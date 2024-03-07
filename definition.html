@@ -1,0 +1,409 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="⚙️ Installation and configuration" href="install.html" /><link rel="prev" title="Promptmeteo 🔥🧔" href="index.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>🤔 What is this library for? - 🔥🧔</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">🔥🧔</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">🔥🧔</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">🤔 What is this library for?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">⚙️ Installation and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">⚡ Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classes.html"><code class="docutils literal notranslate"><span class="pre">APIGenerator</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html#promptmeteo.APIFormatter"><code class="docutils literal notranslate"><span class="pre">APIFormatter</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html#promptmeteo.CodeGenerator"><code class="docutils literal notranslate"><span class="pre">CodeGenerator</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html#promptmeteo.DocumentClassifier"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html#promptmeteo.DocumentQA"><code class="docutils literal notranslate"><span class="pre">DocumentQA</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html#promptmeteo.Summarizer"><code class="docutils literal notranslate"><span class="pre">Summarizer</span></code></a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="what-is-this-library-for">
+<h1>🤔 What is this library for?<a class="headerlink" href="#what-is-this-library-for" title="Link to this heading">#</a></h1>
+<p><strong>TL;DR: Industrialize projects powered by LLMs easily.</strong></p>
+<p>LLMs have the capability to address various tasks when provided with specific instructions in the form of input prompts. They can function as a “reasoning engine” for constructing applications. However, deploying and industrializing these applications poses significant challenges for two main reasons.</p>
+<p>Firstly, prompts typically encapsulate application logic in their definition, yet they are treated merely as input arguments. This means that a poorly formulated prompt input has the potential to disrupt the application.</p>
+<p>Secondly, crafting specific prompts for each task is not only a laborious task but also a complex one. Minor alterations in the input prompt can result in different outcomes, rendering them highly error-prone. Additionally, when composing prompts, considerations extend beyond the task itself to include factors such as the specific LLM being used, the model’s capacity, and other relevant aspects.</p>
+<section id="how-do-we-do-it">
+<h2>🚀 How do we do it?<a class="headerlink" href="#how-do-we-do-it" title="Link to this heading">#</a></h2>
+<p><strong>TL;DR: Treating prompts and code equally!!!</strong></p>
+<p>Promptmeteo aims to address the aforementioned issues by dividing the prompt definition into two distinct parts: the task logic, coded within prompt templates, and the concrete problem, included as argument variables. Promptmeteo incorporates high-level objects for various tasks, implemented through <cite>.py</cite> and <cite>.prompt</cite> files.</p>
+<section id="prebuilt-tasks">
+<h3>🏠 Prebuilt tasks<a class="headerlink" href="#prebuilt-tasks" title="Link to this heading">#</a></h3>
+<p>The project incorporates high-level objects designed to address various NLP tasks, including text classification, Named Entity Recognition, and code generation. These objects only require configuration parameters for execution, eliminating the need to parse the output from the Language Model Models (LLMs).</p>
+</section>
+<section id="ease-of-deployment">
+<h3>⚙️ Ease of Deployment<a class="headerlink" href="#ease-of-deployment" title="Link to this heading">#</a></h3>
+<p>Promptmeteo modules adhere to a model interface similar to Scikit-Learn. By defining an interface with independent methods for training, predicting, saving, and loading the model, Promptmeteo enables training in a separate pipeline from prediction. This facilitates the reuse of conventional ML pipelines for LLM projects.</p>
+</section>
+<section id="model-artifacts">
+<h3>📦 Model Artifacts<a class="headerlink" href="#model-artifacts" title="Link to this heading">#</a></h3>
+<p>To enhance results, LLMs can incorporate examples in their prompts. Promptmeteo supports training with examples, and for reproducibility, the training process can be stored as a binary model artifact. This allows storing and reusing training results multiple times with new data. The training process stores embeddings from the input text in a vector database, such as FAISS.</p>
+</section>
+<section id="llms-integration">
+<h3>⚙️ LLMs Integration<a class="headerlink" href="#llms-integration" title="Link to this heading">#</a></h3>
+<p>Promptmeteo integrates different LLMs through LangChain. This includes models that can be executed locally and remote API calls from providers like OpenAI and HuggingFace.</p>
+</section>
+<section id="prompt-templating">
+<h3>📄 Prompt Templating<a class="headerlink" href="#prompt-templating" title="Link to this heading">#</a></h3>
+<p>Establishing a concrete format for creating prompts in Promptmeteo (<cite>.prompt</cite>) not only facilitates programmatic use but also enables versioning of prompts. This approach aids in understanding changes when they occur and allows for the definition of code tests oriented toward prompt testing. This testing encompasses aspects such as validating language use and ensuring the prompt size is appropriate for the model.</p>
+</section>
+</section>
+<section id="current-capacilities">
+<h2>📋 Current capacilities<a class="headerlink" href="#current-capacilities" title="Link to this heading">#</a></h2>
+<section id="available-tasks">
+<h3>✅ Available tasks<a class="headerlink" href="#available-tasks" title="Link to this heading">#</a></h3>
+<p>The current available tasks in Promptmeteo are:</p>
+<div class="table-wrapper docutils container" id="id1">
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Tasks</span><a class="headerlink" href="#id1" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>task type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>DocumentQA</cite></p></td>
+<td><p>Document-level question answering</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>DocumentClassifier</cite></p></td>
+<td><p>Document-level classification</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>CodeGenerator</cite></p></td>
+<td><p>Code generation</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>ApiGenerator</cite></p></td>
+<td><p>API REST generation</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>ApiFormatter</cite></p></td>
+<td><p>API REST correction</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>Summarizer</cite></p></td>
+<td><p>Text summarization</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="available-models">
+<h3>✅ Available Models<a class="headerlink" href="#available-models" title="Link to this heading">#</a></h3>
+<p>The current available <cite>model_name</cite> and <cite>language</cite> values are:</p>
+<div class="table-wrapper docutils container" id="id2">
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Models</span><a class="headerlink" href="#id2" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>provider</p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>languages</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>openai</p></td>
+<td><p>gpt-3.5-turbo-16k</p></td>
+<td><p>es, en</p></td>
+</tr>
+<tr class="row-odd"><td><p>azure</p></td>
+<td><p>gpt-3.5-turbo-16k</p></td>
+<td><p>es, en</p></td>
+</tr>
+<tr class="row-even"><td><p>hf_hub_api</p></td>
+<td><p>google/flan-t5-xxl</p></td>
+<td><p>es, en</p></td>
+</tr>
+<tr class="row-odd"><td><p>hf_pipeline</p></td>
+<td><p>google/flan-t5-small</p></td>
+<td><p>es, en</p></td>
+</tr>
+<tr class="row-even"><td><p>google</p></td>
+<td><p>text-bison</p></td>
+<td><p>es, en</p></td>
+</tr>
+<tr class="row-odd"><td><p>google</p></td>
+<td><p><a class="reference external" href="mailto:text-bison&#37;&#52;&#48;001">text-bison<span>&#64;</span>001</a></p></td>
+<td><p>es, en</p></td>
+</tr>
+<tr class="row-even"><td><p>google</p></td>
+<td><p>text-bison-32k</p></td>
+<td><p>es, en</p></td>
+</tr>
+<tr class="row-odd"><td><p>bedrock</p></td>
+<td><p>anthropic.claude-v2</p></td>
+<td><p>es, en</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="install.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">⚙️ Installation and configuration</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023 - 2024, Paradigma Digital
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">🤔 What is this library for?</a><ul>
+<li><a class="reference internal" href="#how-do-we-do-it">🚀 How do we do it?</a><ul>
+<li><a class="reference internal" href="#prebuilt-tasks">🏠 Prebuilt tasks</a></li>
+<li><a class="reference internal" href="#ease-of-deployment">⚙️ Ease of Deployment</a></li>
+<li><a class="reference internal" href="#model-artifacts">📦 Model Artifacts</a></li>
+<li><a class="reference internal" href="#llms-integration">⚙️ LLMs Integration</a></li>
+<li><a class="reference internal" href="#prompt-templating">📄 Prompt Templating</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#current-capacilities">📋 Current capacilities</a><ul>
+<li><a class="reference internal" href="#available-tasks">✅ Available tasks</a></li>
+<li><a class="reference internal" href="#available-models">✅ Available Models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=91f6191e"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>

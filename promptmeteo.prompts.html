@@ -1,0 +1,425 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
+        <title>promptmeteo.prompts package - 🔥🧔</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">🔥🧔</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">🔥🧔</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="definition.html">🤔 What is this library for?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">⚙️ Installation and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">⚡ Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">👻 Classes</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="promptmeteo-prompts-package">
+<h1>promptmeteo.prompts package<a class="headerlink" href="#promptmeteo-prompts-package" title="Permalink to this heading">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="module-promptmeteo.prompts.base">
+<span id="promptmeteo-prompts-base-module"></span><h2>promptmeteo.prompts.base module<a class="headerlink" href="#module-promptmeteo.prompts.base" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="promptmeteo.prompts.base.BasePrompt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.prompts.base.</span></span><span class="sig-name descname"><span class="pre">BasePrompt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt_domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompt_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompt_detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.prompts.base.BasePrompt" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Prompt class interface.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.prompts.base.BasePrompt.PROMPT_EXAMPLE">
+<span class="sig-name descname"><span class="pre">PROMPT_EXAMPLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">TEMPLATE:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;Here</span> <span class="pre">you</span> <span class="pre">explain</span> <span class="pre">the</span> <span class="pre">task.\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{__PROMPT_DOMAIN__}\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{__PROMPT_DETAIL__}\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{__SHOT_EXAMPLES__}\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{__PROMPT_SAMPLE__}\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{__CHAIN_THOUGHT__}\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{__ANSWER_FORMAT__}&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">PROMPT_SAMPLE:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;Here</span> <span class="pre">you</span> <span class="pre">describe</span> <span class="pre">the</span> <span class="pre">task.&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">SHOT_EXAMPLES:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;Here</span> <span class="pre">you</span> <span class="pre">set</span> <span class="pre">the</span> <span class="pre">{__EXAMPLES__}</span> <span class="pre">to</span> <span class="pre">take</span> <span class="pre">into</span> <span class="pre">consideration.&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">PROMPT_DOMAIN:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;Here</span> <span class="pre">you</span> <span class="pre">explain</span> <span class="pre">the</span> <span class="pre">{__DOMAIN__}</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">texts.&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">PROMPT_LABELS:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;Here</span> <span class="pre">you</span> <span class="pre">give</span> <span class="pre">the</span> <span class="pre">{__LABELS__}</span> <span class="pre">if</span> <span class="pre">required.&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">PROMPT_DETAIL:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;Here</span> <span class="pre">you</span> <span class="pre">can</span> <span class="pre">give</span> <span class="pre">some</span> <span class="pre">{__DETAIL__}&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">CHAIN_THOUGHT:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;Explain</span> <span class="pre">your</span> <span class="pre">answer</span> <span class="pre">step</span> <span class="pre">by</span> <span class="pre">step.&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">ANSWER_FORMAT:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;Response</span> <span class="pre">just</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">answer.&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#promptmeteo.prompts.base.BasePrompt.PROMPT_EXAMPLE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="promptmeteo.prompts.base.BasePrompt.domain">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">domain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.prompts.base.BasePrompt.domain" title="Permalink to this definition">#</a></dt>
+<dd><p>Prompt Domain.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="promptmeteo.prompts.base.BasePrompt.labels">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#promptmeteo.prompts.base.BasePrompt.labels" title="Permalink to this definition">#</a></dt>
+<dd><p>Prompt Labels.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.prompts.base.BasePrompt.read_prompt">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_prompt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#promptmeteo.prompts.base.BasePrompt.read_prompt" title="Permalink to this definition">#</a></dt>
+<dd><p>Reads a Promptmeteo prompt string to build the Task Prompt. Promptmeteo
+prompts are expected to follow the following template:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>prompt_text</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.prompts.base.BasePrompt.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PromptTemplate</span></span></span><a class="headerlink" href="#promptmeteo.prompts.base.BasePrompt.run" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the prompt template for the current task.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="promptmeteo.prompts.base.BasePrompt.template">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">template</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.prompts.base.BasePrompt.template" title="Permalink to this definition">#</a></dt>
+<dd><p>Prompt Template.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-promptmeteo.prompts">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-promptmeteo.prompts" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="promptmeteo.prompts.PromptFactory">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.prompts.</span></span><span class="sig-name descname"><span class="pre">PromptFactory</span></span><a class="headerlink" href="#promptmeteo.prompts.PromptFactory" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Factory of Prompts</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.prompts.PromptFactory.build_class">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#promptmeteo.prompts.base.BasePrompt" title="promptmeteo.prompts.base.BasePrompt"><span class="pre">BasePrompt</span></a></span></span><a class="headerlink" href="#promptmeteo.prompts.PromptFactory.build_class" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a class dinamically that inherits from <cite>BasePrompt</cite> given
+arguments configuracion. This new class has included its prompt from
+the .prompt file.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PromptFactory</span><span class="o">.</span><span class="n">build_class</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">language</span><span class="o">=</span><span class="s1">&#39;es&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">task_type</span><span class="o">=</span><span class="s1">&#39;ner&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;text-davinci-003&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>&lt;class ‘__main__.Textdavinci003SpNer’&gt;</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.prompts.PromptFactory.factory_method">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">factory_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompt_domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompt_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompt_detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.prompts.PromptFactory.factory_method" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns and instance of a BasePrompt object depending on the
+<cite>task_type</cite>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="promptmeteo.prompts.get_files_taxonomy">
+<span class="sig-prename descclassname"><span class="pre">promptmeteo.prompts.</span></span><span class="sig-name descname"><span class="pre">get_files_taxonomy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.prompts.get_files_taxonomy" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert a list of prompt files with the naming convetion of
+<a href="#id1"><span class="problematic" id="id2">`</span></a>{model_name}_{language}_{task}.prompt into a dictorionary version.
+Given the following folder structure:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>./prompts/</dt><dd><p>├── __init__.py
+├── base.py
+├── google-flan-t5-small_es_classification.prompt
+├── google-flan-t5-small_es_code-generation.prompt
+├── google-flan-t5-small_es_ner.prompt
+├── text-davinci-003_es_classification.prompt
+├── text-davinci-003_es_code-generation.prompt
+└── text-davinci-003_es_ner.prompt</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>The function returns:</p>
+<blockquote>
+<div><dl>
+<dt>{‘google-flan-t5-small’: {</dt><dd><blockquote>
+<div><dl>
+<dt>‘es’: {</dt><dd><blockquote>
+<div><p>‘classification’: {},
+‘ner’: {}
+}</p>
+</div></blockquote>
+<p>},</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl>
+<dt>‘text-davinci-003’: {</dt><dd><dl>
+<dt>‘es’: {</dt><dd><blockquote>
+<div><p>‘classification’: {},
+‘code-generation’: {},
+‘ner’: {}
+}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023 - 2024, Paradigma Digital
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">promptmeteo.prompts package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-promptmeteo.prompts.base">promptmeteo.prompts.base module</a><ul>
+<li><a class="reference internal" href="#promptmeteo.prompts.base.BasePrompt"><code class="docutils literal notranslate"><span class="pre">BasePrompt</span></code></a><ul>
+<li><a class="reference internal" href="#promptmeteo.prompts.base.BasePrompt.PROMPT_EXAMPLE"><code class="docutils literal notranslate"><span class="pre">BasePrompt.PROMPT_EXAMPLE</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.prompts.base.BasePrompt.domain"><code class="docutils literal notranslate"><span class="pre">BasePrompt.domain</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.prompts.base.BasePrompt.labels"><code class="docutils literal notranslate"><span class="pre">BasePrompt.labels</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.prompts.base.BasePrompt.read_prompt"><code class="docutils literal notranslate"><span class="pre">BasePrompt.read_prompt()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.prompts.base.BasePrompt.run"><code class="docutils literal notranslate"><span class="pre">BasePrompt.run()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.prompts.base.BasePrompt.template"><code class="docutils literal notranslate"><span class="pre">BasePrompt.template</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-promptmeteo.prompts">Module contents</a><ul>
+<li><a class="reference internal" href="#promptmeteo.prompts.PromptFactory"><code class="docutils literal notranslate"><span class="pre">PromptFactory</span></code></a><ul>
+<li><a class="reference internal" href="#promptmeteo.prompts.PromptFactory.build_class"><code class="docutils literal notranslate"><span class="pre">PromptFactory.build_class()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.prompts.PromptFactory.factory_method"><code class="docutils literal notranslate"><span class="pre">PromptFactory.factory_method()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#promptmeteo.prompts.get_files_taxonomy"><code class="docutils literal notranslate"><span class="pre">get_files_taxonomy()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e936e8a8"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>

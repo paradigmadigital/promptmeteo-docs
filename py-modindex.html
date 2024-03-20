@@ -2,12 +2,10 @@
 <html class="no-js" lang="en" data-content_root="">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="⚡ Quickstart" href="quickstart.html" /><link rel="prev" title="🤔 What is this library for?" href="definition.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
-        <title>⚙️ Installation and configuration - 🔥🧔</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 --><title>Python Module Index - 🔥🧔</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
     
@@ -134,7 +132,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -155,9 +153,9 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="definition.html">🤔 What is this library for?</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">⚙️ Installation and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">⚙️ Installation and configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">⚡ Quickstart</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Classes</span></p>
@@ -182,8 +180,7 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          
-<div class="theme-toggle-container theme-toggle-content">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -191,94 +188,238 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="installation-and-configuration">
-<h1>⚙️ Installation and configuration<a class="headerlink" href="#installation-and-configuration" title="Permalink to this heading">#</a></h1>
-<section id="install">
-<span id="id1"></span><h2>Install<a class="headerlink" href="#install" title="Permalink to this heading">#</a></h2>
-<p>To install the stable version of the library use <a class="reference external" href="https://pypi.org/">pip</a>.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(.venv)</span> <span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>promptmeteo
-</pre></div>
-</div>
+          
+<section class="domainindex-section">
+  <h1>Python Module Index</h1>
+  <div class="domainindex-jumpbox"><a href="#cap-p"><strong>p</strong></a></div>
 </section>
-<section id="configure-credentials">
-<h2>Configure credentials<a class="headerlink" href="#configure-credentials" title="Permalink to this heading">#</a></h2>
-<p>Create a <code class="docutils literal notranslate"><span class="pre">`.env`</span></code> with the following variables depending on the LLM provider</p>
-<section id="google-cloud">
-<h3>Google Cloud<a class="headerlink" href="#google-cloud" title="Permalink to this heading">#</a></h3>
-<p>First you should create a [Service Account](<a class="reference external" href="https://cloud.google.com/vertex-ai/docs/general/custom-service-account#configure">https://cloud.google.com/vertex-ai/docs/general/custom-service-account#configure</a>) with the role: <code class="docutils literal notranslate"><span class="pre">Vertex</span> <span class="pre">AI</span> <span class="pre">User.</span></code></p>
-<p>Once created, generate a key, store it locally and reference the path in the .env file:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">GOOGLE_CLOUD_PROJECT_ID=&quot;MY_GOOGLE_LLM_PROJECT_ID&quot;</span>
-<span class="go">GOOGLE_APPLICATION_CREDENTIALS=&quot;PATH_TO_SERVICE_ACCOUNT_KEY_FILE.json&quot;</span>
-</pre></div>
-</div>
-</section>
-<section id="openai">
-<h3>OpenAI<a class="headerlink" href="#openai" title="Permalink to this heading">#</a></h3>
-<p>Create your Secret API key in your User settings [page](<a class="reference external" href="https://platform.openai.com/account/api-keys">https://platform.openai.com/account/api-keys</a>).</p>
-<p>Indicate the value of the key in your .env file:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">OPENAI_API_KEY=&quot;MY_OPENAI_API_KEY&quot;</span>
-</pre></div>
-</div>
-<p>You can also pass <cite>openai_api_key</cite> as a named parameter.</p>
-</section>
-<section id="hugging-face">
-<h3>Hugging Face<a class="headerlink" href="#hugging-face" title="Permalink to this heading">#</a></h3>
-<p>Create Access Token in your User settings [page](<a class="reference external" href="https://huggingface.co/settings/tokens">https://huggingface.co/settings/tokens</a>).</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">HUGGINGFACEHUB_API_TOKEN=&quot;MY_HF_API_KEY&quot;</span>
-</pre></div>
-</div>
-<p>You can also pass <cite>huggingfacehub_api_token</cite> as a named parameter.</p>
-</section>
-<section id="aws-bedrock">
-<h3>AWS Bedrock<a class="headerlink" href="#aws-bedrock" title="Permalink to this heading">#</a></h3>
-<p>Create your access keys in security credentials of your user in AWS.</p>
-<p>Then write in the files <code class="docutils literal notranslate"><span class="pre">`~/.aws/config`</span></code> and <code class="docutils literal notranslate"><span class="pre">``~/.aws/credentials``</span></code> for Linux and MacOS or <code class="docutils literal notranslate"><span class="pre">``%USERPROFILE%\.aws\config``</span></code> and <code class="docutils literal notranslate"><span class="pre">``%USERPROFILE%\.aws\credentials``</span></code> for Windows:</p>
-<p>In credentials</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[default]</span>
-<span class="go">aws_access_key_id = &lt;YOUR_CREATED_AWS_KEY&gt;</span>
-<span class="go">aws_secret_access_key = &lt;YOUR_CREATED_AWS_SECRET_KEY&gt;</span>
-</pre></div>
-</div>
-<p>In config:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[default]</span>
-<span class="go">region = &lt;AWS_REGION&gt;</span>
-</pre></div>
-</div>
-</section>
-</section>
-</section>
+<table class="domainindex-table">
+  <tr class="pcap">
+    <td></td><td>&#160;</td><td></td>
+  </tr>
+  <tr class="cap" id="cap-p">
+    <td></td><td><strong>p</strong></td><td></td>
+  </tr>
+  <tr>
+    <td><img src="_static/minus.png" class="toggler"
+              id="toggle-1" style="display: none" alt="-" /></td>
+    <td>
+        <a href="promptmeteo.html#module-promptmeteo"><code class="xref">promptmeteo</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.html#module-promptmeteo.api_formatter"><code class="xref">promptmeteo.api_formatter</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.html#module-promptmeteo.api_generator"><code class="xref">promptmeteo.api_generator</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.html#module-promptmeteo.base"><code class="xref">promptmeteo.base</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.html#module-promptmeteo.code_generator"><code class="xref">promptmeteo.code_generator</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.html#module-promptmeteo.constants"><code class="xref">promptmeteo.constants</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.html#module-promptmeteo.document_classifier"><code class="xref">promptmeteo.document_classifier</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.html#module-promptmeteo.document_qa"><code class="xref">promptmeteo.document_qa</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.models.html#module-promptmeteo.models"><code class="xref">promptmeteo.models</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.models.html#module-promptmeteo.models.azure_openai"><code class="xref">promptmeteo.models.azure_openai</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.models.html#module-promptmeteo.models.base"><code class="xref">promptmeteo.models.base</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.models.html#module-promptmeteo.models.bedrock"><code class="xref">promptmeteo.models.bedrock</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.models.html#module-promptmeteo.models.fake_llm"><code class="xref">promptmeteo.models.fake_llm</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.models.html#module-promptmeteo.models.google_vertexai"><code class="xref">promptmeteo.models.google_vertexai</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.models.html#module-promptmeteo.models.hf_hub_api"><code class="xref">promptmeteo.models.hf_hub_api</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.models.html#module-promptmeteo.models.hf_pipeline"><code class="xref">promptmeteo.models.hf_pipeline</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.models.html#module-promptmeteo.models.openai"><code class="xref">promptmeteo.models.openai</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.parsers.html#module-promptmeteo.parsers"><code class="xref">promptmeteo.parsers</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.parsers.html#module-promptmeteo.parsers.api_parser"><code class="xref">promptmeteo.parsers.api_parser</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.parsers.html#module-promptmeteo.parsers.base"><code class="xref">promptmeteo.parsers.base</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.parsers.html#module-promptmeteo.parsers.classification_parser"><code class="xref">promptmeteo.parsers.classification_parser</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.parsers.html#module-promptmeteo.parsers.dummy_parser"><code class="xref">promptmeteo.parsers.dummy_parser</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.parsers.html#module-promptmeteo.parsers.json_parser"><code class="xref">promptmeteo.parsers.json_parser</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.prompts.html#module-promptmeteo.prompts"><code class="xref">promptmeteo.prompts</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.prompts.html#module-promptmeteo.prompts.base"><code class="xref">promptmeteo.prompts.base</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.selector.html#module-promptmeteo.selector"><code class="xref">promptmeteo.selector</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.selector.html#module-promptmeteo.selector.base"><code class="xref">promptmeteo.selector.base</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.selector.html#module-promptmeteo.selector.custom_selectors"><code class="xref">promptmeteo.selector.custom_selectors</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.html#module-promptmeteo.summarizer"><code class="xref">promptmeteo.summarizer</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.tasks.html#module-promptmeteo.tasks"><code class="xref">promptmeteo.tasks</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.tasks.html#module-promptmeteo.tasks.task"><code class="xref">promptmeteo.tasks.task</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.tasks.html#module-promptmeteo.tasks.task_builder"><code class="xref">promptmeteo.tasks.task_builder</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.html#module-promptmeteo.tools"><code class="xref">promptmeteo.tools</code></a></td><td>
+    <em></em></td>
+  </tr>
+  <tr class="cg-1">
+    <td></td>
+    <td>&#160;&#160;&#160;
+        <a href="promptmeteo.html#module-promptmeteo.validations"><code class="xref">promptmeteo.validations</code></a></td><td>
+    <em></em></td>
+  </tr>
+</table>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="quickstart.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">⚡ Quickstart</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="definition.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">🤔 What is this library for?</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -297,34 +438,8 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">⚙️ Installation and configuration</a><ul>
-<li><a class="reference internal" href="#install">Install</a></li>
-<li><a class="reference internal" href="#configure-credentials">Configure credentials</a><ul>
-<li><a class="reference internal" href="#google-cloud">Google Cloud</a></li>
-<li><a class="reference internal" href="#openai">OpenAI</a></li>
-<li><a class="reference internal" href="#hugging-face">Hugging Face</a></li>
-<li><a class="reference internal" href="#aws-bedrock">AWS Bedrock</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

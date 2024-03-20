@@ -1,11 +1,11 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="./">
+<html class="no-js" lang="en" data-content_root="">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="&lt;no title&gt;" href="classes.html" /><link rel="prev" title="⚙️ Installation and configuration" href="install.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="👻 Classes" href="classes.html" /><link rel="prev" title="⚙️ Installation and configuration" href="install.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
         <title>⚡ Quickstart - 🔥🧔</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
@@ -162,12 +162,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Classes</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="classes.html"><code class="docutils literal notranslate"><span class="pre">APIGenerator</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="classes.html#promptmeteo.APIFormatter"><code class="docutils literal notranslate"><span class="pre">APIFormatter</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="classes.html#promptmeteo.CodeGenerator"><code class="docutils literal notranslate"><span class="pre">CodeGenerator</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="classes.html#promptmeteo.DocumentClassifier"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="classes.html#promptmeteo.DocumentQA"><code class="docutils literal notranslate"><span class="pre">DocumentQA</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="classes.html#promptmeteo.Summarizer"><code class="docutils literal notranslate"><span class="pre">Summarizer</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">👻 Classes</a></li>
 </ul>
 
 </div>
@@ -203,20 +198,20 @@
         </div>
         <article role="main">
           <section id="quickstart">
-<h1>⚡ Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">#</a></h1>
+<h1>⚡ Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading">#</a></h1>
 <section id="create-the-task">
-<span id="id1"></span><h2>✨ Create the task<a class="headerlink" href="#create-the-task" title="Link to this heading">#</a></h2>
+<span id="id1"></span><h2>✨ Create the task<a class="headerlink" href="#create-the-task" title="Permalink to this heading">#</a></h2>
 <p>You can make a prediction directly indicating the model and calling the method <cite>predict()</cite>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
- <span class="n">clf</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-         <span class="n">language</span>            <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-         <span class="n">model_provider_name</span> <span class="o">=</span> <span class="s1">&#39;hf_pipeline&#39;</span><span class="p">,</span>
-         <span class="n">model_name</span>          <span class="o">=</span> <span class="s1">&#39;google/flan-t5-small&#39;</span><span class="p">,</span>
-         <span class="n">prompt_labels</span>       <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span> <span class="s1">&#39;neutral&#39;</span><span class="p">,</span> <span class="s1">&#39;negative&#39;</span><span class="p">]</span>
-     <span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
+        <span class="n">language</span>            <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
+        <span class="n">model_provider_name</span> <span class="o">=</span> <span class="s1">&#39;hf_pipeline&#39;</span><span class="p">,</span>
+        <span class="n">model_name</span>          <span class="o">=</span> <span class="s1">&#39;google/flan-t5-small&#39;</span><span class="p">,</span>
+        <span class="n">prompt_labels</span>       <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span> <span class="s1">&#39;neutral&#39;</span><span class="p">,</span> <span class="s1">&#39;negative&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
 
- <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;so cool!!&#39;</span><span class="p">])</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;so cool!!&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[[&#39;positive&#39;]]</span>
@@ -224,7 +219,7 @@
 </div>
 </section>
 <section id="train-the-task">
-<h2>✨ Train the task<a class="headerlink" href="#train-the-task" title="Link to this heading">#</a></h2>
+<h2>✨ Train the task<a class="headerlink" href="#train-the-task" title="Permalink to this heading">#</a></h2>
 <p>You can also include examples to improve the results by calling the method <cite>train()</cite></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
     <span class="n">examples</span>    <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;i am happy&#39;</span><span class="p">,</span> <span class="s1">&#39;doesnt matter&#39;</span><span class="p">,</span> <span class="s1">&#39;I hate it&#39;</span><span class="p">],</span>
@@ -239,14 +234,14 @@
 </div>
 </section>
 <section id="save-a-trained-task">
-<h2>✨ Save a trained task<a class="headerlink" href="#save-a-trained-task" title="Link to this heading">#</a></h2>
+<h2>✨ Save a trained task<a class="headerlink" href="#save-a-trained-task" title="Permalink to this heading">#</a></h2>
 <p>Once the model is trained it can be saved locally</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">clf.save_model(&quot;hello_world.meteo&quot;)</span>
 </pre></div>
 </div>
 </section>
 <section id="load-a-trained-task">
-<h2>✨ Load a trained task<a class="headerlink" href="#load-a-trained-task" title="Link to this heading">#</a></h2>
+<h2>✨ Load a trained task<a class="headerlink" href="#load-a-trained-task" title="Permalink to this heading">#</a></h2>
 <p>and loaded again to make new predictions</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
@@ -281,7 +276,7 @@
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">&lt;no title&gt;</div>
+                <div class="title">👻 Classes</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -342,9 +337,9 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=91f6191e"></script>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e936e8a8"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/scripts/furo.js?v=32e29ea5"></script>
     </body>
 </html>

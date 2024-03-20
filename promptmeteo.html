@@ -1,0 +1,1706 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
+        <title>promptmeteo package - 🔥🧔</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">🔥🧔</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">🔥🧔</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="definition.html">🤔 What is this library for?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">⚙️ Installation and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">⚡ Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">👻 Classes</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="promptmeteo-package">
+<h1>promptmeteo package<a class="headerlink" href="#promptmeteo-package" title="Permalink to this heading">#</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="promptmeteo.models.html">promptmeteo.models package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.models.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.models.html#module-promptmeteo.models.azure_openai">promptmeteo.models.azure_openai module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.azure_openai.AzureOpenAILLM"><code class="docutils literal notranslate"><span class="pre">AzureOpenAILLM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.azure_openai.ModelEnum"><code class="docutils literal notranslate"><span class="pre">ModelEnum</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.azure_openai.ModelEnum.GPT35Turbo"><code class="docutils literal notranslate"><span class="pre">ModelEnum.GPT35Turbo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.azure_openai.ModelEnum.GPT35TurboInstruct"><code class="docutils literal notranslate"><span class="pre">ModelEnum.GPT35TurboInstruct</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.azure_openai.ModelTypes"><code class="docutils literal notranslate"><span class="pre">ModelTypes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.azure_openai.ModelTypes.GPT35Turbo"><code class="docutils literal notranslate"><span class="pre">ModelTypes.GPT35Turbo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.azure_openai.ModelTypes.GPT35TurboInstruct"><code class="docutils literal notranslate"><span class="pre">ModelTypes.GPT35TurboInstruct</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.azure_openai.ModelTypes.has_value"><code class="docutils literal notranslate"><span class="pre">ModelTypes.has_value()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.models.html#module-promptmeteo.models.base">promptmeteo.models.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.base.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.base.BaseModel.embeddings"><code class="docutils literal notranslate"><span class="pre">BaseModel.embeddings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.base.BaseModel.llm"><code class="docutils literal notranslate"><span class="pre">BaseModel.llm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.base.BaseModel.run"><code class="docutils literal notranslate"><span class="pre">BaseModel.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.models.html#module-promptmeteo.models.bedrock">promptmeteo.models.bedrock module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.bedrock.BedrockLLM"><code class="docutils literal notranslate"><span class="pre">BedrockLLM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.bedrock.ModelEnum"><code class="docutils literal notranslate"><span class="pre">ModelEnum</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.bedrock.ModelEnum.AnthropicClaudeV2"><code class="docutils literal notranslate"><span class="pre">ModelEnum.AnthropicClaudeV2</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.bedrock.ModelTypes"><code class="docutils literal notranslate"><span class="pre">ModelTypes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.bedrock.ModelTypes.AnthropicClaudeV2"><code class="docutils literal notranslate"><span class="pre">ModelTypes.AnthropicClaudeV2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.bedrock.ModelTypes.has_value"><code class="docutils literal notranslate"><span class="pre">ModelTypes.has_value()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.models.html#module-promptmeteo.models.fake_llm">promptmeteo.models.fake_llm module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakeLLM"><code class="docutils literal notranslate"><span class="pre">FakeLLM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakeLLM.LLM_MAPPING"><code class="docutils literal notranslate"><span class="pre">FakeLLM.LLM_MAPPING</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakeListLLM"><code class="docutils literal notranslate"><span class="pre">FakeListLLM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakeListLLM.i"><code class="docutils literal notranslate"><span class="pre">FakeListLLM.i</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakeListLLM.responses"><code class="docutils literal notranslate"><span class="pre">FakeListLLM.responses</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakePromptCopyLLM"><code class="docutils literal notranslate"><span class="pre">FakePromptCopyLLM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakePromptCopyLLM.cache"><code class="docutils literal notranslate"><span class="pre">FakePromptCopyLLM.cache</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakePromptCopyLLM.callback_manager"><code class="docutils literal notranslate"><span class="pre">FakePromptCopyLLM.callback_manager</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakePromptCopyLLM.callbacks"><code class="docutils literal notranslate"><span class="pre">FakePromptCopyLLM.callbacks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakePromptCopyLLM.metadata"><code class="docutils literal notranslate"><span class="pre">FakePromptCopyLLM.metadata</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakePromptCopyLLM.tags"><code class="docutils literal notranslate"><span class="pre">FakePromptCopyLLM.tags</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakePromptCopyLLM.verbose"><code class="docutils literal notranslate"><span class="pre">FakePromptCopyLLM.verbose</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakeStaticLLM"><code class="docutils literal notranslate"><span class="pre">FakeStaticLLM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.FakeStaticLLM.response"><code class="docutils literal notranslate"><span class="pre">FakeStaticLLM.response</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.ModelTypes"><code class="docutils literal notranslate"><span class="pre">ModelTypes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.ModelTypes.MODEL_1"><code class="docutils literal notranslate"><span class="pre">ModelTypes.MODEL_1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.ModelTypes.MODEL_2"><code class="docutils literal notranslate"><span class="pre">ModelTypes.MODEL_2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.fake_llm.ModelTypes.MODEL_3"><code class="docutils literal notranslate"><span class="pre">ModelTypes.MODEL_3</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.models.html#module-promptmeteo.models.google_vertexai">promptmeteo.models.google_vertexai module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.google_vertexai.GoogleVertexAILLM"><code class="docutils literal notranslate"><span class="pre">GoogleVertexAILLM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.google_vertexai.ModelEnum"><code class="docutils literal notranslate"><span class="pre">ModelEnum</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.google_vertexai.ModelEnum.TextBison"><code class="docutils literal notranslate"><span class="pre">ModelEnum.TextBison</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.google_vertexai.ModelEnum.TextBison001"><code class="docutils literal notranslate"><span class="pre">ModelEnum.TextBison001</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.google_vertexai.ModelEnum.TextBison32k"><code class="docutils literal notranslate"><span class="pre">ModelEnum.TextBison32k</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.google_vertexai.ModelTypes"><code class="docutils literal notranslate"><span class="pre">ModelTypes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.google_vertexai.ModelTypes.TextBison"><code class="docutils literal notranslate"><span class="pre">ModelTypes.TextBison</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.google_vertexai.ModelTypes.TextBison001"><code class="docutils literal notranslate"><span class="pre">ModelTypes.TextBison001</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.google_vertexai.ModelTypes.TextBison32k"><code class="docutils literal notranslate"><span class="pre">ModelTypes.TextBison32k</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.google_vertexai.ModelTypes.has_value"><code class="docutils literal notranslate"><span class="pre">ModelTypes.has_value()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.models.html#module-promptmeteo.models.hf_hub_api">promptmeteo.models.hf_hub_api module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.hf_hub_api.HFHubApiLLM"><code class="docutils literal notranslate"><span class="pre">HFHubApiLLM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.hf_hub_api.ModelEnum"><code class="docutils literal notranslate"><span class="pre">ModelEnum</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.hf_hub_api.ModelEnum.FlanT5Xxl"><code class="docutils literal notranslate"><span class="pre">ModelEnum.FlanT5Xxl</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.hf_hub_api.ModelTypes"><code class="docutils literal notranslate"><span class="pre">ModelTypes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.hf_hub_api.ModelTypes.FlanT5Xxl"><code class="docutils literal notranslate"><span class="pre">ModelTypes.FlanT5Xxl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.hf_hub_api.ModelTypes.has_value"><code class="docutils literal notranslate"><span class="pre">ModelTypes.has_value()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.models.html#module-promptmeteo.models.hf_pipeline">promptmeteo.models.hf_pipeline module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.hf_pipeline.HFPipelineLLM"><code class="docutils literal notranslate"><span class="pre">HFPipelineLLM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.hf_pipeline.ModelParams"><code class="docutils literal notranslate"><span class="pre">ModelParams</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.hf_pipeline.ModelParams.MODEL_1"><code class="docutils literal notranslate"><span class="pre">ModelParams.MODEL_1</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.hf_pipeline.ModelTypes"><code class="docutils literal notranslate"><span class="pre">ModelTypes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.hf_pipeline.ModelTypes.MODEL_1"><code class="docutils literal notranslate"><span class="pre">ModelTypes.MODEL_1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.hf_pipeline.ModelTypes.has_value"><code class="docutils literal notranslate"><span class="pre">ModelTypes.has_value()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.models.html#module-promptmeteo.models.openai">promptmeteo.models.openai module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.openai.ModelEnum"><code class="docutils literal notranslate"><span class="pre">ModelEnum</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.openai.ModelEnum.GPT35Turbo"><code class="docutils literal notranslate"><span class="pre">ModelEnum.GPT35Turbo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.openai.ModelEnum.GPT35TurboInstruct"><code class="docutils literal notranslate"><span class="pre">ModelEnum.GPT35TurboInstruct</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.openai.ModelTypes"><code class="docutils literal notranslate"><span class="pre">ModelTypes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.openai.ModelTypes.GPT35Turbo"><code class="docutils literal notranslate"><span class="pre">ModelTypes.GPT35Turbo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.openai.ModelTypes.GPT35TurboInstruct"><code class="docutils literal notranslate"><span class="pre">ModelTypes.GPT35TurboInstruct</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.openai.ModelTypes.has_value"><code class="docutils literal notranslate"><span class="pre">ModelTypes.has_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.openai.OpenAILLM"><code class="docutils literal notranslate"><span class="pre">OpenAILLM</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.models.html#module-promptmeteo.models">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.ModelFactory"><code class="docutils literal notranslate"><span class="pre">ModelFactory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.ModelFactory.MAPPING"><code class="docutils literal notranslate"><span class="pre">ModelFactory.MAPPING</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.ModelFactory.factory_method"><code class="docutils literal notranslate"><span class="pre">ModelFactory.factory_method()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.ModelProvider"><code class="docutils literal notranslate"><span class="pre">ModelProvider</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.ModelProvider.PROVIDER_0"><code class="docutils literal notranslate"><span class="pre">ModelProvider.PROVIDER_0</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.ModelProvider.PROVIDER_1"><code class="docutils literal notranslate"><span class="pre">ModelProvider.PROVIDER_1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.ModelProvider.PROVIDER_2"><code class="docutils literal notranslate"><span class="pre">ModelProvider.PROVIDER_2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.ModelProvider.PROVIDER_3"><code class="docutils literal notranslate"><span class="pre">ModelProvider.PROVIDER_3</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.ModelProvider.PROVIDER_4"><code class="docutils literal notranslate"><span class="pre">ModelProvider.PROVIDER_4</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.models.html#promptmeteo.models.ModelProvider.PROVIDER_5"><code class="docutils literal notranslate"><span class="pre">ModelProvider.PROVIDER_5</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="promptmeteo.parsers.html">promptmeteo.parsers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.parsers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.parsers.html#module-promptmeteo.parsers.api_parser">promptmeteo.parsers.api_parser module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.api_parser.ApiParser"><code class="docutils literal notranslate"><span class="pre">ApiParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.api_parser.ApiParser.run"><code class="docutils literal notranslate"><span class="pre">ApiParser.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.parsers.html#module-promptmeteo.parsers.base">promptmeteo.parsers.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.base.BaseParser"><code class="docutils literal notranslate"><span class="pre">BaseParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.base.BaseParser.run"><code class="docutils literal notranslate"><span class="pre">BaseParser.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.base.ParserException"><code class="docutils literal notranslate"><span class="pre">ParserException</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.parsers.html#module-promptmeteo.parsers.classification_parser">promptmeteo.parsers.classification_parser module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.classification_parser.ClassificationParser"><code class="docutils literal notranslate"><span class="pre">ClassificationParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.classification_parser.ClassificationParser.run"><code class="docutils literal notranslate"><span class="pre">ClassificationParser.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.parsers.html#module-promptmeteo.parsers.dummy_parser">promptmeteo.parsers.dummy_parser module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.dummy_parser.DummyParser"><code class="docutils literal notranslate"><span class="pre">DummyParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.dummy_parser.DummyParser.run"><code class="docutils literal notranslate"><span class="pre">DummyParser.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.parsers.html#module-promptmeteo.parsers.json_parser">promptmeteo.parsers.json_parser module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.json_parser.JSONParser"><code class="docutils literal notranslate"><span class="pre">JSONParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.json_parser.JSONParser.run"><code class="docutils literal notranslate"><span class="pre">JSONParser.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.parsers.html#module-promptmeteo.parsers">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.ParserFactory"><code class="docutils literal notranslate"><span class="pre">ParserFactory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.ParserFactory.factory_method"><code class="docutils literal notranslate"><span class="pre">ParserFactory.factory_method()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.ParserTypes"><code class="docutils literal notranslate"><span class="pre">ParserTypes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.ParserTypes.PARSER_1"><code class="docutils literal notranslate"><span class="pre">ParserTypes.PARSER_1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.ParserTypes.PARSER_2"><code class="docutils literal notranslate"><span class="pre">ParserTypes.PARSER_2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.ParserTypes.PARSER_3"><code class="docutils literal notranslate"><span class="pre">ParserTypes.PARSER_3</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.ParserTypes.PARSER_4"><code class="docutils literal notranslate"><span class="pre">ParserTypes.PARSER_4</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.ParserTypes.PARSER_5"><code class="docutils literal notranslate"><span class="pre">ParserTypes.PARSER_5</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.ParserTypes.PARSER_6"><code class="docutils literal notranslate"><span class="pre">ParserTypes.PARSER_6</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.ParserTypes.PARSER_7"><code class="docutils literal notranslate"><span class="pre">ParserTypes.PARSER_7</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.parsers.html#promptmeteo.parsers.ParserTypes.PARSER_8"><code class="docutils literal notranslate"><span class="pre">ParserTypes.PARSER_8</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="promptmeteo.prompts.html">promptmeteo.prompts package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.prompts.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.prompts.html#module-promptmeteo.prompts.base">promptmeteo.prompts.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.prompts.html#promptmeteo.prompts.base.BasePrompt"><code class="docutils literal notranslate"><span class="pre">BasePrompt</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.prompts.html#promptmeteo.prompts.base.BasePrompt.PROMPT_EXAMPLE"><code class="docutils literal notranslate"><span class="pre">BasePrompt.PROMPT_EXAMPLE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.prompts.html#promptmeteo.prompts.base.BasePrompt.domain"><code class="docutils literal notranslate"><span class="pre">BasePrompt.domain</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.prompts.html#promptmeteo.prompts.base.BasePrompt.labels"><code class="docutils literal notranslate"><span class="pre">BasePrompt.labels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.prompts.html#promptmeteo.prompts.base.BasePrompt.read_prompt"><code class="docutils literal notranslate"><span class="pre">BasePrompt.read_prompt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.prompts.html#promptmeteo.prompts.base.BasePrompt.run"><code class="docutils literal notranslate"><span class="pre">BasePrompt.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.prompts.html#promptmeteo.prompts.base.BasePrompt.template"><code class="docutils literal notranslate"><span class="pre">BasePrompt.template</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.prompts.html#module-promptmeteo.prompts">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.prompts.html#promptmeteo.prompts.PromptFactory"><code class="docutils literal notranslate"><span class="pre">PromptFactory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.prompts.html#promptmeteo.prompts.PromptFactory.build_class"><code class="docutils literal notranslate"><span class="pre">PromptFactory.build_class()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.prompts.html#promptmeteo.prompts.PromptFactory.factory_method"><code class="docutils literal notranslate"><span class="pre">PromptFactory.factory_method()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.prompts.html#promptmeteo.prompts.get_files_taxonomy"><code class="docutils literal notranslate"><span class="pre">get_files_taxonomy()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="promptmeteo.selector.html">promptmeteo.selector package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.selector.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.selector.html#module-promptmeteo.selector.base">promptmeteo.selector.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.BaseSelector"><code class="docutils literal notranslate"><span class="pre">BaseSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.BaseSelector.SELECTOR"><code class="docutils literal notranslate"><span class="pre">BaseSelector.SELECTOR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.BaseSelector.load_example_selector"><code class="docutils literal notranslate"><span class="pre">BaseSelector.load_example_selector()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.BaseSelector.template"><code class="docutils literal notranslate"><span class="pre">BaseSelector.template</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.BaseSelector.vectorstore"><code class="docutils literal notranslate"><span class="pre">BaseSelector.vectorstore</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.BaseSelectorSupervised"><code class="docutils literal notranslate"><span class="pre">BaseSelectorSupervised</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.BaseSelectorSupervised.run"><code class="docutils literal notranslate"><span class="pre">BaseSelectorSupervised.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.BaseSelectorSupervised.train"><code class="docutils literal notranslate"><span class="pre">BaseSelectorSupervised.train()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.BaseSelectorUnsupervised"><code class="docutils literal notranslate"><span class="pre">BaseSelectorUnsupervised</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.BaseSelectorUnsupervised.run"><code class="docutils literal notranslate"><span class="pre">BaseSelectorUnsupervised.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.BaseSelectorUnsupervised.train"><code class="docutils literal notranslate"><span class="pre">BaseSelectorUnsupervised.train()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.SelectorAlgorithms"><code class="docutils literal notranslate"><span class="pre">SelectorAlgorithms</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.SelectorAlgorithms.RELEVANCE"><code class="docutils literal notranslate"><span class="pre">SelectorAlgorithms.RELEVANCE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.SelectorAlgorithms.SIMILARITY"><code class="docutils literal notranslate"><span class="pre">SelectorAlgorithms.SIMILARITY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.base.SelectorAlgorithms.SIMILARITY_CLASS_BALANCED"><code class="docutils literal notranslate"><span class="pre">SelectorAlgorithms.SIMILARITY_CLASS_BALANCED</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.selector.html#module-promptmeteo.selector.custom_selectors">promptmeteo.selector.custom_selectors module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.BalancedSemanticSamplesSelector"><code class="docutils literal notranslate"><span class="pre">BalancedSemanticSamplesSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.BalancedSemanticSamplesSelector.Config"><code class="docutils literal notranslate"><span class="pre">BalancedSemanticSamplesSelector.Config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.BalancedSemanticSamplesSelector.add_example"><code class="docutils literal notranslate"><span class="pre">BalancedSemanticSamplesSelector.add_example()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.BalancedSemanticSamplesSelector.class_key"><code class="docutils literal notranslate"><span class="pre">BalancedSemanticSamplesSelector.class_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.BalancedSemanticSamplesSelector.class_list"><code class="docutils literal notranslate"><span class="pre">BalancedSemanticSamplesSelector.class_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.BalancedSemanticSamplesSelector.example_keys"><code class="docutils literal notranslate"><span class="pre">BalancedSemanticSamplesSelector.example_keys</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.BalancedSemanticSamplesSelector.from_examples"><code class="docutils literal notranslate"><span class="pre">BalancedSemanticSamplesSelector.from_examples()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.BalancedSemanticSamplesSelector.input_keys"><code class="docutils literal notranslate"><span class="pre">BalancedSemanticSamplesSelector.input_keys</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.BalancedSemanticSamplesSelector.k"><code class="docutils literal notranslate"><span class="pre">BalancedSemanticSamplesSelector.k</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.BalancedSemanticSamplesSelector.select_examples"><code class="docutils literal notranslate"><span class="pre">BalancedSemanticSamplesSelector.select_examples()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.BalancedSemanticSamplesSelector.vectorstore"><code class="docutils literal notranslate"><span class="pre">BalancedSemanticSamplesSelector.vectorstore</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.BalancedSemanticSamplesSelector.vectorstore_kwargs"><code class="docutils literal notranslate"><span class="pre">BalancedSemanticSamplesSelector.vectorstore_kwargs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.custom_selectors.sorted_values"><code class="docutils literal notranslate"><span class="pre">sorted_values()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.selector.html#module-promptmeteo.selector">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.SelectorFactory"><code class="docutils literal notranslate"><span class="pre">SelectorFactory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.SelectorFactory.factory_method"><code class="docutils literal notranslate"><span class="pre">SelectorFactory.factory_method()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.SelectorTypes"><code class="docutils literal notranslate"><span class="pre">SelectorTypes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.SelectorTypes.SUPERVISED"><code class="docutils literal notranslate"><span class="pre">SelectorTypes.SUPERVISED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.selector.html#promptmeteo.selector.SelectorTypes.UNSUPERVISED"><code class="docutils literal notranslate"><span class="pre">SelectorTypes.UNSUPERVISED</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="promptmeteo.tasks.html">promptmeteo.tasks package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.tasks.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.tasks.html#module-promptmeteo.tasks.task">promptmeteo.tasks.task module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task.Task"><code class="docutils literal notranslate"><span class="pre">Task</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task.Task.language"><code class="docutils literal notranslate"><span class="pre">Task.language</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task.Task.model"><code class="docutils literal notranslate"><span class="pre">Task.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task.Task.parser"><code class="docutils literal notranslate"><span class="pre">Task.parser</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task.Task.prompt"><code class="docutils literal notranslate"><span class="pre">Task.prompt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task.Task.run"><code class="docutils literal notranslate"><span class="pre">Task.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task.Task.selector"><code class="docutils literal notranslate"><span class="pre">Task.selector</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task.Task.task_type"><code class="docutils literal notranslate"><span class="pre">Task.task_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.tasks.html#module-promptmeteo.tasks.task_builder">promptmeteo.tasks.task_builder module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskBuilder"><code class="docutils literal notranslate"><span class="pre">TaskBuilder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskBuilder.build_model"><code class="docutils literal notranslate"><span class="pre">TaskBuilder.build_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskBuilder.build_parser"><code class="docutils literal notranslate"><span class="pre">TaskBuilder.build_parser()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskBuilder.build_prompt"><code class="docutils literal notranslate"><span class="pre">TaskBuilder.build_prompt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskBuilder.build_selector_by_load"><code class="docutils literal notranslate"><span class="pre">TaskBuilder.build_selector_by_load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskBuilder.build_selector_by_train"><code class="docutils literal notranslate"><span class="pre">TaskBuilder.build_selector_by_train()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskBuilder.task"><code class="docutils literal notranslate"><span class="pre">TaskBuilder.task</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskTypes"><code class="docutils literal notranslate"><span class="pre">TaskTypes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskTypes.API_CORRECTION"><code class="docutils literal notranslate"><span class="pre">TaskTypes.API_CORRECTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskTypes.API_GENERATION"><code class="docutils literal notranslate"><span class="pre">TaskTypes.API_GENERATION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskTypes.CLASSIFICATION"><code class="docutils literal notranslate"><span class="pre">TaskTypes.CLASSIFICATION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskTypes.CODE_GENERATION"><code class="docutils literal notranslate"><span class="pre">TaskTypes.CODE_GENERATION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskTypes.QA"><code class="docutils literal notranslate"><span class="pre">TaskTypes.QA</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskTypes.SUMMARIZATION"><code class="docutils literal notranslate"><span class="pre">TaskTypes.SUMMARIZATION</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="promptmeteo.tasks.html#module-promptmeteo.tasks">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="module-promptmeteo.api_formatter">
+<span id="promptmeteo-api-formatter-module"></span><h2>promptmeteo.api_formatter module<a class="headerlink" href="#module-promptmeteo.api_formatter" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="promptmeteo.api_formatter.APIFormatter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.api_formatter.</span></span><span class="sig-name descname"><span class="pre">APIFormatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_provider_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_style_instructions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.api_formatter.APIFormatter" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#promptmeteo.base.BaseUnsupervised" title="promptmeteo.base.BaseUnsupervised"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUnsupervised</span></code></a></p>
+<p>API Formatter Task.</p>
+<p>This class initializes the API Formatter Task to correct and format APIs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>language</strong> (<em>str</em>) – Language for the API descriptions.</p></li>
+<li><p><strong>model_name</strong> (<em>str</em>) – Name of the model to be used for API generation.</p></li>
+<li><p><strong>model_provider_name</strong> (<em>str</em>) – Name of the model provider.</p></li>
+<li><p><strong>api_version</strong> (<em>str</em>) – Version of the API.</p></li>
+<li><p><strong>api_protocol</strong> (<em>str</em>) – Protocol of the API.</p></li>
+<li><p><strong>api_style_instructions</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Instructions for API style.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <cite>api_protocol</cite> is not in the allowed protocols or if <cite>api_version</cite>
+    is not in the correct format.</p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">APIFormatter</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">APIFormatter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">api_version</span> <span class="o">=</span> <span class="s1">&#39;3.0.3&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">api_protocol</span> <span class="o">=</span> <span class="s1">&#39;REST&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">api_style_instructions</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>        <span class="s1">&#39;Use always camel case.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;Do not use acronyms.&#39;</span>
+<span class="gp">... </span>        <span class="p">],</span>
+<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s1">&#39;openai&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;gpt-3.5-turbo-16k&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">model_token</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">external_info</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>                    <span class="s2">&quot;servers&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="gp">... </span>                        <span class="p">{</span>
+<span class="gp">... </span>                            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8080/&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Local environment&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="p">}</span>
+<span class="gp">... </span>                    <span class="p">],</span>
+<span class="gp">... </span>                <span class="p">}</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">api_code</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.api_formatter.APIFormatter.ALLOWED_PROTOCOLS">
+<span class="sig-name descname"><span class="pre">ALLOWED_PROTOCOLS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['REST']</span></em><a class="headerlink" href="#promptmeteo.api_formatter.APIFormatter.ALLOWED_PROTOCOLS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.api_formatter.APIFormatter.TASK_TYPE">
+<span class="sig-name descname"><span class="pre">TASK_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'api-correction'</span></em><a class="headerlink" href="#promptmeteo.api_formatter.APIFormatter.TASK_TYPE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.api_formatter.APIFormatter.load_model">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.api_formatter.APIFormatter.load_model" title="Permalink to this definition">#</a></dt>
+<dd><p>Load a saved model from disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_path</strong> (<em>str</em>) – Path from where the model will be loaded.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded model instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#promptmeteo.base.Base" title="promptmeteo.base.Base">Base</a></p>
+</dd>
+</dl>
+<p>Loads a model artifact to make new predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_path</strong> (<em>str</em>) – Path to the model artifact.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the loaded APIFormatter object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#promptmeteo.api_formatter.APIFormatter" title="promptmeteo.api_formatter.APIFormatter">APIFormatter</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.api_formatter.APIFormatter.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#promptmeteo.api_formatter.APIFormatter.predict" title="Permalink to this definition">#</a></dt>
+<dd><p>Predict over new text samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>examples</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of text samples to predict.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of predictions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+<p>Receive a list of API codes and return a list with the corrected APIs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_codes</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of API codes.</p></li>
+<li><p><strong>external_info</strong> (<em>dict</em>) – External information to be added to the APIs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of corrected APIs.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.api_formatter.APIFormatter.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.api_formatter.APIFormatter.train" title="Permalink to this definition">#</a></dt>
+<dd><p>Trains the model given use cases and notes on behaviour. Check the
+parameters and task behaviour in each specific model training docstring.</p>
+<p>Train the APIFormatter to extract entities and parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>api_codes</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of API codes.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the trained APIFormatter object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#promptmeteo.api_formatter.APIFormatter" title="promptmeteo.api_formatter.APIFormatter">APIFormatter</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-promptmeteo.api_generator">
+<span id="promptmeteo-api-generator-module"></span><h2>promptmeteo.api_generator module<a class="headerlink" href="#module-promptmeteo.api_generator" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="promptmeteo.api_generator.APIGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.api_generator.</span></span><span class="sig-name descname"><span class="pre">APIGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_provider_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_style_instructions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.api_generator.APIGenerator" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#promptmeteo.base.BaseSupervised" title="promptmeteo.base.BaseSupervised"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSupervised</span></code></a></p>
+<p>API Generator Task.</p>
+<p>This class initializes the APIGenerator Task to create APIs based on descriptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>language</strong> (<em>str</em>) – Language for the API descriptions.</p></li>
+<li><p><strong>model_name</strong> (<em>str</em>) – Name of the model to be used for API generation.</p></li>
+<li><p><strong>model_provider_name</strong> (<em>str</em>) – Name of the model provider.</p></li>
+<li><p><strong>api_version</strong> (<em>str</em>) – Version of the API.</p></li>
+<li><p><strong>api_protocol</strong> (<em>str</em>) – Protocol of the API.</p></li>
+<li><p><strong>api_style_instructions</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Instructions for API style.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <cite>api_protocol</cite> is not in the allowed protocols or if <cite>api_version</cite>
+    is not in the correct format.</p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">APIGenerator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">APIGenerator</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">selector_k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">api_version</span><span class="o">=</span><span class="s1">&#39;3.0.3&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">api_protocol</span><span class="o">=</span><span class="s1">&#39;REST&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">api_style_instructions</span><span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>        <span class="s1">&#39;Use always camel case.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;Do not use acronyms.&#39;</span>
+<span class="gp">... </span>    <span class="p">],</span>
+<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s1">&#39;openai&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;gpt-3.5-turbo-16k&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">model_token</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">api_description</span><span class="p">,</span> <span class="n">api_code</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">&quot;API for managing account access&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.api_generator.APIGenerator.ALLOWED_PROTOCOLS">
+<span class="sig-name descname"><span class="pre">ALLOWED_PROTOCOLS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['REST']</span></em><a class="headerlink" href="#promptmeteo.api_generator.APIGenerator.ALLOWED_PROTOCOLS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.api_generator.APIGenerator.TASK_TYPE">
+<span class="sig-name descname"><span class="pre">TASK_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'api-generation'</span></em><a class="headerlink" href="#promptmeteo.api_generator.APIGenerator.TASK_TYPE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.api_generator.APIGenerator.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_descriptions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.api_generator.APIGenerator.train" title="Permalink to this definition">#</a></dt>
+<dd><p>Trains the model given use cases and notes on behaviour. Check the
+parameters and task behaviour in each specific model training docstring.</p>
+<p>Train the APIGenerator from a list of APIs descriptions and contracts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_descriptions</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of API descriptions.</p></li>
+<li><p><strong>api_codes</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of API codes - contracts.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the trained APIGenerator object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#promptmeteo.api_generator.APIGenerator" title="promptmeteo.api_generator.APIGenerator">APIGenerator</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-promptmeteo.base">
+<span id="promptmeteo-base-module"></span><h2>promptmeteo.base module<a class="headerlink" href="#module-promptmeteo.base" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="promptmeteo.base.Base">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.base.</span></span><span class="sig-name descname"><span class="pre">Base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_provider_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_provider_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompt_domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompt_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompt_detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selector_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selector_algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'relevance'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.base.Base" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Promptmeteo is a tool powered by LLMs, capable of solving NLP tasks such as
+text classification and Named Entity Recognition. Its interface resembles
+that of a conventional ML model, making it easy to integrate into MLOps
+pipelines.</p>
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
+<dl class="simple">
+<dt>‘Sun is setting on the New Republic. It’s time for the ResistencIA to rise’</dt><dd><p>Padmé Amidala, mother of Leia</p>
+</dd>
+</dl>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.Base.SELECTOR_TYPE">
+<span class="sig-name descname"><span class="pre">SELECTOR_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#promptmeteo.base.Base.SELECTOR_TYPE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.Base.TASK_TYPE">
+<span class="sig-name descname"><span class="pre">TASK_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#promptmeteo.base.Base.TASK_TYPE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="promptmeteo.base.Base.builder">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">builder</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskBuilder" title="promptmeteo.tasks.task_builder.TaskBuilder"><span class="pre">TaskBuilder</span></a></em><a class="headerlink" href="#promptmeteo.base.Base.builder" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the TaskBuilder instance for the model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.base.Base.create_builder">
+<span class="sig-name descname"><span class="pre">create_builder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task_builder.TaskBuilder" title="promptmeteo.tasks.task_builder.TaskBuilder"><span class="pre">TaskBuilder</span></a></span></span><a class="headerlink" href="#promptmeteo.base.Base.create_builder" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a TaskBuilder instance for the model.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="promptmeteo.base.Base.init_params">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">init_params</span></span><a class="headerlink" href="#promptmeteo.base.Base.init_params" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the initialization parameters of the model.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="promptmeteo.base.Base.is_trained">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_trained</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#promptmeteo.base.Base.is_trained" title="Permalink to this definition">#</a></dt>
+<dd><p>Check if the model is trained.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.base.Base.load_model">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.base.Base.load_model" title="Permalink to this definition">#</a></dt>
+<dd><p>Load a saved model from disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_path</strong> (<em>str</em>) – Path from where the model will be loaded.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded model instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#promptmeteo.base.Base" title="promptmeteo.base.Base">Base</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.base.Base.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">examples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#promptmeteo.base.Base.predict" title="Permalink to this definition">#</a></dt>
+<dd><p>Predict over new text samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>examples</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of text samples to predict.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of predictions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.base.Base.save_model">
+<span class="sig-name descname"><span class="pre">save_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.base.Base.save_model" title="Permalink to this definition">#</a></dt>
+<dd><p>Save the trained model to disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_path</strong> (<em>str</em>) – Path where the model will be saved.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of the saved model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#promptmeteo.base.Base" title="promptmeteo.base.Base">Base</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="promptmeteo.base.Base.task">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">task</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="promptmeteo.tasks.html#promptmeteo.tasks.task.Task" title="promptmeteo.tasks.task.Task"><span class="pre">Task</span></a></em><a class="headerlink" href="#promptmeteo.base.Base.task" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the Task instance for the model.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseSupervised">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.base.</span></span><span class="sig-name descname"><span class="pre">BaseSupervised</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.base.BaseSupervised" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#promptmeteo.base.Base" title="promptmeteo.base.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a></p>
+<p>Base class for supervised training tasks.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseSupervised.SELECTOR_TYPE">
+<span class="sig-name descname"><span class="pre">SELECTOR_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'supervised'</span></em><a class="headerlink" href="#promptmeteo.base.BaseSupervised.SELECTOR_TYPE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseSupervised.language">
+<span class="sig-name descname"><span class="pre">language</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.base.BaseSupervised.language" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseSupervised.model_name">
+<span class="sig-name descname"><span class="pre">model_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.base.BaseSupervised.model_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseSupervised.model_params">
+<span class="sig-name descname"><span class="pre">model_params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span></em><a class="headerlink" href="#promptmeteo.base.BaseSupervised.model_params" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseSupervised.model_provider_name">
+<span class="sig-name descname"><span class="pre">model_provider_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.base.BaseSupervised.model_provider_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseSupervised.model_provider_token">
+<span class="sig-name descname"><span class="pre">model_provider_token</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.base.BaseSupervised.model_provider_token" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseSupervised.prompt_detail">
+<span class="sig-name descname"><span class="pre">prompt_detail</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.base.BaseSupervised.prompt_detail" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseSupervised.prompt_domain">
+<span class="sig-name descname"><span class="pre">prompt_domain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.base.BaseSupervised.prompt_domain" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseSupervised.prompt_labels">
+<span class="sig-name descname"><span class="pre">prompt_labels</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#promptmeteo.base.BaseSupervised.prompt_labels" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseSupervised.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">examples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.base.BaseSupervised.train" title="Permalink to this definition">#</a></dt>
+<dd><p>Trains the model given use cases and notes on behaviour. Check the
+parameters and task behaviour in each specific model training docstring.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseSupervised.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#promptmeteo.base.BaseSupervised.verbose" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseUnsupervised">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.base.</span></span><span class="sig-name descname"><span class="pre">BaseUnsupervised</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.base.BaseUnsupervised" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#promptmeteo.base.Base" title="promptmeteo.base.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a></p>
+<p>Base class for unsupervised training tasks.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseUnsupervised.SELECTOR_TYPE">
+<span class="sig-name descname"><span class="pre">SELECTOR_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'unsupervised'</span></em><a class="headerlink" href="#promptmeteo.base.BaseUnsupervised.SELECTOR_TYPE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseUnsupervised.language">
+<span class="sig-name descname"><span class="pre">language</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.base.BaseUnsupervised.language" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseUnsupervised.model_name">
+<span class="sig-name descname"><span class="pre">model_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.base.BaseUnsupervised.model_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseUnsupervised.model_params">
+<span class="sig-name descname"><span class="pre">model_params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span></em><a class="headerlink" href="#promptmeteo.base.BaseUnsupervised.model_params" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseUnsupervised.model_provider_name">
+<span class="sig-name descname"><span class="pre">model_provider_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.base.BaseUnsupervised.model_provider_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseUnsupervised.model_provider_token">
+<span class="sig-name descname"><span class="pre">model_provider_token</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.base.BaseUnsupervised.model_provider_token" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseUnsupervised.prompt_detail">
+<span class="sig-name descname"><span class="pre">prompt_detail</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.base.BaseUnsupervised.prompt_detail" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseUnsupervised.prompt_domain">
+<span class="sig-name descname"><span class="pre">prompt_domain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.base.BaseUnsupervised.prompt_domain" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseUnsupervised.prompt_labels">
+<span class="sig-name descname"><span class="pre">prompt_labels</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#promptmeteo.base.BaseUnsupervised.prompt_labels" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseUnsupervised.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">examples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.base.BaseUnsupervised.train" title="Permalink to this definition">#</a></dt>
+<dd><p>Trains the model given use cases and notes on behaviour. Check the
+parameters and task behaviour in each specific model training docstring.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.base.BaseUnsupervised.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#promptmeteo.base.BaseUnsupervised.verbose" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-promptmeteo.code_generator">
+<span id="promptmeteo-code-generator-module"></span><h2>promptmeteo.code_generator module<a class="headerlink" href="#module-promptmeteo.code_generator" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="promptmeteo.code_generator.CodeGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.code_generator.</span></span><span class="sig-name descname"><span class="pre">CodeGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.code_generator.CodeGenerator" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#promptmeteo.base.BaseSupervised" title="promptmeteo.base.BaseSupervised"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSupervised</span></code></a></p>
+<p>Code Generator Task.</p>
+<p>This class represents a model for generating code based on natural language descriptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments.</p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">CodeGenerator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">CodeGenerator</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">prompt_domain</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s1">&#39;openai&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">model_token</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">prompt_detail</span><span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>        <span class="s2">&quot;add docstring in function definitions&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;add argument typing annotations&quot;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;A function that receives the argument `foo` and prints it.&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.code_generator.CodeGenerator.TASK_TYPE">
+<span class="sig-name descname"><span class="pre">TASK_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'code-generation'</span></em><a class="headerlink" href="#promptmeteo.code_generator.CodeGenerator.TASK_TYPE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.code_generator.CodeGenerator.language">
+<span class="sig-name descname"><span class="pre">language</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.code_generator.CodeGenerator.language" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.code_generator.CodeGenerator.model_name">
+<span class="sig-name descname"><span class="pre">model_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.code_generator.CodeGenerator.model_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.code_generator.CodeGenerator.model_params">
+<span class="sig-name descname"><span class="pre">model_params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span></em><a class="headerlink" href="#promptmeteo.code_generator.CodeGenerator.model_params" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.code_generator.CodeGenerator.model_provider_name">
+<span class="sig-name descname"><span class="pre">model_provider_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.code_generator.CodeGenerator.model_provider_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.code_generator.CodeGenerator.model_provider_token">
+<span class="sig-name descname"><span class="pre">model_provider_token</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.code_generator.CodeGenerator.model_provider_token" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.code_generator.CodeGenerator.prompt_detail">
+<span class="sig-name descname"><span class="pre">prompt_detail</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.code_generator.CodeGenerator.prompt_detail" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.code_generator.CodeGenerator.prompt_domain">
+<span class="sig-name descname"><span class="pre">prompt_domain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.code_generator.CodeGenerator.prompt_domain" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.code_generator.CodeGenerator.prompt_labels">
+<span class="sig-name descname"><span class="pre">prompt_labels</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#promptmeteo.code_generator.CodeGenerator.prompt_labels" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.code_generator.CodeGenerator.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#promptmeteo.code_generator.CodeGenerator.verbose" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-promptmeteo.constants">
+<span id="promptmeteo-constants-module"></span><h2>promptmeteo.constants module<a class="headerlink" href="#module-promptmeteo.constants" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="module-promptmeteo.document_classifier">
+<span id="promptmeteo-document-classifier-module"></span><h2>promptmeteo.document_classifier module<a class="headerlink" href="#module-promptmeteo.document_classifier" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="promptmeteo.document_classifier.DocumentClassifier">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.document_classifier.</span></span><span class="sig-name descname"><span class="pre">DocumentClassifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.document_classifier.DocumentClassifier" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#promptmeteo.base.BaseSupervised" title="promptmeteo.base.BaseSupervised"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSupervised</span></code></a></p>
+<p>DocumentClassifier Task</p>
+<p>This class represents a model for classifying documents into predefined categories.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s1">&#39;hf_pipeline&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;google/flan-t5-small&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">prompt_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span><span class="s1">&#39;negative&#39;</span><span class="p">,</span><span class="s1">&#39;neutral&#39;</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;estoy feliz&#39;</span><span class="p">,</span> <span class="s1">&#39;me da igual&#39;</span><span class="p">,</span> <span class="s1">&#39;no me gusta&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">annotations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span> <span class="s1">&#39;neutral&#39;</span><span class="p">,</span> <span class="s1">&#39;negative&#39;</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;que guay!!&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[[</span><span class="s1">&#39;positive&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_classifier.DocumentClassifier.TASK_TYPE">
+<span class="sig-name descname"><span class="pre">TASK_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'classification'</span></em><a class="headerlink" href="#promptmeteo.document_classifier.DocumentClassifier.TASK_TYPE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_classifier.DocumentClassifier.language">
+<span class="sig-name descname"><span class="pre">language</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.document_classifier.DocumentClassifier.language" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_classifier.DocumentClassifier.model_name">
+<span class="sig-name descname"><span class="pre">model_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.document_classifier.DocumentClassifier.model_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_classifier.DocumentClassifier.model_params">
+<span class="sig-name descname"><span class="pre">model_params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span></em><a class="headerlink" href="#promptmeteo.document_classifier.DocumentClassifier.model_params" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_classifier.DocumentClassifier.model_provider_name">
+<span class="sig-name descname"><span class="pre">model_provider_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.document_classifier.DocumentClassifier.model_provider_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_classifier.DocumentClassifier.model_provider_token">
+<span class="sig-name descname"><span class="pre">model_provider_token</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.document_classifier.DocumentClassifier.model_provider_token" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_classifier.DocumentClassifier.prompt_detail">
+<span class="sig-name descname"><span class="pre">prompt_detail</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.document_classifier.DocumentClassifier.prompt_detail" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_classifier.DocumentClassifier.prompt_domain">
+<span class="sig-name descname"><span class="pre">prompt_domain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.document_classifier.DocumentClassifier.prompt_domain" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_classifier.DocumentClassifier.prompt_labels">
+<span class="sig-name descname"><span class="pre">prompt_labels</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#promptmeteo.document_classifier.DocumentClassifier.prompt_labels" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.document_classifier.DocumentClassifier.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">examples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.document_classifier.DocumentClassifier.train" title="Permalink to this definition">#</a></dt>
+<dd><p>Trains the model given use cases and notes on behaviour. Check the
+parameters and task behaviour in each specific model training docstring.</p>
+<p>Trains the DocumentClassifier model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>examples</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of document examples.</p></li>
+<li><p><strong>annotations</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of corresponding annotations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_classifier.DocumentClassifier.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#promptmeteo.document_classifier.DocumentClassifier.verbose" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-promptmeteo.document_qa">
+<span id="promptmeteo-document-qa-module"></span><h2>promptmeteo.document_qa module<a class="headerlink" href="#module-promptmeteo.document_qa" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="promptmeteo.document_qa.DocumentQA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.document_qa.</span></span><span class="sig-name descname"><span class="pre">DocumentQA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.document_qa.DocumentQA" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#promptmeteo.base.BaseUnsupervised" title="promptmeteo.base.BaseUnsupervised"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUnsupervised</span></code></a></p>
+<p>Question Answering over Documents Task</p>
+<p>This class represents a model for answering questions based on documents.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentQA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">DocumentQA</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s1">&#39;hf_pipeline&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;google/flan-t5-small&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="s2">&quot;The rain in spain is always in plain&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;The logarithm&#39;s limit is the limit&#39;s logarithm&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;To punish oppresors is clementy. To forgive them is cruelty&quot;</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;How is the rain in spain?&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[[</span><span class="s1">&#39;in plain&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_qa.DocumentQA.TASK_TYPE">
+<span class="sig-name descname"><span class="pre">TASK_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'qa'</span></em><a class="headerlink" href="#promptmeteo.document_qa.DocumentQA.TASK_TYPE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_qa.DocumentQA.language">
+<span class="sig-name descname"><span class="pre">language</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.document_qa.DocumentQA.language" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_qa.DocumentQA.model_name">
+<span class="sig-name descname"><span class="pre">model_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.document_qa.DocumentQA.model_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_qa.DocumentQA.model_params">
+<span class="sig-name descname"><span class="pre">model_params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span></em><a class="headerlink" href="#promptmeteo.document_qa.DocumentQA.model_params" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_qa.DocumentQA.model_provider_name">
+<span class="sig-name descname"><span class="pre">model_provider_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.document_qa.DocumentQA.model_provider_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_qa.DocumentQA.model_provider_token">
+<span class="sig-name descname"><span class="pre">model_provider_token</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.document_qa.DocumentQA.model_provider_token" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_qa.DocumentQA.prompt_detail">
+<span class="sig-name descname"><span class="pre">prompt_detail</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.document_qa.DocumentQA.prompt_detail" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_qa.DocumentQA.prompt_domain">
+<span class="sig-name descname"><span class="pre">prompt_domain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.document_qa.DocumentQA.prompt_domain" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_qa.DocumentQA.prompt_labels">
+<span class="sig-name descname"><span class="pre">prompt_labels</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#promptmeteo.document_qa.DocumentQA.prompt_labels" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.document_qa.DocumentQA.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#promptmeteo.document_qa.DocumentQA.verbose" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-promptmeteo.summarizer">
+<span id="promptmeteo-summarizer-module"></span><h2>promptmeteo.summarizer module<a class="headerlink" href="#module-promptmeteo.summarizer" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.summarizer.</span></span><span class="sig-name descname"><span class="pre">Summarizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.summarizer.Summarizer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#promptmeteo.base.BaseUnsupervised" title="promptmeteo.base.BaseUnsupervised"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUnsupervised</span></code></a></p>
+<p>Class for text summarization</p>
+<p>This class represents a model for text summarization.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">Summarizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">Summarizer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;es&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">prompt_domain</span><span class="o">=</span><span class="s2">&quot;A partir del siguiente texto:&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;anthropic.claude-v2&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;bedrock&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">text</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer.TASK_TYPE">
+<span class="sig-name descname"><span class="pre">TASK_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'summarization'</span></em><a class="headerlink" href="#promptmeteo.summarizer.Summarizer.TASK_TYPE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer.language">
+<span class="sig-name descname"><span class="pre">language</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.summarizer.Summarizer.language" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer.load_model">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.summarizer.Summarizer.load_model" title="Permalink to this definition">#</a></dt>
+<dd><p>Load a saved model from disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_path</strong> (<em>str</em>) – Path from where the model will be loaded.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded model instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#promptmeteo.base.Base" title="promptmeteo.base.Base">Base</a></p>
+</dd>
+</dl>
+<p>Loads a model artifact to make new predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_path</strong> (<em>str</em>) – The path to the saved model artifact.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>self</strong> – The loaded Summarizer model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#promptmeteo.summarizer.Summarizer" title="promptmeteo.summarizer.Summarizer">Summarizer</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer.model_name">
+<span class="sig-name descname"><span class="pre">model_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.summarizer.Summarizer.model_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer.model_params">
+<span class="sig-name descname"><span class="pre">model_params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span></em><a class="headerlink" href="#promptmeteo.summarizer.Summarizer.model_params" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer.model_provider_name">
+<span class="sig-name descname"><span class="pre">model_provider_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#promptmeteo.summarizer.Summarizer.model_provider_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer.model_provider_token">
+<span class="sig-name descname"><span class="pre">model_provider_token</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.summarizer.Summarizer.model_provider_token" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer.prompt_detail">
+<span class="sig-name descname"><span class="pre">prompt_detail</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.summarizer.Summarizer.prompt_detail" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer.prompt_domain">
+<span class="sig-name descname"><span class="pre">prompt_domain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#promptmeteo.summarizer.Summarizer.prompt_domain" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer.prompt_labels">
+<span class="sig-name descname"><span class="pre">prompt_labels</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#promptmeteo.summarizer.Summarizer.prompt_labels" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.summarizer.Summarizer.train" title="Permalink to this definition">#</a></dt>
+<dd><p>Trains the model given use cases and notes on behaviour. Check the
+parameters and task behaviour in each specific model training docstring.</p>
+<p>Train the Summarizer model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>self</strong> – The trained Summarizer model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#promptmeteo.summarizer.Summarizer" title="promptmeteo.summarizer.Summarizer">Summarizer</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="promptmeteo.summarizer.Summarizer.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#promptmeteo.summarizer.Summarizer.verbose" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-promptmeteo.tools">
+<span id="promptmeteo-tools-module"></span><h2>promptmeteo.tools module<a class="headerlink" href="#module-promptmeteo.tools" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="promptmeteo.tools.add_docstring_from">
+<span class="sig-prename descclassname"><span class="pre">promptmeteo.tools.</span></span><span class="sig-name descname"><span class="pre">add_docstring_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent_function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.tools.add_docstring_from" title="Permalink to this definition">#</a></dt>
+<dd><p>Decorator function used to concatenate a docstring from another function
+at the beginning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>parent_function</strong> (<em>function</em>) – The function whose docstring will be used.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>decorator</strong> – The decorator function.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>function</p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+<span class="gp">... </span><span class="w">    </span><span class="sd">&#39;&#39;&#39;documentation for foo&#39;&#39;&#39;</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@add_docstring_from</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">bar</span><span class="p">():</span>
+<span class="gp">... </span><span class="w">    </span><span class="sd">&#39;&#39;&#39;additional notes for bar&#39;&#39;&#39;</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">documentation</span> <span class="k">for</span> <span class="n">foo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">additional</span> <span class="n">notes</span> <span class="k">for</span> <span class="n">bar</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-promptmeteo.validations">
+<span id="promptmeteo-validations-module"></span><h2>promptmeteo.validations module<a class="headerlink" href="#module-promptmeteo.validations" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="promptmeteo.validations.validate_version_rest">
+<span class="sig-prename descclassname"><span class="pre">promptmeteo.validations.</span></span><span class="sig-name descname"><span class="pre">validate_version_rest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.validations.validate_version_rest" title="Permalink to this definition">#</a></dt>
+<dd><p>Validates the version number for REST protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>api_version</strong> (<em>str</em>) – The version number to validate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the version number is valid, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="promptmeteo.validations.version_validation">
+<span class="sig-prename descclassname"><span class="pre">promptmeteo.validations.</span></span><span class="sig-name descname"><span class="pre">version_validation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_protocol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.validations.version_validation" title="Permalink to this definition">#</a></dt>
+<dd><p>Validates the version based on the provided protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_version</strong> (<em>str</em>) – The version number to validate.</p></li>
+<li><p><strong>api_protocol</strong> (<em>str</em>) – The protocol to use for validation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the version number is valid for the given protocol, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the provided protocol is not supported.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-promptmeteo">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-promptmeteo" title="Permalink to this heading">#</a></h2>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023 - 2024, Paradigma Digital
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">promptmeteo package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-promptmeteo.api_formatter">promptmeteo.api_formatter module</a><ul>
+<li><a class="reference internal" href="#promptmeteo.api_formatter.APIFormatter"><code class="docutils literal notranslate"><span class="pre">APIFormatter</span></code></a><ul>
+<li><a class="reference internal" href="#promptmeteo.api_formatter.APIFormatter.ALLOWED_PROTOCOLS"><code class="docutils literal notranslate"><span class="pre">APIFormatter.ALLOWED_PROTOCOLS</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.api_formatter.APIFormatter.TASK_TYPE"><code class="docutils literal notranslate"><span class="pre">APIFormatter.TASK_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.api_formatter.APIFormatter.load_model"><code class="docutils literal notranslate"><span class="pre">APIFormatter.load_model()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.api_formatter.APIFormatter.predict"><code class="docutils literal notranslate"><span class="pre">APIFormatter.predict()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.api_formatter.APIFormatter.train"><code class="docutils literal notranslate"><span class="pre">APIFormatter.train()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-promptmeteo.api_generator">promptmeteo.api_generator module</a><ul>
+<li><a class="reference internal" href="#promptmeteo.api_generator.APIGenerator"><code class="docutils literal notranslate"><span class="pre">APIGenerator</span></code></a><ul>
+<li><a class="reference internal" href="#promptmeteo.api_generator.APIGenerator.ALLOWED_PROTOCOLS"><code class="docutils literal notranslate"><span class="pre">APIGenerator.ALLOWED_PROTOCOLS</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.api_generator.APIGenerator.TASK_TYPE"><code class="docutils literal notranslate"><span class="pre">APIGenerator.TASK_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.api_generator.APIGenerator.train"><code class="docutils literal notranslate"><span class="pre">APIGenerator.train()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-promptmeteo.base">promptmeteo.base module</a><ul>
+<li><a class="reference internal" href="#promptmeteo.base.Base"><code class="docutils literal notranslate"><span class="pre">Base</span></code></a><ul>
+<li><a class="reference internal" href="#promptmeteo.base.Base.SELECTOR_TYPE"><code class="docutils literal notranslate"><span class="pre">Base.SELECTOR_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.Base.TASK_TYPE"><code class="docutils literal notranslate"><span class="pre">Base.TASK_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.Base.builder"><code class="docutils literal notranslate"><span class="pre">Base.builder</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.Base.create_builder"><code class="docutils literal notranslate"><span class="pre">Base.create_builder()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.Base.init_params"><code class="docutils literal notranslate"><span class="pre">Base.init_params</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.Base.is_trained"><code class="docutils literal notranslate"><span class="pre">Base.is_trained</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.Base.load_model"><code class="docutils literal notranslate"><span class="pre">Base.load_model()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.Base.predict"><code class="docutils literal notranslate"><span class="pre">Base.predict()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.Base.save_model"><code class="docutils literal notranslate"><span class="pre">Base.save_model()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.Base.task"><code class="docutils literal notranslate"><span class="pre">Base.task</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseSupervised"><code class="docutils literal notranslate"><span class="pre">BaseSupervised</span></code></a><ul>
+<li><a class="reference internal" href="#promptmeteo.base.BaseSupervised.SELECTOR_TYPE"><code class="docutils literal notranslate"><span class="pre">BaseSupervised.SELECTOR_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseSupervised.language"><code class="docutils literal notranslate"><span class="pre">BaseSupervised.language</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseSupervised.model_name"><code class="docutils literal notranslate"><span class="pre">BaseSupervised.model_name</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseSupervised.model_params"><code class="docutils literal notranslate"><span class="pre">BaseSupervised.model_params</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseSupervised.model_provider_name"><code class="docutils literal notranslate"><span class="pre">BaseSupervised.model_provider_name</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseSupervised.model_provider_token"><code class="docutils literal notranslate"><span class="pre">BaseSupervised.model_provider_token</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseSupervised.prompt_detail"><code class="docutils literal notranslate"><span class="pre">BaseSupervised.prompt_detail</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseSupervised.prompt_domain"><code class="docutils literal notranslate"><span class="pre">BaseSupervised.prompt_domain</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseSupervised.prompt_labels"><code class="docutils literal notranslate"><span class="pre">BaseSupervised.prompt_labels</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseSupervised.train"><code class="docutils literal notranslate"><span class="pre">BaseSupervised.train()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseSupervised.verbose"><code class="docutils literal notranslate"><span class="pre">BaseSupervised.verbose</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseUnsupervised"><code class="docutils literal notranslate"><span class="pre">BaseUnsupervised</span></code></a><ul>
+<li><a class="reference internal" href="#promptmeteo.base.BaseUnsupervised.SELECTOR_TYPE"><code class="docutils literal notranslate"><span class="pre">BaseUnsupervised.SELECTOR_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseUnsupervised.language"><code class="docutils literal notranslate"><span class="pre">BaseUnsupervised.language</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseUnsupervised.model_name"><code class="docutils literal notranslate"><span class="pre">BaseUnsupervised.model_name</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseUnsupervised.model_params"><code class="docutils literal notranslate"><span class="pre">BaseUnsupervised.model_params</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseUnsupervised.model_provider_name"><code class="docutils literal notranslate"><span class="pre">BaseUnsupervised.model_provider_name</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseUnsupervised.model_provider_token"><code class="docutils literal notranslate"><span class="pre">BaseUnsupervised.model_provider_token</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseUnsupervised.prompt_detail"><code class="docutils literal notranslate"><span class="pre">BaseUnsupervised.prompt_detail</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseUnsupervised.prompt_domain"><code class="docutils literal notranslate"><span class="pre">BaseUnsupervised.prompt_domain</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseUnsupervised.prompt_labels"><code class="docutils literal notranslate"><span class="pre">BaseUnsupervised.prompt_labels</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseUnsupervised.train"><code class="docutils literal notranslate"><span class="pre">BaseUnsupervised.train()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.base.BaseUnsupervised.verbose"><code class="docutils literal notranslate"><span class="pre">BaseUnsupervised.verbose</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-promptmeteo.code_generator">promptmeteo.code_generator module</a><ul>
+<li><a class="reference internal" href="#promptmeteo.code_generator.CodeGenerator"><code class="docutils literal notranslate"><span class="pre">CodeGenerator</span></code></a><ul>
+<li><a class="reference internal" href="#promptmeteo.code_generator.CodeGenerator.TASK_TYPE"><code class="docutils literal notranslate"><span class="pre">CodeGenerator.TASK_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.code_generator.CodeGenerator.language"><code class="docutils literal notranslate"><span class="pre">CodeGenerator.language</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.code_generator.CodeGenerator.model_name"><code class="docutils literal notranslate"><span class="pre">CodeGenerator.model_name</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.code_generator.CodeGenerator.model_params"><code class="docutils literal notranslate"><span class="pre">CodeGenerator.model_params</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.code_generator.CodeGenerator.model_provider_name"><code class="docutils literal notranslate"><span class="pre">CodeGenerator.model_provider_name</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.code_generator.CodeGenerator.model_provider_token"><code class="docutils literal notranslate"><span class="pre">CodeGenerator.model_provider_token</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.code_generator.CodeGenerator.prompt_detail"><code class="docutils literal notranslate"><span class="pre">CodeGenerator.prompt_detail</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.code_generator.CodeGenerator.prompt_domain"><code class="docutils literal notranslate"><span class="pre">CodeGenerator.prompt_domain</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.code_generator.CodeGenerator.prompt_labels"><code class="docutils literal notranslate"><span class="pre">CodeGenerator.prompt_labels</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.code_generator.CodeGenerator.verbose"><code class="docutils literal notranslate"><span class="pre">CodeGenerator.verbose</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-promptmeteo.constants">promptmeteo.constants module</a></li>
+<li><a class="reference internal" href="#module-promptmeteo.document_classifier">promptmeteo.document_classifier module</a><ul>
+<li><a class="reference internal" href="#promptmeteo.document_classifier.DocumentClassifier"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier</span></code></a><ul>
+<li><a class="reference internal" href="#promptmeteo.document_classifier.DocumentClassifier.TASK_TYPE"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier.TASK_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_classifier.DocumentClassifier.language"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier.language</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_classifier.DocumentClassifier.model_name"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier.model_name</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_classifier.DocumentClassifier.model_params"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier.model_params</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_classifier.DocumentClassifier.model_provider_name"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier.model_provider_name</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_classifier.DocumentClassifier.model_provider_token"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier.model_provider_token</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_classifier.DocumentClassifier.prompt_detail"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier.prompt_detail</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_classifier.DocumentClassifier.prompt_domain"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier.prompt_domain</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_classifier.DocumentClassifier.prompt_labels"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier.prompt_labels</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_classifier.DocumentClassifier.train"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier.train()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_classifier.DocumentClassifier.verbose"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier.verbose</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-promptmeteo.document_qa">promptmeteo.document_qa module</a><ul>
+<li><a class="reference internal" href="#promptmeteo.document_qa.DocumentQA"><code class="docutils literal notranslate"><span class="pre">DocumentQA</span></code></a><ul>
+<li><a class="reference internal" href="#promptmeteo.document_qa.DocumentQA.TASK_TYPE"><code class="docutils literal notranslate"><span class="pre">DocumentQA.TASK_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_qa.DocumentQA.language"><code class="docutils literal notranslate"><span class="pre">DocumentQA.language</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_qa.DocumentQA.model_name"><code class="docutils literal notranslate"><span class="pre">DocumentQA.model_name</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_qa.DocumentQA.model_params"><code class="docutils literal notranslate"><span class="pre">DocumentQA.model_params</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_qa.DocumentQA.model_provider_name"><code class="docutils literal notranslate"><span class="pre">DocumentQA.model_provider_name</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_qa.DocumentQA.model_provider_token"><code class="docutils literal notranslate"><span class="pre">DocumentQA.model_provider_token</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_qa.DocumentQA.prompt_detail"><code class="docutils literal notranslate"><span class="pre">DocumentQA.prompt_detail</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_qa.DocumentQA.prompt_domain"><code class="docutils literal notranslate"><span class="pre">DocumentQA.prompt_domain</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_qa.DocumentQA.prompt_labels"><code class="docutils literal notranslate"><span class="pre">DocumentQA.prompt_labels</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.document_qa.DocumentQA.verbose"><code class="docutils literal notranslate"><span class="pre">DocumentQA.verbose</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-promptmeteo.summarizer">promptmeteo.summarizer module</a><ul>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer"><code class="docutils literal notranslate"><span class="pre">Summarizer</span></code></a><ul>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer.TASK_TYPE"><code class="docutils literal notranslate"><span class="pre">Summarizer.TASK_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer.language"><code class="docutils literal notranslate"><span class="pre">Summarizer.language</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer.load_model"><code class="docutils literal notranslate"><span class="pre">Summarizer.load_model()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer.model_name"><code class="docutils literal notranslate"><span class="pre">Summarizer.model_name</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer.model_params"><code class="docutils literal notranslate"><span class="pre">Summarizer.model_params</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer.model_provider_name"><code class="docutils literal notranslate"><span class="pre">Summarizer.model_provider_name</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer.model_provider_token"><code class="docutils literal notranslate"><span class="pre">Summarizer.model_provider_token</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer.prompt_detail"><code class="docutils literal notranslate"><span class="pre">Summarizer.prompt_detail</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer.prompt_domain"><code class="docutils literal notranslate"><span class="pre">Summarizer.prompt_domain</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer.prompt_labels"><code class="docutils literal notranslate"><span class="pre">Summarizer.prompt_labels</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer.train"><code class="docutils literal notranslate"><span class="pre">Summarizer.train()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.summarizer.Summarizer.verbose"><code class="docutils literal notranslate"><span class="pre">Summarizer.verbose</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-promptmeteo.tools">promptmeteo.tools module</a><ul>
+<li><a class="reference internal" href="#promptmeteo.tools.add_docstring_from"><code class="docutils literal notranslate"><span class="pre">add_docstring_from()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-promptmeteo.validations">promptmeteo.validations module</a><ul>
+<li><a class="reference internal" href="#promptmeteo.validations.validate_version_rest"><code class="docutils literal notranslate"><span class="pre">validate_version_rest()</span></code></a></li>
+<li><a class="reference internal" href="#promptmeteo.validations.version_validation"><code class="docutils literal notranslate"><span class="pre">version_validation()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-promptmeteo">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e936e8a8"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>

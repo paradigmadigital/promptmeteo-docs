@@ -1,12 +1,12 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="./">
+<html class="no-js" lang="en" data-content_root="">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="⚡ Quickstart" href="quickstart.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
-        <title>&lt;no title&gt; - 🔥🧔</title>
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
+        <title>👻 Classes - 🔥🧔</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -162,12 +162,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Classes</span></p>
 <ul class="current">
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">APIGenerator</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="#promptmeteo.APIFormatter"><code class="docutils literal notranslate"><span class="pre">APIFormatter</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="#promptmeteo.CodeGenerator"><code class="docutils literal notranslate"><span class="pre">CodeGenerator</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="#promptmeteo.DocumentClassifier"><code class="docutils literal notranslate"><span class="pre">DocumentClassifier</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="#promptmeteo.DocumentQA"><code class="docutils literal notranslate"><span class="pre">DocumentQA</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="#promptmeteo.Summarizer"><code class="docutils literal notranslate"><span class="pre">Summarizer</span></code></a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">👻 Classes</a></li>
 </ul>
 
 </div>
@@ -202,9 +197,11 @@
           </label>
         </div>
         <article role="main">
-          <dl class="py class">
+          <section id="classes">
+<h1>👻 Classes<a class="headerlink" href="#classes" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
 <dt class="sig sig-object py" id="promptmeteo.APIGenerator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">APIGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_provider_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_style_instructions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.APIGenerator" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">APIGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_provider_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_style_instructions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.APIGenerator" title="Permalink to this definition">#</a></dt>
 <dd><p>API Generator Task.</p>
 <p>This class initializes the APIGenerator Task to create APIs based on descriptions.</p>
 <dl class="field-list simple">
@@ -251,7 +248,7 @@
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.APIGenerator.train">
-<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_descriptions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.APIGenerator.train" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_descriptions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.APIGenerator.train" title="Permalink to this definition">#</a></dt>
 <dd><p>Trains the model given use cases and notes on behaviour. Check the
 parameters and task behaviour in each specific model training docstring.</p>
 <p>Train the APIGenerator from a list of APIs descriptions and contracts.</p>
@@ -275,7 +272,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="promptmeteo.APIFormatter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">APIFormatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_provider_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_style_instructions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.APIFormatter" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">APIFormatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_provider_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_style_instructions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.APIFormatter" title="Permalink to this definition">#</a></dt>
 <dd><p>API Formatter Task.</p>
 <p>This class initializes the API Formatter Task to correct and format APIs.</p>
 <dl class="field-list simple">
@@ -331,7 +328,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.APIFormatter.load_model">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.APIFormatter.load_model" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.APIFormatter.load_model" title="Permalink to this definition">#</a></dt>
 <dd><p>Load a saved model from disk.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -341,7 +338,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 <dd class="field-even"><p>Loaded model instance.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Base</p>
+<dd class="field-odd"><p><a class="reference internal" href="promptmeteo.html#promptmeteo.base.Base" title="promptmeteo.base.Base">Base</a></p>
 </dd>
 </dl>
 <p>Loads a model artifact to make new predictions.</p>
@@ -360,7 +357,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.APIFormatter.predict">
-<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#promptmeteo.APIFormatter.predict" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#promptmeteo.APIFormatter.predict" title="Permalink to this definition">#</a></dt>
 <dd><p>Predict over new text samples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -392,7 +389,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.APIFormatter.train">
-<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.APIFormatter.train" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.APIFormatter.train" title="Permalink to this definition">#</a></dt>
 <dd><p>Trains the model given use cases and notes on behaviour. Check the
 parameters and task behaviour in each specific model training docstring.</p>
 <p>Train the APIFormatter to extract entities and parameters.</p>
@@ -413,7 +410,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="promptmeteo.CodeGenerator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">CodeGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.CodeGenerator" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">CodeGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.CodeGenerator" title="Permalink to this definition">#</a></dt>
 <dd><p>Code Generator Task.</p>
 <p>This class represents a model for generating code based on natural language descriptions.</p>
 <dl class="field-list simple">
@@ -449,7 +446,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="promptmeteo.DocumentClassifier">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">DocumentClassifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.DocumentClassifier" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">DocumentClassifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.DocumentClassifier" title="Permalink to this definition">#</a></dt>
 <dd><p>DocumentClassifier Task</p>
 <p>This class represents a model for classifying documents into predefined categories.</p>
 <div class="admonition-example admonition">
@@ -477,7 +474,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.DocumentClassifier.train">
-<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">examples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.DocumentClassifier.train" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">examples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.DocumentClassifier.train" title="Permalink to this definition">#</a></dt>
 <dd><p>Trains the model given use cases and notes on behaviour. Check the
 parameters and task behaviour in each specific model training docstring.</p>
 <p>Trains the DocumentClassifier model.</p>
@@ -498,7 +495,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="promptmeteo.DocumentQA">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">DocumentQA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.DocumentQA" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">DocumentQA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.DocumentQA" title="Permalink to this definition">#</a></dt>
 <dd><p>Question Answering over Documents Task</p>
 <p>This class represents a model for answering questions based on documents.</p>
 <div class="admonition-example admonition">
@@ -530,7 +527,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="promptmeteo.Summarizer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">Summarizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.Summarizer" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">Summarizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.Summarizer" title="Permalink to this definition">#</a></dt>
 <dd><p>Class for text summarization</p>
 <p>This class represents a model for text summarization.</p>
 <div class="admonition-example admonition">
@@ -550,7 +547,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.Summarizer.load_model">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.Summarizer.load_model" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.Summarizer.load_model" title="Permalink to this definition">#</a></dt>
 <dd><p>Load a saved model from disk.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -560,7 +557,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 <dd class="field-even"><p>Loaded model instance.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Base</p>
+<dd class="field-odd"><p><a class="reference internal" href="promptmeteo.html#promptmeteo.base.Base" title="promptmeteo.base.Base">Base</a></p>
 </dd>
 </dl>
 <p>Loads a model artifact to make new predictions.</p>
@@ -579,7 +576,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.Summarizer.train">
-<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.Summarizer.train" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.Summarizer.train" title="Permalink to this definition">#</a></dt>
 <dd><p>Trains the model given use cases and notes on behaviour. Check the
 parameters and task behaviour in each specific model training docstring.</p>
 <p>Train the Summarizer model.</p>
@@ -595,6 +592,7 @@ parameters and task behaviour in each specific model training docstring.</p>
 
 </dd></dl>
 
+</section>
 
         </article>
       </div>
@@ -643,7 +641,8 @@ parameters and task behaviour in each specific model training docstring.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">APIGenerator</span></code></a><ul>
+<li><a class="reference internal" href="#">👻 Classes</a><ul>
+<li><a class="reference internal" href="#promptmeteo.APIGenerator"><code class="docutils literal notranslate"><span class="pre">APIGenerator</span></code></a><ul>
 <li><a class="reference internal" href="#promptmeteo.APIGenerator.train"><code class="docutils literal notranslate"><span class="pre">APIGenerator.train()</span></code></a></li>
 </ul>
 </li>
@@ -665,6 +664,8 @@ parameters and task behaviour in each specific model training docstring.</p>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 
           </div>
         </div>
@@ -673,9 +674,9 @@ parameters and task behaviour in each specific model training docstring.</p>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=91f6191e"></script>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e936e8a8"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/scripts/furo.js?v=32e29ea5"></script>
     </body>
 </html>

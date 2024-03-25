@@ -1,0 +1,3134 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="OpenAI - Test Classification Prompts" href="05_test_openai_classification_prompts.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
+        <title>OpenAI - Test API Generation - 🔥🧔</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">🔥🧔</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">🔥🧔</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../definition.html">🤔 What is this library for?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">⚙️ Installation and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">⚡ Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">👻 Classes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Example notebooks</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_promptmeteo_usage.html">Promptmeteo Usage - Save and Load Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_sentiment_analysis.html">Sentiment Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_test_flant5_classification_prompts.html">Flan-t5-Small - Test Classification Prompts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_test_openai_classification_prompts.html">OpenAI - Test Classification Prompts</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">OpenAI - Test API Generation</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="OpenAI---Test-API-Generation">
+<h1>OpenAI - Test API Generation<a class="headerlink" href="#OpenAI---Test-API-Generation" title="Permalink to this heading">#</a></h1>
+<p>In this notebook, we create a fresh REST API specification. APIGeneration models are thought to generate a new API based on similar APIs.</p>
+<p>APIGenerator and APIFormatter and thought to perform together but are not exclusive.</p>
+<section id="1.-Data-Preparation---API-Examples-and-instructions.">
+<h2>1. Data Preparation - API Examples and instructions.<a class="headerlink" href="#1.-Data-Preparation---API-Examples-and-instructions." title="Permalink to this heading">#</a></h2>
+<p>The examples in the <code class="docutils literal notranslate"><span class="pre">api_examples</span></code> folder are APIs along with their descriptions, enabling a search based on similarity.</p>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">instructions</span></code> pertains to specific criteria we want the generated API to meet. This could involve specifying that it should be entirely in English or include certain types of responses.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">APIGenerator</span>
+<span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">APIFormatter</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../data/api_examples/api_rest.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+    <span class="n">api_descriptions</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="n">api_codes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;api&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+<span class="n">instructions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;rule&quot;</span><span class="p">:</span> <span class="s2">&quot;Actions `get`, `post`, `update`, `delete` must have the properties `tags`, `description`, `summary`, `operationId`, `parameters`, `response`.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;example&quot;</span><span class="p">:</span> <span class="s2">&quot;```</span><span class="se">\n</span><span class="s2">    paths:</span><span class="se">\n</span><span class="s2">      /products:</span><span class="se">\n</span><span class="s2">get:</span><span class="se">\n</span><span class="s2">  tags:</span><span class="se">\n</span><span class="s2">  - Products</span><span class="se">\n</span><span class="s2">  summary: Service to fetch the list of products.</span><span class="se">\n</span><span class="s2">  description: This service fetches the list of the products.</span><span class="se">\n</span><span class="s2">  operationId: findAllProducts</span><span class="se">\n</span><span class="s2">  parameters:</span><span class="se">\n</span><span class="s2">  - name: brand</span><span class="se">\n</span><span class="s2">  responses:</span><span class="se">\n</span><span class="s2">    &#39;200&#39;:</span><span class="se">\n</span><span class="s2">      description: OK</span><span class="se">\n</span><span class="s2">    ```&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>The following variables are essential in the inference process:</p>
+<ul class="simple">
+<li><p><strong>description:</strong> This is the phrase that provides meaning to the API.</p></li>
+<li><p><strong>protocol and version:</strong> These variables are related to the technical specification of the generated code.</p></li>
+<li><p><strong>additional information:</strong> This variable allows us to include custom information. This information is incorporated exactly as specified in the variable.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;An API for managing my finances&quot;</span>
+<span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;REST&quot;</span>
+<span class="n">version</span><span class="o">=</span><span class="s2">&quot;3.0.3&quot;</span>
+<span class="n">additional_info</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">&quot;servers&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8080/&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Local environment&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="2.-APIGenerator---Generate-a-new-API.">
+<h2>2. APIGenerator - Generate a new API.<a class="headerlink" href="#2.-APIGenerator---Generate-a-new-API." title="Permalink to this heading">#</a></h2>
+<p>API Generator is in charge of creating a new REST API based on a knowledge base and some instructions. Example APIs are search based on their descriptions matching the description of the new API.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_1</span> <span class="o">=</span> <span class="n">APIGenerator</span><span class="p">(</span>
+        <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+        <span class="n">n_samples</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">api_version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
+        <span class="n">api_protocol</span><span class="o">=</span><span class="n">protocol</span><span class="p">,</span>
+        <span class="n">api_style_instructions</span><span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;rule&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">instructions</span><span class="p">],</span>
+        <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo-16k&quot;</span><span class="p">,</span>
+        <span class="n">model_provider_token</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">api_descriptions</span><span class="p">,</span> <span class="n">api_codes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">model_1</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">description</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+PROMPT INPUT
+
+ You are an API Designer that has to create an API file for your company. The expected file should be OpenAPI 3.0.3 REST API YAML.
+
+### RULES ###
+
+ The API should fulfill the following rules:
+ - Actions `get`, `post`, `update`, `delete` must have the properties `tags`, `description`, `summary`, `operationId`, `parameters`, `response`.
+
+### EXAMPLES ###
+
+For doing so take into consideration `paths`, `schemas` and `parameters` from the following API (They are not complete, they just include the scaffolding):
+
+IBANAPI OpenApi documentation
+```
+openapi: 3.0.0
+servers:
+- description: IBANAPI Server
+  url: https://api.ibanapi.com/v1
+info:
+  contact:
+    email: samy@ibanapi.com
+  description: IBANAPI OpenApi documentation
+  title: IBANAPI OpenApi Documentation
+  version: 1.0.0
+  x-apisguru-categories:
+  - financial
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_ibanapi.com_assets_favicon_apple-touch-icon.png
+  x-origin:
+  - format: openapi
+    url: https://api.ibanapi.com/docs/api-docs.json
+    version: &#39;3.0&#39;
+  x-providerName: ibanapi.com
+tags:
+- description: API Endpoints of IBANAPI
+  name: IBANAPI
+paths:
+  /balance:
+    get:
+    - description
+    - operationId
+    - responses
+    - security
+    - summary
+    - tags
+  /validate:
+    get:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - summary
+    - tags
+  /validate-basic:
+    get:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - summary
+    - tags
+components:
+  parameters:
+    iban:
+    - description
+    - in
+    - name
+    - required
+    - schema
+  schemas:
+    &#39;400&#39;:
+    - properties
+    - type
+    &#39;401&#39;:
+    - properties
+    - type
+    &#39;403&#39;:
+    - properties
+    - type
+    &#39;422&#39;:
+    - properties
+    - type
+    BalanceResponse:
+    - properties
+    - type
+    IBANResult:
+    - properties
+    - type
+    IBANResultBasic:
+    - properties
+    - type
+  securitySchemes:
+    api_key_security:
+    - description
+    - in
+    - name
+    - type
+```
+
+The price is a fundamental building block for your listing on Walmart.com. You can use the price management APIs to set up and manage the price for a given item
+```
+openapi: 3.0.1
+servers:
+- description: Production URL
+  url: https://marketplace.walmartapis.com
+- description: Sandbox URL
+  url: https://sandbox.walmartapis.com
+info:
+  contact:
+    x-twitter: Walmart
+  description: The price is a fundamental building block for your listing on Walmart.com.
+    You can use the price management APIs to set up and manage the price for a given
+    item
+  title: Price Management
+  version: 1.0.0
+  x-apisguru-categories:
+  - ecommerce
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_Walmart_profile_image.jpeg
+  x-origin:
+  - format: openapi
+    url: https://developer.walmart.com/api/detail
+    version: &#39;3.0&#39;
+  x-providerName: walmart.com
+  x-serviceName: price
+security:
+- {{}}
+paths:
+  /v3/cppreference:
+    post:
+    - description
+    - externalDocs
+    - operationId
+    - parameters
+    - requestBody
+    - responses
+    - summary
+    - tags
+  /v3/feeds:
+    post:
+    - description
+    - operationId
+    - parameters
+    - requestBody
+    - responses
+    - summary
+    - tags
+  /v3/price:
+    put:
+    - description
+    - operationId
+    - parameters
+    - requestBody
+    - responses
+    - summary
+    - tags
+components:
+  parameters:
+    accept:
+    - description
+    - example
+    - in
+    - name
+    - required
+    - schema
+    accessToken:
+    - description
+    - example
+    - in
+    - name
+    - required
+    - schema
+    authorization:
+    - description
+    - example
+    - in
+    - name
+    - required
+    - schema
+    channelType:
+    - description
+    - in
+    - name
+    - required
+    - schema
+    content-type:
+    - description
+    - example
+    - in
+    - name
+    - required
+    - schema
+    correlationId:
+    - description
+    - example
+    - in
+    - name
+    - required
+    - schema
+    svcName:
+    - description
+    - example
+    - in
+    - name
+    - required
+    - schema
+  schemas:
+    CapProgramResponse:
+    - properties
+    - type
+    Cause:
+    - properties
+    - type
+    - xml
+    ComparisonPrice:
+    - description
+    - properties
+    - type
+    CurrentPrice:
+    - properties
+    - type
+    FeedId:
+    - properties
+    - type
+    GatewayError:
+    - properties
+    - required
+    - type
+    - xml
+    ItemPriceResponse:
+    - properties
+    - type
+    - xml
+    Price:
+    - properties
+    - required
+    - type
+    Pricing:
+    - properties
+    - required
+    - type
+    StatusInfo:
+    - properties
+    - type
+```
+
+The Assets API exposes fixed asset related functions of the Xero Accounting application and can be used for a variety of purposes such as creating assets, retrieving asset valuations etc.
+```
+openapi: 3.0.0
+servers:
+- description: Xero API servers
+  url: https://api.xero.com/assets.xro/1.0
+info:
+  contact:
+    email: api@xero.com
+    name: Xero Platform Team
+    url: https://developer.xero.com
+    x-twitter: XeroAPI
+  description: The Assets API exposes fixed asset related functions of the Xero Accounting
+    application and can be used for a variety of purposes such as creating assets,
+    retrieving asset valuations etc.
+  license:
+    name: MIT
+    url: https://github.com/XeroAPI/Xero-OpenAPI/blob/master/LICENSE
+  termsOfService: https://developer.xero.com/xero-developer-platform-terms-conditions/
+  title: Xero Assets API
+  version: 2.9.4
+  x-apisguru-categories:
+  - financial
+  x-origin:
+  - format: openapi
+    url: https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero_assets.yaml
+    version: &#39;3.0&#39;
+  x-providerName: xero.com
+  x-serviceName: xero_assets
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+paths:
+  /AssetTypes:
+    get:
+    - description
+    - operationId
+    - responses
+    - security
+    - summary
+    - tags
+    parameters:
+    - $ref: &#39;#/components/parameters/requiredHeader&#39;
+    post:
+    - description
+    - operationId
+    - requestBody
+    - responses
+    - security
+    - summary
+    - tags
+    - x-hasAssetsValidationError
+  /Assets:
+    get:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - summary
+    - tags
+    parameters:
+    - $ref: &#39;#/components/parameters/requiredHeader&#39;
+    post:
+    - description
+    - operationId
+    - requestBody
+    - responses
+    - security
+    - summary
+    - tags
+    - x-hasAssetsValidationError
+  /Assets/{{id}}:
+    get:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - summary
+    - tags
+    parameters:
+    - $ref: &#39;#/components/parameters/requiredHeader&#39;
+  /Settings:
+    get:
+    - description
+    - operationId
+    - responses
+    - security
+    - summary
+    - tags
+    parameters:
+    - $ref: &#39;#/components/parameters/requiredHeader&#39;
+components:
+  parameters:
+    requiredHeader:
+    - description
+    - example
+    - in
+    - name
+    - required
+    - schema
+  schemas:
+    Asset:
+    - properties
+    - required
+    - type
+    AssetStatus:
+    - description
+    - enum
+    - example
+    - type
+    AssetStatusQueryParam:
+    - description
+    - enum
+    - example
+    - type
+    AssetType:
+    - properties
+    - required
+    - type
+    Assets:
+    - properties
+    - type
+    BookDepreciationDetail:
+    - properties
+    - required
+    BookDepreciationSetting:
+    - properties
+    - required
+    Error:
+    - externalDocs
+    - properties
+    - type
+    FieldValidationErrorsElement:
+    - externalDocs
+    - properties
+    - type
+    Pagination:
+    - properties
+    ResourceValidationErrorsElement:
+    - externalDocs
+    - properties
+    - type
+    Setting:
+    - properties
+    - required
+    - type
+  securitySchemes:
+    OAuth2:
+    - description
+    - flows
+    - type
+```
+
+The Vonage Business Cloud Reports API enables you to retrieve call logs for your account.
+```
+openapi: 3.0.0
+servers:
+- url: https://api.vonage.com/t/vbc.prod/reports
+info:
+  contact:
+    name: Vonage Business Cloud Support
+    url: https://businesssupport.vonage.com/contactus
+  description: &#39;The Vonage Business Cloud Reports API enables you to retrieve call
+    logs for your account.
+
+
+    Your application must subscribe to the Reports API suite to use this API.
+
+    &#39;
+  termsOfService: https://www.vonage.com/business/legal-policy-center/business-cloud/tos
+  title: Reports API
+  version: 1.0.1
+  x-origin:
+  - format: openapi
+    url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/vonage-business-cloud/reports.yml
+    version: &#39;3.0&#39;
+  x-providerName: vonage.com
+  x-serviceName: reports
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_apis.guru_assets_images_no-logo.svg
+paths:
+  /accounts/{{account_id}}/call-logs:
+    get:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - summary
+components:
+  parameters:
+    AccountID:
+    - description
+    - example
+    - in
+    - name
+    - required
+    - schema
+  schemas:
+    CallLog:
+    - properties
+    - type
+    CallLogsEmbeddedObject:
+    - properties
+    - type
+    CallLogsHalResponse:
+    - properties
+    - type
+    DetailedInvalidParam:
+    - properties
+    - type
+    ErrorResponse:
+    - properties
+    - type
+    FirstHref:
+    - description
+    - properties
+    - type
+    LastHref:
+    - description
+    - properties
+    - type
+    Links:
+    - properties
+    - type
+    NextHref:
+    - description
+    - properties
+    - type
+    PrevHref:
+    - description
+    - properties
+    - type
+    SelfHref:
+    - description
+    - properties
+    - type
+    ValidationErrorsResponse:
+    - properties
+    - type
+  securitySchemes:
+    bearerAuth:
+    - bearerFormat
+    - scheme
+    - type
+```
+
+The Google Play Game Management API allows developers to manage resources from the Google Play Game service.
+```
+openapi: 3.0.0
+servers:
+- url: https://gamesmanagement.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: The Google Play Game Management API allows developers to manage resources
+    from the Google Play Game service.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google Play Game Management
+  version: v1management
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+  - analytics
+  - media
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_www.google.com_images_branding_googlelogo_2x_googlelogo_color_272x92dp.png
+  x-origin:
+  - format: google
+    url: https://gamesmanagement.googleapis.com/$discovery/rest?version=v1management
+    version: v1
+  x-providerName: googleapis.com
+  x-serviceName: gamesManagement
+externalDocs:
+  url: https://developers.google.com/games/
+tags:
+- name: achievements
+- name: applications
+- name: events
+- name: players
+- name: scores
+paths:
+  /games/v1management/achievements/reset:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - responses
+    - security
+    - tags
+  /games/v1management/achievements/resetAllForAllPlayers:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - responses
+    - security
+    - tags
+  /games/v1management/achievements/resetMultipleForAllPlayers:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - requestBody
+    - responses
+    - security
+    - tags
+  /games/v1management/achievements/{{achievementId}}/reset:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - tags
+  /games/v1management/achievements/{{achievementId}}/resetForAllPlayers:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - tags
+  /games/v1management/applications/{{applicationId}}/players/hidden:
+    get:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - tags
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+  /games/v1management/applications/{{applicationId}}/players/hidden/{{playerId}}:
+    delete:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - tags
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - tags
+  /games/v1management/events/reset:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - responses
+    - security
+    - tags
+  /games/v1management/events/resetAllForAllPlayers:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - responses
+    - security
+    - tags
+  /games/v1management/events/resetMultipleForAllPlayers:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - requestBody
+    - responses
+    - security
+    - tags
+  /games/v1management/events/{{eventId}}/reset:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - tags
+  /games/v1management/events/{{eventId}}/resetForAllPlayers:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - tags
+  /games/v1management/leaderboards/{{leaderboardId}}/scores/reset:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - tags
+  /games/v1management/leaderboards/{{leaderboardId}}/scores/resetForAllPlayers:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - parameters
+    - responses
+    - security
+    - tags
+  /games/v1management/scores/reset:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - responses
+    - security
+    - tags
+  /games/v1management/scores/resetAllForAllPlayers:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - responses
+    - security
+    - tags
+  /games/v1management/scores/resetMultipleForAllPlayers:
+    parameters:
+    - $ref: &#39;#/components/parameters/_.xgafv&#39;
+    - $ref: &#39;#/components/parameters/access_token&#39;
+    - $ref: &#39;#/components/parameters/alt&#39;
+    - $ref: &#39;#/components/parameters/callback&#39;
+    - $ref: &#39;#/components/parameters/fields&#39;
+    - $ref: &#39;#/components/parameters/key&#39;
+    - $ref: &#39;#/components/parameters/oauth_token&#39;
+    - $ref: &#39;#/components/parameters/prettyPrint&#39;
+    - $ref: &#39;#/components/parameters/quotaUser&#39;
+    - $ref: &#39;#/components/parameters/upload_protocol&#39;
+    - $ref: &#39;#/components/parameters/uploadType&#39;
+    post:
+    - description
+    - operationId
+    - requestBody
+    - responses
+    - security
+    - tags
+components:
+  parameters:
+    _.xgafv:
+    - description
+    - in
+    - name
+    - schema
+    access_token:
+    - description
+    - in
+    - name
+    - schema
+    alt:
+    - description
+    - in
+    - name
+    - schema
+    callback:
+    - description
+    - in
+    - name
+    - schema
+    fields:
+    - description
+    - in
+    - name
+    - schema
+    key:
+    - description
+    - in
+    - name
+    - schema
+    oauth_token:
+    - description
+    - in
+    - name
+    - schema
+    prettyPrint:
+    - description
+    - in
+    - name
+    - schema
+    quotaUser:
+    - description
+    - in
+    - name
+    - schema
+    uploadType:
+    - description
+    - in
+    - name
+    - schema
+    upload_protocol:
+    - description
+    - in
+    - name
+    - schema
+  schemas:
+    AchievementResetAllResponse:
+    - description
+    - properties
+    - type
+    AchievementResetMultipleForAllRequest:
+    - properties
+    - type
+    AchievementResetResponse:
+    - description
+    - properties
+    - type
+    EventsResetMultipleForAllRequest:
+    - description
+    - properties
+    - type
+    GamesPlayerExperienceInfoResource:
+    - description
+    - properties
+    - type
+    GamesPlayerLevelResource:
+    - description
+    - properties
+    - type
+    HiddenPlayer:
+    - description
+    - properties
+    - type
+    HiddenPlayerList:
+    - description
+    - properties
+    - type
+    Player:
+    - description
+    - properties
+    - type
+    PlayerScoreResetAllResponse:
+    - description
+    - properties
+    - type
+    PlayerScoreResetResponse:
+    - description
+    - properties
+    - type
+    ProfileSettings:
+    - description
+    - properties
+    - type
+    ScoresResetMultipleForAllRequest:
+    - properties
+    - type
+  securitySchemes:
+    Oauth2:
+    - description
+    - flows
+    - type
+    Oauth2c:
+    - description
+    - flows
+    - type
+```
+
+
+The API purpose is: &#34;An API for managing my finances.&#34;  Please create a complete API and answer just with the code, following the previous RULES and the `paths`, `schemas` and `parameters` from the EXAMPLES.
+
+
+MODEL OUTPUT
+
+ openapi: 3.0.3
+servers:
+- description: My Finances API Server
+  url: https://api.myfinances.com/v1
+info:
+  contact:
+    email: api@myfinances.com
+  description: An API for managing my finances.
+  title: My Finances API
+  version: 1.0.0
+tags:
+- description: API Endpoints of My Finances
+  name: My Finances
+paths:
+  /balance:
+    get:
+      tags:
+      - My Finances
+      description: Get the balance of my finances.
+      summary: Get Balance
+      operationId: getBalance
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the balance.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/BalanceResponse&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+  /transactions:
+    get:
+      tags:
+      - My Finances
+      description: Get a list of transactions.
+      summary: Get Transactions
+      operationId: getTransactions
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/startDate&#39;
+      - $ref: &#39;#/components/parameters/endDate&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the list of transactions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    post:
+      tags:
+      - My Finances
+      description: Create a new transaction.
+      summary: Create Transaction
+      operationId: createTransaction
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#39;#/components/schemas/Transaction&#39;
+      responses:
+        &#39;201&#39;:
+          description: Successful response indicating the transaction was created.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/schemas/400&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+  /transactions/{id}:
+    get:
+      tags:
+      - My Finances
+      description: Get a specific transaction by ID.
+      summary: Get Transaction by ID
+      operationId: getTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the transaction.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    put:
+      tags:
+      - My Finances
+      description: Update a specific transaction by ID.
+      summary: Update Transaction by ID
+      operationId: updateTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#39;#/components/schemas/Transaction&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response indicating the transaction was updated.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/schemas/400&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    delete:
+      tags:
+      - My Finances
+      description: Delete a specific transaction by ID.
+      summary: Delete Transaction by ID
+      operationId: deleteTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      responses:
+        &#39;204&#39;:
+          description: Successful response indicating the transaction was deleted.
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+components:
+  parameters:
+    accessToken:
+    - description: Access token for authentication.
+      in: header
+      name: Authorization
+      required: true
+      schema:
+        type: string
+    startDate:
+    - description: Start date of the transaction period.
+      in: query
+      name: startDate
+      required: true
+      schema:
+        type: string
+        format: date
+    endDate:
+    - description: End date of the transaction period.
+      in: query
+      name: endDate
+      required: true
+      schema:
+        type: string
+        format: date
+    id:
+    - description: ID of the transaction.
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+  schemas:
+    BalanceResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+          format: date
+        description:
+          type: string
+        amount:
+          type: number
+        category:
+          type: string
+    400:
+      type: object
+      properties:
+        error:
+          type: string
+    401:
+      type: object
+      properties:
+        error:
+          type: string
+
+
+PARSE RESULT
+
+ openapi: 3.0.3
+servers:
+- description: My Finances API Server
+  url: https://api.myfinances.com/v1
+info:
+  contact:
+    email: api@myfinances.com
+  description: An API for managing my finances.
+  title: My Finances API
+  version: 1.0.0
+tags:
+- description: API Endpoints of My Finances
+  name: My Finances
+paths:
+  /balance:
+    get:
+      tags:
+      - My Finances
+      description: Get the balance of my finances.
+      summary: Get Balance
+      operationId: getBalance
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the balance.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/BalanceResponse&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+  /transactions:
+    get:
+      tags:
+      - My Finances
+      description: Get a list of transactions.
+      summary: Get Transactions
+      operationId: getTransactions
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/startDate&#39;
+      - $ref: &#39;#/components/parameters/endDate&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the list of transactions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    post:
+      tags:
+      - My Finances
+      description: Create a new transaction.
+      summary: Create Transaction
+      operationId: createTransaction
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#39;#/components/schemas/Transaction&#39;
+      responses:
+        &#39;201&#39;:
+          description: Successful response indicating the transaction was created.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/schemas/400&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+  /transactions/{id}:
+    get:
+      tags:
+      - My Finances
+      description: Get a specific transaction by ID.
+      summary: Get Transaction by ID
+      operationId: getTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the transaction.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    put:
+      tags:
+      - My Finances
+      description: Update a specific transaction by ID.
+      summary: Update Transaction by ID
+      operationId: updateTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#39;#/components/schemas/Transaction&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response indicating the transaction was updated.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/schemas/400&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    delete:
+      tags:
+      - My Finances
+      description: Delete a specific transaction by ID.
+      summary: Delete Transaction by ID
+      operationId: deleteTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      responses:
+        &#39;204&#39;:
+          description: Successful response indicating the transaction was deleted.
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+components:
+  parameters:
+    accessToken:
+    - description: Access token for authentication.
+      in: header
+      name: Authorization
+      required: true
+      schema:
+        type: string
+    startDate:
+    - description: Start date of the transaction period.
+      in: query
+      name: startDate
+      required: true
+      schema:
+        type: string
+        format: date
+    endDate:
+    - description: End date of the transaction period.
+      in: query
+      name: endDate
+      required: true
+      schema:
+        type: string
+        format: date
+    id:
+    - description: ID of the transaction.
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+  schemas:
+    BalanceResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+          format: date
+        description:
+          type: string
+        amount:
+          type: number
+        category:
+          type: string
+    400:
+      type: object
+      properties:
+        error:
+          type: string
+    401:
+      type: object
+      properties:
+        error:
+          type: string
+</pre></div></div>
+</div>
+</section>
+<section id="API-Formatter---Correct-an-API">
+<h2>API Formatter - Correct an API<a class="headerlink" href="#API-Formatter---Correct-an-API" title="Permalink to this heading">#</a></h2>
+<p>The API Formatter processes an API specification, providing instructions to the Language Model (LLM) for correction and formatting based on the given instructions. Additionally, its parser handles schemas and parameters, replacing coincidental information with details extracted from example APIs. The objective is to maximize the reuse of information throughout the formatting process.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_2</span> <span class="o">=</span> <span class="n">APIFormatter</span><span class="p">(</span>
+        <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+        <span class="n">api_version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
+        <span class="n">api_protocol</span><span class="o">=</span><span class="n">protocol</span><span class="p">,</span>
+        <span class="n">api_style_instructions</span><span class="o">=</span><span class="p">[</span>
+            <span class="s2">&quot;For example:</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">instructions</span>
+        <span class="p">],</span>
+        <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo-16k&quot;</span><span class="p">,</span>
+        <span class="n">model_provider_token</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">api_codes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">model_2</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">api</span><span class="p">],</span> <span class="n">additional_info</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+PROMPT INPUT
+
+ I want you to complete and correct an openAPI file. The expected file should be OpenAPI 3.0.3 REST API YAML.
+
+### RULES ###
+
+
+Make sure that the API should fulfill the following requirements:
+ - Actions `get`, `post`, `update`, `delete` must have the properties `tags`, `description`, `summary`, `operationId`, `parameters`, `response`.For example:
+
+```
+    paths:
+      /products:
+get:
+  tags:
+  - Products
+  summary: Service to fetch the list of products.
+  description: This service fetches the list of the products.
+  operationId: findAllProducts
+  parameters:
+  - name: brand
+  responses:
+    &#39;200&#39;:
+      description: OK
+    ```
+The API that you have to correct is:
+```
+openapi: 3.0.3
+servers:
+- url: http://localhost:8080/
+  description: Local environment
+info:
+  contact:
+    email: api@myfinances.com
+  description: An API for managing my finances.
+  title: My Finances API
+  version: 1.0.0
+tags:
+- description: API Endpoints of My Finances
+  name: My Finances
+paths:
+  /balance:
+    get:
+      tags:
+      - My Finances
+      summary: Get Balance
+      description: Get the balance of my finances.
+      operationId: getBalance
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the balance.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/BalanceResponse&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+  /transactions:
+    get:
+      tags:
+      - My Finances
+      summary: Get Transactions
+      description: Get a list of transactions.
+      operationId: getTransactions
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/startDate&#39;
+      - $ref: &#39;#/components/parameters/endDate&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the list of transactions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    post:
+      tags:
+      - My Finances
+      summary: Create Transaction
+      description: Create a new transaction.
+      operationId: createTransaction
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#39;#/components/schemas/Transaction&#39;
+      responses:
+        &#39;201&#39;:
+          description: Successful response indicating the transaction was created.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/schemas/400&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+  /transactions/{{id}}:
+    get:
+      tags:
+      - My Finances
+      summary: Get Transaction by ID
+      description: Get a specific transaction by ID.
+      operationId: getTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the transaction.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    put:
+      tags:
+      - My Finances
+      summary: Update Transaction by ID
+      description: Update a specific transaction by ID.
+      operationId: updateTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#39;#/components/schemas/Transaction&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response indicating the transaction was updated.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/schemas/400&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    delete:
+      tags:
+      - My Finances
+      summary: Delete Transaction by ID
+      description: Delete a specific transaction by ID.
+      operationId: deleteTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      responses:
+        &#39;204&#39;:
+          description: Successful response indicating the transaction was deleted.
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+components:
+  parameters:
+    accessToken:
+      description: The access token retrieved in the Token API call
+      example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+      in: header
+      name: WM_SEC.ACCESS_TOKEN
+      required: true
+      schema:
+        type: string
+    startDate:
+      description: Start date of the transaction period.
+      in: query
+      name: startDate
+      required: true
+      schema:
+        type: string
+        format: date
+    endDate:
+      description: End date of the transaction period.
+      in: query
+      name: endDate
+      required: true
+      schema:
+        type: string
+        format: date
+    id:
+      description: ID of the record you are acting upon.
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+  schemas:
+    BalanceResponse:
+      properties:
+        data:
+          example:
+            bank_balance: 100
+            basic_balance: 2000
+            expiry_date: 2021-05-16
+          type: object
+        message:
+          example: SUCCESS
+          type: string
+        result:
+          example: &#39;200&#39;
+          type: integer
+      type: object
+    Transaction:
+      allOf:
+      - properties:
+          accountId:
+            description: The unique identifier of the bank account.
+            minLength: 1
+            type: string
+          amount:
+            description: The amount of the bank transaction.
+            type: number
+          authorizedDate:
+            $ref: &#39;#/components/schemas/DateTime&#39;
+            description: The date the bank transaction was authorized.
+          code:
+            $ref: &#39;#/components/schemas/Transaction/definitions/transactionCode&#39;
+          currency:
+            description: The currency of the bank transaction.
+            minLength: 1
+            type: string
+          description:
+            description: The description of the bank transaction.
+            nullable: true
+            type: string
+          id:
+            description: The unique identifier of the bank transaction.
+            minLength: 1
+            type: string
+          merchantName:
+            description: The name of the merchant.
+            nullable: true
+            type: string
+          postedDate:
+            $ref: &#39;#/components/schemas/DateTime&#39;
+            description: The date the bank transaction was cleared.
+          transactionCategoryRef:
+            $ref: &#39;#/components/schemas/TransactionCategory/definitions/transactionCategoryRef&#39;
+        type: object
+      - $ref: &#39;#/components/schemas/ModifiedDates&#39;
+      definitions:
+        transactionCode:
+          description: Code to identify the underlying transaction.
+          enum:
+          - Unknown
+          - Fee
+          - Payment
+          - Cash
+          - Transfer
+          - Interest
+          - Cashback
+          - Cheque
+          - DirectDebit
+          - Purchase
+          - StandingOrder
+          - Adjustment
+          - Credit
+          - Other
+          - NotSupported
+          type: string
+          x-internal: true
+      description: &#39;The Banking Transactions data type provides an immutable source
+        of up-to-date information on income and expenditure.
+
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters
+        in your request.
+
+
+        View the coverage for banking transactions in the [Data Coverage Explorer](https://knowledge.codat.io/supported-features/banking?view=tab-by-data-type&amp;dataType=banking-transactions).&#39;
+      examples:
+      - accountId: 1703194f-7805-4da8-bac0-2ba5da4a4216
+        amount: 5062.39
+        authorizedDate: 2021-07-06 00:00:00
+        currency: GBP
+        description: Payments for direct income ce149943-c157-43fc-aac7-42a716b655b6
+        id: 0130b5bb-1419-40f6-8a27-7362d0381229
+        merchantName: New Look
+        modifiedDate: 2022-05-23 16:32:50+00:00
+        postedDate: 2021-07-06 00:00:00
+        sourceModifiedDate: 2021-06-28 10:48:12
+        transactionCategoryRef:
+          id: health-and-fitness-sports
+      required:
+      - id
+      - accountId
+      - currency
+      title: Transaction
+      type: object
+    &#39;400&#39;:
+      properties:
+        data:
+          example: &#39;{{}}&#39;
+          type: object
+        message:
+          example: Your balance is exhausted
+          type: string
+        result:
+          example: &#39;400&#39;
+          type: integer
+      type: object
+    &#39;401&#39;:
+      properties:
+        data:
+          example: &#39;{{}}&#39;
+          type: object
+        message:
+          example: Your package has expired
+          type: string
+        result:
+          example: &#39;401&#39;
+          type: integer
+      type: object
+    DateTime:
+      description: &#34;In Codat&#39;s data model, dates and times are represented using the\
+        \ &lt;a class=\&#34;external\&#34; href=\&#34;https://en.wikipedia.org/wiki/ISO_8601\&#34; target=\&#34;\
+        _blank\&#34;&gt;ISO 8601 standard&lt;/a&gt;. Date and time fields are formatted as strings;\
+        \ for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\
+        \nWhen syncing data that contains `DateTime` fields from Codat, make sure\
+        \ you support the following cases when reading time information:\n\n- Coordinated\
+        \ Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time:\
+        \ `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\
+        \n&gt; Time zones\n&gt; \n&gt; Not all dates from Codat will contain information about\
+        \ time zones.  \n&gt; Where it is not available from the underlying platform,\
+        \ Codat will return these as times local to the business whose data has been\
+        \ synced.&#34;
+      example: 2022-10-23 00:00:00+00:00
+      title: Date time
+      type: string
+    TransactionCategory:
+      allOf:
+      - description: Status of the bank transaction category.
+        properties:
+          hasChildren:
+            description: A Boolean indicating whether there are other bank transaction
+              categories beneath this one in the hierarchy.
+            type: boolean
+          id:
+            description: The unique identifier of the bank transaction category.
+            minLength: 1
+            type: string
+          name:
+            description: The name of the bank transaction category.
+            minLength: 1
+            type: string
+          parentId:
+            description: The unique identifier of the parent bank transaction category.
+            nullable: true
+            type: string
+          status:
+            $ref: &#39;#/components/schemas/TransactionCategory/definitions/transactionCategoryStatus&#39;
+        type: object
+      - $ref: &#39;#/components/schemas/ModifiedDates&#39;
+      definitions:
+        transactionCategoryRef:
+          description: An object of bank transaction category reference data.
+          properties:
+            id:
+              description: The unique category reference id for the bank transaction.
+              minLength: 1
+              type: string
+            name:
+              description: The category name reference for the bank transaction.
+              nullable: true
+              type: string
+          required:
+          - id
+          type: object
+          x-internal: true
+        transactionCategoryStatus:
+          enum:
+          - Unknown
+          - Active
+          - Archived
+          type: string
+          x-internal: true
+      description: &#39;The Banking Transaction Categories data type provides a list of
+        hierarchical categories associated with a transaction for greater contextual
+        meaning to transaction activity.
+
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters
+        in your request.&#39;
+      examples:
+      - hasChildren: true
+        id: auto-and-transport
+        modifiedDate: 2022-05-23 16:32:50
+        name: Auto &amp; Transport
+        sourceModifiedDate: 2021-04-24 07:59:10
+        status: Active
+      required:
+      - id
+      - name
+      title: Transaction Category
+      type: object
+    ModifiedDates:
+      allOf:
+      - $ref: &#39;#/components/schemas/ModifiedDate&#39;
+      - $ref: &#39;#/components/schemas/SourceModifiedDate&#39;
+      x-internal: true
+    ModifiedDate:
+      properties:
+        modifiedDate:
+          $ref: &#39;#/components/schemas/DateTime&#39;
+          description: The date on which this record was last modified in Codat.
+      title: ModifiedDate
+      type: object
+      x-internal: true
+    SourceModifiedDate:
+      properties:
+        sourceModifiedDate:
+          $ref: &#39;#/components/schemas/DateTime&#39;
+          description: The date on which this record was last modified in the originating
+            system
+      title: Source Modified Date
+      type: object
+      x-internal: true
+
+```
+
+
+
+MODEL OUTPUT
+
+ openapi: 3.0.3
+servers:
+- url: http://localhost:8080/
+  description: Local environment
+info:
+  contact:
+    email: api@myfinances.com
+  description: An API for managing my finances.
+  title: My Finances API
+  version: 1.0.0
+tags:
+- description: API Endpoints of My Finances
+  name: My Finances
+paths:
+  /balance:
+    get:
+      tags:
+      - My Finances
+      summary: Get Balance
+      description: Get the balance of my finances.
+      operationId: getBalance
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the balance.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/BalanceResponse&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+  /transactions:
+    get:
+      tags:
+      - My Finances
+      summary: Get Transactions
+      description: Get a list of transactions.
+      operationId: getTransactions
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/startDate&#39;
+      - $ref: &#39;#/components/parameters/endDate&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the list of transactions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    post:
+      tags:
+      - My Finances
+      summary: Create Transaction
+      description: Create a new transaction.
+      operationId: createTransaction
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#39;#/components/schemas/Transaction&#39;
+      responses:
+        &#39;201&#39;:
+          description: Successful response indicating the transaction was created.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/schemas/400&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+  /transactions/{id}:
+    get:
+      tags:
+      - My Finances
+      summary: Get Transaction by ID
+      description: Get a specific transaction by ID.
+      operationId: getTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the transaction.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    put:
+      tags:
+      - My Finances
+      summary: Update Transaction by ID
+      description: Update a specific transaction by ID.
+      operationId: updateTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#39;#/components/schemas/Transaction&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response indicating the transaction was updated.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/schemas/400&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    delete:
+      tags:
+      - My Finances
+      summary: Delete Transaction by ID
+      description: Delete a specific transaction by ID.
+      operationId: deleteTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      responses:
+        &#39;204&#39;:
+          description: Successful response indicating the transaction was deleted.
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+components:
+  parameters:
+    accessToken:
+      description: The access token retrieved in the Token API call
+      example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+      in: header
+      name: WM_SEC.ACCESS_TOKEN
+      required: true
+      schema:
+        type: string
+    startDate:
+      description: Start date of the transaction period.
+      in: query
+      name: startDate
+      required: true
+      schema:
+        type: string
+        format: date
+    endDate:
+      description: End date of the transaction period.
+      in: query
+      name: endDate
+      required: true
+      schema:
+        type: string
+        format: date
+    id:
+      description: ID of the record you are acting upon.
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+  schemas:
+    BalanceResponse:
+      properties:
+        data:
+          example:
+            bank_balance: 100
+            basic_balance: 2000
+            expiry_date: 2021-05-16
+          type: object
+        message:
+          example: SUCCESS
+          type: string
+        result:
+          example: &#39;200&#39;
+          type: integer
+      type: object
+    Transaction:
+      allOf:
+      - properties:
+          accountId:
+            description: The unique identifier of the bank account.
+            minLength: 1
+            type: string
+          amount:
+            description: The amount of the bank transaction.
+            type: number
+          authorizedDate:
+            $ref: &#39;#/components/schemas/DateTime&#39;
+            description: The date the bank transaction was authorized.
+          code:
+            $ref: &#39;#/components/schemas/Transaction/definitions/transactionCode&#39;
+          currency:
+            description: The currency of the bank transaction.
+            minLength: 1
+            type: string
+          description:
+            description: The description of the bank transaction.
+            nullable: true
+            type: string
+          id:
+            description: The unique identifier of the bank transaction.
+            minLength: 1
+            type: string
+          merchantName:
+            description: The name of the merchant.
+            nullable: true
+            type: string
+          postedDate:
+            $ref: &#39;#/components/schemas/DateTime&#39;
+            description: The date the bank transaction was cleared.
+          transactionCategoryRef:
+            $ref: &#39;#/components/schemas/TransactionCategory/definitions/transactionCategoryRef&#39;
+        type: object
+      - $ref: &#39;#/components/schemas/ModifiedDates&#39;
+      definitions:
+        transactionCode:
+          description: Code to identify the underlying transaction.
+          enum:
+          - Unknown
+          - Fee
+          - Payment
+          - Cash
+          - Transfer
+          - Interest
+          - Cashback
+          - Cheque
+          - DirectDebit
+          - Purchase
+          - StandingOrder
+          - Adjustment
+          - Credit
+          - Other
+          - NotSupported
+          type: string
+          x-internal: true
+      description: &#39;The Banking Transactions data type provides an immutable source
+        of up-to-date information on income and expenditure.
+
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters
+        in your request.
+
+
+        View the coverage for banking transactions in the [Data Coverage Explorer](https://knowledge.codat.io/supported-features/banking?view=tab-by-data-type&amp;dataType=banking-transactions).&#39;
+      examples:
+      - accountId: 1703194f-7805-4da8-bac0-2ba5da4a4216
+        amount: 5062.39
+        authorizedDate: 2021-07-06 00:00:00
+        currency: GBP
+        description: Payments for direct income ce149943-c157-43fc-aac7-42a716b655b6
+        id: 0130b5bb-1419-40f6-8a27-7362d0381229
+        merchantName: New Look
+        modifiedDate: 2022-05-23 16:32:50+00:00
+        postedDate: 2021-07-06 00:00:00
+        sourceModifiedDate: 2021-06-28 10:48:12
+        transactionCategoryRef:
+          id: health-and-fitness-sports
+      required:
+      - id
+      - accountId
+      - currency
+      title: Transaction
+      type: object
+    &#39;400&#39;:
+      properties:
+        data:
+          example: &#39;{{}}&#39;
+          type: object
+        message:
+          example: Your balance is exhausted
+          type: string
+        result:
+          example: &#39;400&#39;
+          type: integer
+      type: object
+    &#39;401&#39;:
+      properties:
+        data:
+          example: &#39;{{}}&#39;
+          type: object
+        message:
+          example: Your package has expired
+          type: string
+        result:
+          example: &#39;401&#39;
+          type: integer
+      type: object
+    DateTime:
+      description: &#34;In Codat&#39;s data model, dates and times are represented using the\
+        \ &lt;a class=\&#34;external\&#34; href=\&#34;https://en.wikipedia.org/wiki/ISO_8601\&#34; target=\&#34;\
+        _blank\&#34;&gt;ISO 8601 standard&lt;/a&gt;. Date and time fields are formatted as strings;\
+        \ for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\
+        \nWhen syncing data that contains `DateTime` fields from Codat, make sure\
+        \ you support the following cases when reading time information:\n\n- Coordinated\
+        \ Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time:\
+        \ `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\
+        \n&gt; Time zones\n&gt; \n&gt; Not all dates from Codat will contain information about\
+        \ time zones.  \n&gt; Where it is not available from the underlying platform,\
+        \ Codat will return these as times local to the business whose data has been\
+        \ synced.&#34;
+      example: 2022-10-23 00:00:00+00:00
+      title: Date time
+      type: string
+    TransactionCategory:
+      allOf:
+      - description: Status of the bank transaction category.
+        properties:
+          hasChildren:
+            description: A Boolean indicating whether there are other bank transaction
+              categories beneath this one in the hierarchy.
+            type: boolean
+          id:
+            description: The unique identifier of the bank transaction category.
+            minLength: 1
+            type: string
+          name:
+            description: The name of the bank transaction category.
+            minLength: 1
+            type: string
+          parentId:
+            description: The unique identifier of the parent bank transaction category.
+            nullable: true
+            type: string
+          status:
+            $ref: &#39;#/components/schemas/TransactionCategory/definitions/transactionCategoryStatus&#39;
+        type: object
+      - $ref: &#39;#/components/schemas/ModifiedDates&#39;
+      definitions:
+        transactionCategoryRef:
+          description: An object of bank transaction category reference data.
+          properties:
+            id:
+              description: The unique category reference id for the bank transaction.
+              minLength: 1
+              type: string
+            name:
+              description: The category name reference for the bank transaction.
+              nullable: true
+              type: string
+          required:
+          - id
+          type: object
+          x-internal: true
+        transactionCategoryStatus:
+          enum:
+          - Unknown
+          - Active
+          - Archived
+          type: string
+          x-internal: true
+      description: &#39;The Banking Transaction Categories data type provides a list of
+        hierarchical categories associated with a transaction for greater contextual
+        meaning to transaction activity.
+
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters
+        in your request.&#39;
+      examples:
+      - hasChildren: true
+        id: auto-and-transport
+        modifiedDate: 2022-05-23 16:32:50
+        name: Auto &amp; Transport
+        sourceModifiedDate: 2021-04-24 07:59:10
+        status: Active
+      required:
+      - id
+      - name
+      title: Transaction Category
+      type: object
+    ModifiedDates:
+      allOf:
+      - $ref: &#39;#/components/schemas/ModifiedDate&#39;
+      - $ref: &#39;#/components/schemas/SourceModifiedDate&#39;
+      x-internal: true
+    ModifiedDate:
+      properties:
+        modifiedDate:
+          $ref: &#39;#/components/schemas/DateTime&#39;
+          description: The date on which this record was last modified in Codat.
+      title: ModifiedDate
+      type: object
+      x-internal: true
+    SourceModifiedDate:
+      properties:
+        sourceModifiedDate:
+          $ref: &#39;#/components/schemas/DateTime&#39;
+          description: The date on which this record was last modified in the originating
+            system
+      title: Source Modified Date
+      type: object
+      x-internal: true
+
+
+PARSE RESULT
+
+ \n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[7], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> api <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">model_2</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">predict</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">api</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">additional_info</span><span class="ansi-yellow-bg">)</span>[<span style="color: rgb(98,98,98)">0</span>]
+
+File <span class="ansi-green-fg">~/Documents/Promptmeteo/examples/../promptmeteo/api_formatter.py:286</span>, in <span class="ansi-cyan-fg">APIFormatter.predict</span><span class="ansi-blue-fg">(self, api_codes, external_info)</span>
+<span class="ansi-green-intense-fg ansi-bold">    284</span> _api_codes <span style="color: rgb(98,98,98)">=</span> deepcopy(api_codes)
+<span class="ansi-green-intense-fg ansi-bold">    285</span> _api_codes <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">super</span>(APIFormatter, <span style="color: rgb(0,135,0)">self</span>)<span style="color: rgb(98,98,98)">.</span>predict(examples<span style="color: rgb(98,98,98)">=</span>_api_codes)
+<span class="ansi-green-fg">--&gt; 286</span> _api_codes <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_replace</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">api</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg ansi-bold" style="color: rgb(0,135,0)">for</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">api</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg ansi-bold" style="color: rgb(175,0,255)">in</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">_api_codes</span><span class="ansi-yellow-bg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">    287</span> _api_codes <span style="color: rgb(98,98,98)">=</span> [
+<span class="ansi-green-intense-fg ansi-bold">    288</span>     <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_add_external_information(api, external_info)
+<span class="ansi-green-intense-fg ansi-bold">    289</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> api <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> _api_codes
+<span class="ansi-green-intense-fg ansi-bold">    290</span> ]
+<span class="ansi-green-intense-fg ansi-bold">    291</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> _api_codes
+
+File <span class="ansi-green-fg">~/Documents/Promptmeteo/examples/../promptmeteo/api_formatter.py:286</span>, in <span class="ansi-cyan-fg">&lt;listcomp&gt;</span><span class="ansi-blue-fg">(.0)</span>
+<span class="ansi-green-intense-fg ansi-bold">    284</span> _api_codes <span style="color: rgb(98,98,98)">=</span> deepcopy(api_codes)
+<span class="ansi-green-intense-fg ansi-bold">    285</span> _api_codes <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">super</span>(APIFormatter, <span style="color: rgb(0,135,0)">self</span>)<span style="color: rgb(98,98,98)">.</span>predict(examples<span style="color: rgb(98,98,98)">=</span>_api_codes)
+<span class="ansi-green-fg">--&gt; 286</span> _api_codes <span style="color: rgb(98,98,98)">=</span> [<span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_replace</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">api</span><span class="ansi-yellow-bg">)</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> api <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> _api_codes]
+<span class="ansi-green-intense-fg ansi-bold">    287</span> _api_codes <span style="color: rgb(98,98,98)">=</span> [
+<span class="ansi-green-intense-fg ansi-bold">    288</span>     <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_add_external_information(api, external_info)
+<span class="ansi-green-intense-fg ansi-bold">    289</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> api <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> _api_codes
+<span class="ansi-green-intense-fg ansi-bold">    290</span> ]
+<span class="ansi-green-intense-fg ansi-bold">    291</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> _api_codes
+
+File <span class="ansi-green-fg">~/Documents/Promptmeteo/examples/../promptmeteo/api_formatter.py:304</span>, in <span class="ansi-cyan-fg">APIFormatter._replace</span><span class="ansi-blue-fg">(self, api)</span>
+<span class="ansi-green-intense-fg ansi-bold">    302</span> <span style="color: rgb(95,135,135)"># Replace entities</span>
+<span class="ansi-green-intense-fg ansi-bold">    303</span> api <span style="color: rgb(98,98,98)">=</span> yaml<span style="color: rgb(98,98,98)">.</span>load(api, Loader<span style="color: rgb(98,98,98)">=</span>yaml<span style="color: rgb(98,98,98)">.</span>FullLoader)
+<span class="ansi-green-fg">--&gt; 304</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> entity <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> <span class="ansi-yellow-bg">api</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">get</span>(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">components</span><span style="color: rgb(175,0,0)">&#34;</span>, {})<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">schemas</span><span style="color: rgb(175,0,0)">&#34;</span>, {})<span style="color: rgb(98,98,98)">.</span>keys():
+<span class="ansi-green-intense-fg ansi-bold">    305</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> entity <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_entities:
+<span class="ansi-green-intense-fg ansi-bold">    306</span>         api[<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">components</span><span style="color: rgb(175,0,0)">&#34;</span>][<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">schemas</span><span style="color: rgb(175,0,0)">&#34;</span>][entity] <span style="color: rgb(98,98,98)">=</span> yaml<span style="color: rgb(98,98,98)">.</span>load(
+<span class="ansi-green-intense-fg ansi-bold">    307</span>             <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_entities[entity], Loader<span style="color: rgb(98,98,98)">=</span>yaml<span style="color: rgb(98,98,98)">.</span>FullLoader
+<span class="ansi-green-intense-fg ansi-bold">    308</span>         )
+
+<span class="ansi-red-fg">AttributeError</span>: &#39;str&#39; object has no attribute &#39;get&#39;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+openapi: 3.0.3
+servers:
+- url: http://localhost:8080/
+  description: Local environment
+info:
+  contact:
+    email: api@myfinances.com
+  description: An API for managing my finances.
+  title: My Finances API
+  version: 1.0.0
+tags:
+- description: API Endpoints of My Finances
+  name: My Finances
+paths:
+  /balance:
+    get:
+      tags:
+      - My Finances
+      summary: Get Balance
+      description: Get the balance of my finances.
+      operationId: getBalance
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the balance.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/BalanceResponse&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+  /transactions:
+    get:
+      tags:
+      - My Finances
+      summary: Get Transactions
+      description: Get a list of transactions.
+      operationId: getTransactions
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/startDate&#39;
+      - $ref: &#39;#/components/parameters/endDate&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the list of transactions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    post:
+      tags:
+      - My Finances
+      summary: Create Transaction
+      description: Create a new transaction.
+      operationId: createTransaction
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#39;#/components/schemas/Transaction&#39;
+      responses:
+        &#39;201&#39;:
+          description: Successful response indicating the transaction was created.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/schemas/400&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+  /transactions/{id}:
+    get:
+      tags:
+      - My Finances
+      summary: Get Transaction by ID
+      description: Get a specific transaction by ID.
+      operationId: getTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response with the transaction.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    put:
+      tags:
+      - My Finances
+      summary: Update Transaction by ID
+      description: Update a specific transaction by ID.
+      operationId: updateTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#39;#/components/schemas/Transaction&#39;
+      responses:
+        &#39;200&#39;:
+          description: Successful response indicating the transaction was updated.
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/Transaction&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/schemas/400&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+    delete:
+      tags:
+      - My Finances
+      summary: Delete Transaction by ID
+      description: Delete a specific transaction by ID.
+      operationId: deleteTransactionById
+      parameters:
+      - $ref: &#39;#/components/parameters/accessToken&#39;
+      - $ref: &#39;#/components/parameters/id&#39;
+      responses:
+        &#39;204&#39;:
+          description: Successful response indicating the transaction was deleted.
+        &#39;401&#39;:
+          $ref: &#39;#/components/schemas/401&#39;
+components:
+  parameters:
+    accessToken:
+      description: The access token retrieved in the Token API call
+      example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
+      in: header
+      name: WM_SEC.ACCESS_TOKEN
+      required: true
+      schema:
+        type: string
+    startDate:
+      description: Start date of the transaction period.
+      in: query
+      name: startDate
+      required: true
+      schema:
+        type: string
+        format: date
+    endDate:
+      description: End date of the transaction period.
+      in: query
+      name: endDate
+      required: true
+      schema:
+        type: string
+        format: date
+    id:
+      description: ID of the record you are acting upon.
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+  schemas:
+    BalanceResponse:
+      properties:
+        data:
+          example:
+            bank_balance: 100
+            basic_balance: 2000
+            expiry_date: 2021-05-16
+          type: object
+        message:
+          example: SUCCESS
+          type: string
+        result:
+          example: &#39;200&#39;
+          type: integer
+      type: object
+    Transaction:
+      allOf:
+      - properties:
+          accountId:
+            description: The unique identifier of the bank account.
+            minLength: 1
+            type: string
+          amount:
+            description: The amount of the bank transaction.
+            type: number
+          authorizedDate:
+            $ref: &#39;#/components/schemas/DateTime&#39;
+            description: The date the bank transaction was authorized.
+          code:
+            $ref: &#39;#/components/schemas/Transaction/definitions/transactionCode&#39;
+          currency:
+            description: The currency of the bank transaction.
+            minLength: 1
+            type: string
+          description:
+            description: The description of the bank transaction.
+            nullable: true
+            type: string
+          id:
+            description: The unique identifier of the bank transaction.
+            minLength: 1
+            type: string
+          merchantName:
+            description: The name of the merchant.
+            nullable: true
+            type: string
+          postedDate:
+            $ref: &#39;#/components/schemas/DateTime&#39;
+            description: The date the bank transaction was cleared.
+          transactionCategoryRef:
+            $ref: &#39;#/components/schemas/TransactionCategory/definitions/transactionCategoryRef&#39;
+        type: object
+      - $ref: &#39;#/components/schemas/ModifiedDates&#39;
+      definitions:
+        transactionCode:
+          description: Code to identify the underlying transaction.
+          enum:
+          - Unknown
+          - Fee
+          - Payment
+          - Cash
+          - Transfer
+          - Interest
+          - Cashback
+          - Cheque
+          - DirectDebit
+          - Purchase
+          - StandingOrder
+          - Adjustment
+          - Credit
+          - Other
+          - NotSupported
+          type: string
+          x-internal: true
+      description: &#39;The Banking Transactions data type provides an immutable source
+        of up-to-date information on income and expenditure.
+
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters
+        in your request.
+
+
+        View the coverage for banking transactions in the [Data Coverage Explorer](https://knowledge.codat.io/supported-features/banking?view=tab-by-data-type&amp;dataType=banking-transactions).&#39;
+      examples:
+      - accountId: 1703194f-7805-4da8-bac0-2ba5da4a4216
+        amount: 5062.39
+        authorizedDate: 2021-07-06 00:00:00
+        currency: GBP
+        description: Payments for direct income ce149943-c157-43fc-aac7-42a716b655b6
+        id: 0130b5bb-1419-40f6-8a27-7362d0381229
+        merchantName: New Look
+        modifiedDate: 2022-05-23 16:32:50+00:00
+        postedDate: 2021-07-06 00:00:00
+        sourceModifiedDate: 2021-06-28 10:48:12
+        transactionCategoryRef:
+          id: health-and-fitness-sports
+      required:
+      - id
+      - accountId
+      - currency
+      title: Transaction
+      type: object
+    &#39;400&#39;:
+      properties:
+        data:
+          example: &#39;{}&#39;
+          type: object
+        message:
+          example: Your balance is exhausted
+          type: string
+        result:
+          example: &#39;400&#39;
+          type: integer
+      type: object
+    &#39;401&#39;:
+      properties:
+        data:
+          example: &#39;{}&#39;
+          type: object
+        message:
+          example: Your package has expired
+          type: string
+        result:
+          example: &#39;401&#39;
+          type: integer
+      type: object
+    DateTime:
+      description: &#34;In Codat&#39;s data model, dates and times are represented using the\
+        \ &lt;a class=\&#34;external\&#34; href=\&#34;https://en.wikipedia.org/wiki/ISO_8601\&#34; target=\&#34;\
+        _blank\&#34;&gt;ISO 8601 standard&lt;/a&gt;. Date and time fields are formatted as strings;\
+        \ for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\
+        \nWhen syncing data that contains `DateTime` fields from Codat, make sure\
+        \ you support the following cases when reading time information:\n\n- Coordinated\
+        \ Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time:\
+        \ `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\
+        \n&gt; Time zones\n&gt; \n&gt; Not all dates from Codat will contain information about\
+        \ time zones.  \n&gt; Where it is not available from the underlying platform,\
+        \ Codat will return these as times local to the business whose data has been\
+        \ synced.&#34;
+      example: 2022-10-23 00:00:00+00:00
+      title: Date time
+      type: string
+    TransactionCategory:
+      allOf:
+      - description: Status of the bank transaction category.
+        properties:
+          hasChildren:
+            description: A Boolean indicating whether there are other bank transaction
+              categories beneath this one in the hierarchy.
+            type: boolean
+          id:
+            description: The unique identifier of the bank transaction category.
+            minLength: 1
+            type: string
+          name:
+            description: The name of the bank transaction category.
+            minLength: 1
+            type: string
+          parentId:
+            description: The unique identifier of the parent bank transaction category.
+            nullable: true
+            type: string
+          status:
+            $ref: &#39;#/components/schemas/TransactionCategory/definitions/transactionCategoryStatus&#39;
+        type: object
+      - $ref: &#39;#/components/schemas/ModifiedDates&#39;
+      definitions:
+        transactionCategoryRef:
+          description: An object of bank transaction category reference data.
+          properties:
+            id:
+              description: The unique category reference id for the bank transaction.
+              minLength: 1
+              type: string
+            name:
+              description: The category name reference for the bank transaction.
+              nullable: true
+              type: string
+          required:
+          - id
+          type: object
+          x-internal: true
+        transactionCategoryStatus:
+          enum:
+          - Unknown
+          - Active
+          - Archived
+          type: string
+          x-internal: true
+      description: &#39;The Banking Transaction Categories data type provides a list of
+        hierarchical categories associated with a transaction for greater contextual
+        meaning to transaction activity.
+
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters
+        in your request.&#39;
+      examples:
+      - hasChildren: true
+        id: auto-and-transport
+        modifiedDate: 2022-05-23 16:32:50
+        name: Auto &amp; Transport
+        sourceModifiedDate: 2021-04-24 07:59:10
+        status: Active
+      required:
+      - id
+      - name
+      title: Transaction Category
+      type: object
+    ModifiedDates:
+      allOf:
+      - $ref: &#39;#/components/schemas/ModifiedDate&#39;
+      - $ref: &#39;#/components/schemas/SourceModifiedDate&#39;
+      x-internal: true
+    ModifiedDate:
+      properties:
+        modifiedDate:
+          $ref: &#39;#/components/schemas/DateTime&#39;
+          description: The date on which this record was last modified in Codat.
+      title: ModifiedDate
+      type: object
+      x-internal: true
+    SourceModifiedDate:
+      properties:
+        sourceModifiedDate:
+          $ref: &#39;#/components/schemas/DateTime&#39;
+          description: The date on which this record was last modified in the originating
+            system
+      title: Source Modified Date
+      type: object
+      x-internal: true
+
+</pre></div></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          <a class="prev-page" href="05_test_openai_classification_prompts.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">OpenAI - Test Classification Prompts</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023 - 2024, Paradigma Digital
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">OpenAI - Test API Generation</a><ul>
+<li><a class="reference internal" href="#1.-Data-Preparation---API-Examples-and-instructions.">1. Data Preparation - API Examples and instructions.</a></li>
+<li><a class="reference internal" href="#2.-APIGenerator---Generate-a-new-API.">2. APIGenerator - Generate a new API.</a></li>
+<li><a class="reference internal" href="#API-Formatter---Correct-an-API">API Formatter - Correct an API</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e936e8a8"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

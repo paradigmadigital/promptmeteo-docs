@@ -9,7 +9,7 @@
         <title>Sentiment Analysis - 🔥🧔</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
     
     
@@ -218,7 +218,7 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">&#39;../data/amazon_reviews_en/amazon_reviews_multi-test.parquet&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;../data/amazon_reviews_en/amazon_reviews_multi-test.parquet&quot;</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -243,9 +243,10 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">SQLContext</span><span class="p">()</span>
-<span class="n">sql</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">sql</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 
-<span class="n">sentiment_data</span> <span class="o">=</span> <span class="n">sql</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">sentiment_data</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">sql</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    SELECT</span>
 <span class="s2">        review_body as REVIEW,</span>
 <span class="s2">        CASE</span>
@@ -256,7 +257,10 @@
 <span class="s2">        END AS TARGET,</span>
 <span class="s2">    FROM data</span>
 <span class="s2">    WHERE stars!=2 AND stars!=4;</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
 
 <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -285,14 +289,16 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;gpt-3.5-turbo-instruct&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="s1">&#39;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#39;</span>  <span class="c1">#OPENAI TOKEN</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo-instruct&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="s2">&quot;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&quot;</span><span class="p">,</span>  <span class="c1"># OPENAI TOKEN</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -383,13 +389,10 @@ ANSWER_FORMAT:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;REVIEW&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-<span class="n">train_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;TARGET&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;REVIEW&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">train_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;TARGET&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">examples</span> <span class="o">=</span> <span class="n">train_reviews</span><span class="p">,</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">train_targets</span>
-<span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">examples</span><span class="o">=</span><span class="n">train_reviews</span><span class="p">,</span> <span class="n">annotations</span><span class="o">=</span><span class="n">train_targets</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -403,12 +406,16 @@ ANSWER_FORMAT:
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
 
-<span class="n">test_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;REVIEW&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-<span class="n">test_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;TARGET&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">test_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;REVIEW&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">test_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;TARGET&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]),</span>
+    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -439,19 +446,16 @@ ANSWER_FORMAT:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;google/flan-t5-xxl&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;hf_hub_api&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="s1">&#39;hf_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#39;</span>  <span class="c1">#HF API TOKEN</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;google/flan-t5-xxl&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;hf_hub_api&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="s2">&quot;hf_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&quot;</span><span class="p">,</span>  <span class="c1"># HF API TOKEN</span>
 <span class="p">)</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">examples</span> <span class="o">=</span> <span class="n">train_reviews</span><span class="p">,</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">train_targets</span>
-<span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">examples</span><span class="o">=</span><span class="n">train_reviews</span><span class="p">,</span> <span class="n">annotations</span><span class="o">=</span><span class="n">train_targets</span><span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -482,20 +486,17 @@ ANSWER_FORMAT:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;tiiuae/falcon-7b-instruct&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;hf_hub_api&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="s1">&#39;hf_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#39;</span>  <span class="c1">#HF API TOKEN</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;tiiuae/falcon-7b-instruct&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;hf_hub_api&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="s2">&quot;hf_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&quot;</span><span class="p">,</span>  <span class="c1"># HF API TOKEN</span>
 <span class="p">)</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">examples</span> <span class="o">=</span> <span class="n">train_reviews</span><span class="p">,</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">train_targets</span>
-<span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">examples</span><span class="o">=</span><span class="n">train_reviews</span><span class="p">,</span> <span class="n">annotations</span><span class="o">=</span><span class="n">train_targets</span><span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -534,19 +535,16 @@ You&#39;re using a different task than the one specified in the repository. Be s
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;google/flan-t5-small&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;hf_pipeline&#39;</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;google/flan-t5-small&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;hf_pipeline&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">examples</span> <span class="o">=</span> <span class="n">train_reviews</span><span class="p">,</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">train_targets</span>
-<span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">examples</span><span class="o">=</span><span class="n">train_reviews</span><span class="p">,</span> <span class="n">annotations</span><span class="o">=</span><span class="n">train_targets</span><span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -586,13 +584,14 @@ Token indices sequence length is longer than the specified maximum sequence leng
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">&#39;../data/amazon_reviews_sp/amazon_reviews_multi-test.parquet&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;../data/amazon_reviews_sp/amazon_reviews_multi-test.parquet&quot;</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 
 <span class="n">sql</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">SQLContext</span><span class="p">()</span>
-<span class="n">sql</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">sql</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 
-<span class="n">sentiment_data</span> <span class="o">=</span> <span class="n">sql</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">sentiment_data</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">sql</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    SELECT</span>
 <span class="s2">        review_body as REVIEW,</span>
 <span class="s2">        CASE</span>
@@ -603,7 +602,10 @@ Token indices sequence length is longer than the specified maximum sequence leng
 <span class="s2">        END AS TARGET,</span>
 <span class="s2">    FROM data</span>
 <span class="s2">    WHERE stars!=2 AND stars!=4;</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
 
 <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -627,11 +629,11 @@ Token indices sequence length is longer than the specified maximum sequence leng
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;REVIEW&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-<span class="n">train_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;TARGET&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;REVIEW&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">train_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;TARGET&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 
-<span class="n">test_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;REVIEW&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-<span class="n">test_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;TARGET&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">test_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;REVIEW&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">test_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;TARGET&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -645,20 +647,21 @@ Token indices sequence length is longer than the specified maximum sequence leng
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;gpt-3.5-turbo-instruct&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="s1">&#39;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#39;</span>  <span class="c1">#OPENAI TOKEN</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo-instruct&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="s2">&quot;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&quot;</span><span class="p">,</span>  <span class="c1"># OPENAI TOKEN</span>
 <span class="p">)</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">examples</span> <span class="o">=</span> <span class="n">train_reviews</span><span class="p">,</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">train_targets</span>
-<span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">examples</span><span class="o">=</span><span class="n">train_reviews</span><span class="p">,</span> <span class="n">annotations</span><span class="o">=</span><span class="n">train_targets</span><span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]),</span>
+    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -689,19 +692,16 @@ Token indices sequence length is longer than the specified maximum sequence leng
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;es&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;google/flan-t5-small&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;hf_pipeline&#39;</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;es&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;google/flan-t5-small&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;hf_pipeline&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">examples</span> <span class="o">=</span> <span class="n">train_reviews</span><span class="p">,</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">train_targets</span>
-<span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">examples</span><span class="o">=</span><span class="n">train_reviews</span><span class="p">,</span> <span class="n">annotations</span><span class="o">=</span><span class="n">train_targets</span><span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

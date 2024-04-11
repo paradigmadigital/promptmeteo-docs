@@ -222,65 +222,65 @@
 <li><p><strong>api_protocol</strong> (<em>str</em>) – Protocol of the API.</p></li>
 <li><p><strong>api_style_instructions</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Instructions for API style.</p></li>
 <li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments.</p></li>
+<li><p><strong>Raises</strong> – </p></li>
+<li><p><strong>------</strong> – </p></li>
+<li><p><strong>ValueError</strong> – If <cite>api_protocol</cite> is not in the allowed protocols or if <cite>api_version</cite>
+is not in the correct format.</p></li>
+<li><p><strong>Example</strong> – </p></li>
+<li><p><strong>-------</strong> – </p></li>
+<li><p><strong>APIGenerator</strong> (<em>&gt;&gt;&gt; from promptmeteo import</em>) – </p></li>
+<li><p><strong>APIGenerator</strong><strong>(</strong> (<em>&gt;&gt;&gt; model =</em>) – </p></li>
+<li><p><strong>language=&quot;en&quot;</strong> (<em>...</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If <cite>api_protocol</cite> is not in the allowed protocols or if <cite>api_version</cite>
-    is not in the correct format.</p>
-</dd>
 </dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">APIGenerator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">APIGenerator</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">selector_k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">api_version</span><span class="o">=</span><span class="s1">&#39;3.0.3&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">api_protocol</span><span class="o">=</span><span class="s1">&#39;REST&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">api_style_instructions</span><span class="o">=</span><span class="p">[</span>
-<span class="gp">... </span>        <span class="s1">&#39;Use always camel case.&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;Do not use acronyms.&#39;</span>
-<span class="gp">... </span>    <span class="p">],</span>
-<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;gpt-3.5-turbo-16k&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">model_token</span><span class="p">,</span>
-<span class="gp">... </span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">api_description</span><span class="p">,</span> <span class="n">api_code</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">&quot;API for managing account access&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<p>:param :
+:param …     selector_k=5:
+:param :
+:param …     api_version=”3.0.3”:
+:param :
+:param …     api_protocol=”REST”:
+:param :
+:param …     api_style_instructions=[“Use always camel case.”:
+:param “Do not use acronyms.”]:
+:param :
+:param …     model_provider_name=”openai”:
+:param :
+:param …     model_name=”gpt-3.5-turbo-16k”:
+:param :
+:param …     model_provider_token=model_token:
+:param :
+:param … ):
+:param &gt;&gt;&gt; model.train(api_description:
+:param api_code):
+:param &gt;&gt;&gt; model.predict(“API for managing account access”):</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.APIGenerator.train">
 <span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_descriptions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.APIGenerator.train" title="Permalink to this definition">#</a></dt>
-<dd><p>Trains the model given use cases and notes on behaviour. Check the
-parameters and task behaviour in each specific model training docstring.</p>
-<p>Train the APIGenerator from a list of APIs descriptions and contracts.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>api_descriptions</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of API descriptions.</p></li>
-<li><p><strong>api_codes</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of API codes - contracts.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Returns the trained APIGenerator object.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#promptmeteo.APIGenerator" title="promptmeteo.APIGenerator">APIGenerator</a></p>
+<dd><dl class="simple">
+<dt>Trains the model given use cases and notes on behaviour. Check the</dt><dd><p>parameters and task behaviour in each specific model training docstring.</p>
 </dd>
 </dl>
+<p>Train the APIGenerator from a list of APIs descriptions and contracts.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>api_descriptions<span class="classifier">List[str]</span></dt><dd><p>List of API descriptions.</p>
+</dd>
+<dt>api_codes<span class="classifier">List[str]</span></dt><dd><p>List of API codes - contracts.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>APIGenerator</dt><dd><p>Returns the trained APIGenerator object.</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="promptmeteo.APIFormatter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">APIFormatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_provider_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_style_instructions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.APIFormatter" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">APIFormatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_provider_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_style_instructions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.APIFormatter" title="Permalink to this definition">#</a></dt>
 <dd><p>API Formatter Task.</p>
 <p>This class initializes the API Formatter Task to correct and format APIs.</p>
 <dl class="field-list simple">
@@ -293,125 +293,122 @@ parameters and task behaviour in each specific model training docstring.</p>
 <li><p><strong>api_protocol</strong> (<em>str</em>) – Protocol of the API.</p></li>
 <li><p><strong>api_style_instructions</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Instructions for API style.</p></li>
 <li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments.</p></li>
+<li><p><strong>Raises</strong> – </p></li>
+<li><p><strong>------</strong> – </p></li>
+<li><p><strong>ValueError</strong> – If <cite>api_protocol</cite> is not in the allowed protocols or if <cite>api_version</cite>
+is not in the correct format.</p></li>
+<li><p><strong>Example</strong> – </p></li>
+<li><p><strong>-------</strong> – </p></li>
+<li><p><strong>APIFormatter</strong> (<em>&gt;&gt;&gt; from promptmeteo import</em>) – </p></li>
+<li><p><strong>APIFormatter</strong><strong>(</strong> (<em>&gt;&gt;&gt; model =</em>) – </p></li>
+<li><p><strong>language=&quot;en&quot;</strong> (<em>...</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If <cite>api_protocol</cite> is not in the allowed protocols or if <cite>api_version</cite>
-    is not in the correct format.</p>
-</dd>
 </dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">APIFormatter</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">APIFormatter</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">api_version</span> <span class="o">=</span> <span class="s1">&#39;3.0.3&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">api_protocol</span> <span class="o">=</span> <span class="s1">&#39;REST&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">api_style_instructions</span> <span class="o">=</span> <span class="p">[</span>
-<span class="gp">... </span>        <span class="s1">&#39;Use always camel case.&#39;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s1">&#39;Do not use acronyms.&#39;</span>
-<span class="gp">... </span>        <span class="p">],</span>
-<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;gpt-3.5-turbo-16k&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">model_token</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">external_info</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>                    <span class="s2">&quot;servers&quot;</span><span class="p">:</span> <span class="p">[</span>
-<span class="gp">... </span>                        <span class="p">{</span>
-<span class="gp">... </span>                            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8080/&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Local environment&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                        <span class="p">}</span>
-<span class="gp">... </span>                    <span class="p">],</span>
-<span class="gp">... </span>                <span class="p">}</span>
-<span class="gp">... </span>    <span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">api_code</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<p>:param :
+:param …     api_version=”3.0.3”:
+:param :
+:param …     api_protocol=”REST”:
+:param :
+:param …     api_style_instructions=[“Use always camel case.”:
+:param “Do not use acronyms.”]:
+:param :
+:param …     model_provider_name=”openai”:
+:param :
+:param …     model_name=”gpt-3.5-turbo-16k”:
+:param :
+:param …     model_provider_token=model_token:
+:param :
+:param …     external_info={:
+:param …         “servers”:
+:type …         “servers”: [
+:param …             {:
+:param …                 “url”:
+:type …                 “url”: “<a class="reference external" href="http://localhost:8080/">http://localhost:8080/</a>”,
+:param …                 “description”:
+:type …                 “description”: “Local environment”,
+:param …             }:
+:param …         ]:
+:param :
+:param …     }:
+:param :
+:param … ):
+:param &gt;&gt;&gt; model.train(api_code):
+:param &gt;&gt;&gt; model.predict(api):</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.APIFormatter.load_model">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.APIFormatter.load_model" title="Permalink to this definition">#</a></dt>
 <dd><p>Load a saved model from disk.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>model_path</strong> (<em>str</em>) – Path from where the model will be loaded.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Loaded model instance.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="promptmeteo.html#promptmeteo.base.Base" title="promptmeteo.base.Base">Base</a></p>
+<blockquote>
+<div><dl class="simple">
+<dt>model_path<span class="classifier">str</span></dt><dd><p>Path from where the model will be loaded.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>Base</dt><dd><p>Loaded model instance.</p>
+</dd>
+</dl>
+</div></blockquote>
 <p>Loads a model artifact to make new predictions.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>model_path</strong> (<em>str</em>) – Path to the model artifact.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Returns the loaded APIFormatter object.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#promptmeteo.APIFormatter" title="promptmeteo.APIFormatter">APIFormatter</a></p>
+<blockquote>
+<div><dl class="simple">
+<dt>model_path<span class="classifier">str</span></dt><dd><p>Path to the model artifact.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>APIFormatter</dt><dd><p>Returns the loaded APIFormatter object.</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.APIFormatter.predict">
 <span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#promptmeteo.APIFormatter.predict" title="Permalink to this definition">#</a></dt>
 <dd><p>Predict over new text samples.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>examples</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of text samples to predict.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of predictions.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[str]</p>
+<blockquote>
+<div><dl class="simple">
+<dt>examples<span class="classifier">List[str]</span></dt><dd><p>List of text samples to predict.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>List[str]</dt><dd><p>List of predictions.</p>
+</dd>
+</dl>
+</div></blockquote>
 <p>Receive a list of API codes and return a list with the corrected APIs.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>api_codes</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of API codes.</p></li>
-<li><p><strong>external_info</strong> (<em>dict</em>) – External information to be added to the APIs.</p></li>
-</ul>
+<blockquote>
+<div><dl class="simple">
+<dt>api_codes<span class="classifier">List[str]</span></dt><dd><p>List of API codes.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of corrected APIs.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[str]</p>
+<dt>external_info<span class="classifier">dict</span></dt><dd><p>External information to be added to the APIs.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>List[str]</dt><dd><p>List of corrected APIs.</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.APIFormatter.train">
 <span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.APIFormatter.train" title="Permalink to this definition">#</a></dt>
-<dd><p>Trains the model given use cases and notes on behaviour. Check the
-parameters and task behaviour in each specific model training docstring.</p>
-<p>Train the APIFormatter to extract entities and parameters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>api_codes</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of API codes.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Returns the trained APIFormatter object.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#promptmeteo.APIFormatter" title="promptmeteo.APIFormatter">APIFormatter</a></p>
+<dd><dl class="simple">
+<dt>Trains the model given use cases and notes on behaviour. Check the</dt><dd><p>parameters and task behaviour in each specific model training docstring.</p>
 </dd>
 </dl>
+<p>Train the APIFormatter to extract entities and parameters.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>api_codes<span class="classifier">List[str]</span></dt><dd><p>List of API codes.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>APIFormatter</dt><dd><p>Returns the trained APIFormatter object.</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 </dd></dl>
@@ -423,33 +420,39 @@ parameters and task behaviour in each specific model training docstring.</p>
 <p>This class represents a model for generating code based on natural language descriptions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments.</p></li>
+<li><p><strong>Example</strong> – </p></li>
+<li><p><strong>-------</strong> – </p></li>
+<li><p><strong>CodeGenerator</strong> (<em>&gt;&gt;&gt; from promptmeteo import</em>) – </p></li>
+<li><p><strong>CodeGenerator</strong><strong>(</strong> (<em>&gt;&gt;&gt; model =</em>) – </p></li>
+<li><p><strong>language=&quot;en&quot;</strong> (<em>...</em>) – </p></li>
+</ul>
 </dd>
 </dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">CodeGenerator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">CodeGenerator</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">prompt_domain</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">model_token</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">prompt_detail</span><span class="o">=</span><span class="p">[</span>
-<span class="gp">... </span>        <span class="s2">&quot;add docstring in function definitions&quot;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s2">&quot;add argument typing annotations&quot;</span><span class="p">]</span>
-<span class="gp">... </span>    <span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;A function that receives the argument `foo` and prints it.&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
+<p>:param :
+:param …     prompt_domain=”python”:
+:param :
+:param …     model_provider_name=”openai”:
+:param :
+:param …     model_name=”text-davinci-003”:
+:param :
+:param …     model_provider_token=model_token:
+:param :
+:param …     prompt_detail=[:
+:param …         “add docstring in function definitions”:
+:param :
+:param …         “add argument typing annotations”:
+:param :
+:param …     ]:
+:param :
+:param … ):
+:param &gt;&gt;&gt; pred = model.predict(:
+:param …     [“A function that receives the argument <cite>foo</cite> and prints it.”]:
+:param … ):
+:param Returns:
+:param ——-:
+:param None:</p>
 </dd></dl>
 
 <dl class="py class">
@@ -457,48 +460,48 @@ parameters and task behaviour in each specific model training docstring.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">DocumentClassifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.DocumentClassifier" title="Permalink to this definition">#</a></dt>
 <dd><p>DocumentClassifier Task</p>
 <p>This class represents a model for classifying documents into predefined categories.</p>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
+<section id="example">
+<h2>Example:<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s1">&#39;hf_pipeline&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;google/flan-t5-small&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">prompt_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span><span class="s1">&#39;negative&#39;</span><span class="p">,</span><span class="s1">&#39;neutral&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;hf_pipeline&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;google/flan-t5-small&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">prompt_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positive&quot;</span><span class="p">,</span> <span class="s2">&quot;negative&quot;</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;estoy feliz&#39;</span><span class="p">,</span> <span class="s1">&#39;me da igual&#39;</span><span class="p">,</span> <span class="s1">&#39;no me gusta&#39;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">annotations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span> <span class="s1">&#39;neutral&#39;</span><span class="p">,</span> <span class="s1">&#39;negative&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;estoy feliz&quot;</span><span class="p">,</span> <span class="s2">&quot;me da igual&quot;</span><span class="p">,</span> <span class="s2">&quot;no me gusta&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">annotations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positive&quot;</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">,</span> <span class="s2">&quot;negative&quot;</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;que guay!!&#39;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s2">&quot;que guay!!&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[[</span><span class="s1">&#39;positive&#39;</span><span class="p">]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[[</span><span class="s2">&quot;positive&quot;</span><span class="p">]]</span>
 </pre></div>
-</div>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.DocumentClassifier.train">
 <span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">examples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.DocumentClassifier.train" title="Permalink to this definition">#</a></dt>
-<dd><p>Trains the model given use cases and notes on behaviour. Check the
-parameters and task behaviour in each specific model training docstring.</p>
-<p>Trains the DocumentClassifier model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>examples</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of document examples.</p></li>
-<li><p><strong>annotations</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of corresponding annotations.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Self</p>
+<dd><dl class="simple">
+<dt>Trains the model given use cases and notes on behaviour. Check the</dt><dd><p>parameters and task behaviour in each specific model training docstring.</p>
 </dd>
 </dl>
+<p>Trains the DocumentClassifier model.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>examples<span class="classifier">List[str]</span></dt><dd><p>List of document examples.</p>
+</dd>
+<dt>annotations<span class="classifier">List[str]</span></dt><dd><p>List of corresponding annotations.</p>
+</dd>
+</dl>
+<p>Self</p>
+</div></blockquote>
 </dd></dl>
 
+</section>
 </dd></dl>
 
 <dl class="py class">
@@ -506,31 +509,32 @@ parameters and task behaviour in each specific model training docstring.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">DocumentQA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.DocumentQA" title="Permalink to this definition">#</a></dt>
 <dd><p>Question Answering over Documents Task</p>
 <p>This class represents a model for answering questions based on documents.</p>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
+<section id="id1">
+<h2>Example:<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentQA</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">DocumentQA</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s1">&#39;hf_pipeline&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;google/flan-t5-small&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;hf_pipeline&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;google/flan-t5-small&quot;</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
-<span class="gp">... </span>    <span class="s2">&quot;The rain in spain is always in plain&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s2">&quot;The logarithm&#39;s limit is the limit&#39;s logarithm&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s2">&quot;To punish oppresors is clementy. To forgive them is cruelty&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">examples</span><span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>        <span class="s2">&quot;The rain in spain is always in plain&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;The logarithm&#39;s limit is the limit&#39;s logarithm&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;To punish oppresors is clementy. To forgive them is cruelty&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;How is the rain in spain?&#39;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s2">&quot;How is the rain in spain?&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[[</span><span class="s1">&#39;in plain&#39;</span><span class="p">]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[[</span><span class="s2">&quot;in plain&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
-</div>
+</section>
 </dd></dl>
 
 <dl class="py class">
@@ -538,66 +542,64 @@ parameters and task behaviour in each specific model training docstring.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">promptmeteo.</span></span><span class="sig-name descname"><span class="pre">Summarizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#promptmeteo.Summarizer" title="Permalink to this definition">#</a></dt>
 <dd><p>Class for text summarization</p>
 <p>This class represents a model for text summarization.</p>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
+<section id="id2">
+<h2>Example:<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">Summarizer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">Summarizer</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;es&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">prompt_domain</span><span class="o">=</span><span class="s2">&quot;A partir del siguiente texto:&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;anthropic.claude-v2&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;bedrock&quot;</span>
+<span class="gp">... </span>    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;bedrock&quot;</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">text</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.Summarizer.load_model">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.Summarizer.load_model" title="Permalink to this definition">#</a></dt>
 <dd><p>Load a saved model from disk.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>model_path</strong> (<em>str</em>) – Path from where the model will be loaded.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Loaded model instance.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="promptmeteo.html#promptmeteo.base.Base" title="promptmeteo.base.Base">Base</a></p>
+<blockquote>
+<div><dl class="simple">
+<dt>model_path<span class="classifier">str</span></dt><dd><p>Path from where the model will be loaded.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>Base</dt><dd><p>Loaded model instance.</p>
+</dd>
+</dl>
+</div></blockquote>
 <p>Loads a model artifact to make new predictions.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>model_path</strong> (<em>str</em>) – The path to the saved model artifact.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>self</strong> – The loaded Summarizer model.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#promptmeteo.Summarizer" title="promptmeteo.Summarizer">Summarizer</a></p>
+<blockquote>
+<div><dl class="simple">
+<dt>model_path<span class="classifier">str</span></dt><dd><p>The path to the saved model artifact.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>self<span class="classifier">Summarizer</span></dt><dd><p>The loaded Summarizer model.</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="promptmeteo.Summarizer.train">
 <span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#promptmeteo.Summarizer.train" title="Permalink to this definition">#</a></dt>
-<dd><p>Trains the model given use cases and notes on behaviour. Check the
-parameters and task behaviour in each specific model training docstring.</p>
-<p>Train the Summarizer model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>self</strong> – The trained Summarizer model.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#promptmeteo.Summarizer" title="promptmeteo.Summarizer">Summarizer</a></p>
+<dd><dl class="simple">
+<dt>Trains the model given use cases and notes on behaviour. Check the</dt><dd><p>parameters and task behaviour in each specific model training docstring.</p>
 </dd>
 </dl>
+<p>Train the Summarizer model.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>self<span class="classifier">Summarizer</span></dt><dd><p>The trained Summarizer model.</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
+</section>
 </dd></dl>
 
 </section>

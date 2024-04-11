@@ -9,7 +9,7 @@
         <title>Promptmeteo Usage - Save and Load Model - 🔥🧔</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
     
     
@@ -208,13 +208,18 @@
         <article role="main">
           <section id="Promptmeteo-Usage---Save-and-Load-Model">
 <h1>Promptmeteo Usage - Save and Load Model<a class="headerlink" href="#Promptmeteo-Usage---Save-and-Load-Model" title="Permalink to this heading">#</a></h1>
+<p>LLMs are truly revolutionizing the world, enabling humans to do things we couldn’t do before, or making them so much easier and faster to do.</p>
+<p>Promptmeteo leverages the power of LLMs to democratize the data science process. This means you can easily train a model and make predictions with it in a few, comfortable steps.</p>
+<p>In this tutorial, you are going to create a model to perform document classification (a classic NLP task), train it with a manageable amount of data, save it, load it and use it to classify new documents.</p>
 <section id="1.-Create-a-model">
 <h2>1. Create a model<a class="headerlink" href="#1.-Create-a-model" title="Permalink to this heading">#</a></h2>
 <section id="1.1-Instance-a-DocumentClassifier">
 <h3>1.1 Instance a DocumentClassifier<a class="headerlink" href="#1.1-Instance-a-DocumentClassifier" title="Permalink to this heading">#</a></h3>
-<p>In this example, we are going to create a model that performs a classic NLP task: document classification. It’s one of the tasks inPromptmeteo has a specific task to do that</p>
+<p>Luckily, Promptmeteo has a specific task to do document classification. You only have to instance the class DocumentClassifier, and it’s very easy to do so. You have to set: - <code class="docutils literal notranslate"><span class="pre">language</span></code>: the language in which the task is going to be performed (currently, only English or Spanish are supported) - <code class="docutils literal notranslate"><span class="pre">model_name</span></code> and <code class="docutils literal notranslate"><span class="pre">model_provider_name</span></code>: the model and provider you want to use (currently, <a class="reference external" href="https://paradigmadigital.github.io/promptmeteo-docs/definition.html#available-models">these</a> are
+supported) - <code class="docutils literal notranslate"><span class="pre">prompt_labels</span></code>: the categories in which you need to classify the documents (free choice)</p>
+<p>Let’s use <code class="docutils literal notranslate"><span class="pre">google/flan-t5-small</span></code>, which is free, in English, and go for the classic sentiment classification, that is, using the <code class="docutils literal notranslate"><span class="pre">positive</span></code> and <code class="docutils literal notranslate"><span class="pre">negative</span></code> labels to classify opinions.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
@@ -230,11 +235,12 @@
 </div>
 </div>
 </section>
-<section id="1.2-Prompt-Templates">
-<h3>1.2 Prompt Templates<a class="headerlink" href="#1.2-Prompt-Templates" title="Permalink to this heading">#</a></h3>
-<p>First, we need to write a helper function to print YAML files in a proper way.</p>
+<section id="1.2-Prompts">
+<h3>1.2 Prompts<a class="headerlink" href="#1.2-Prompts" title="Permalink to this heading">#</a></h3>
+<p>The first thing you need to know about Promptmeteo is that we think <strong>prompts should be treated with the same respect as code</strong>. Therefore, they shouldn’t be hard-coded or taken lightly; instead, they should be carefully designed and properly versioned. In the end, they are the way we communicate with the LLMs. That means a mistake in a prompt can result in major unwanted outputs, while a really good prompt can unleash all the power from the LLM.</p>
+<p>That said, prompt templates in Promptmeteo are written in YAML and saved in files. So first, we need to write a helper function to print YAML files in a proper way.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
@@ -248,11 +254,12 @@
 </pre></div>
 </div>
 </div>
-<section id="1.2.1-Predefined-prompt-templates">
-<h4>1.2.1 Predefined prompt templates<a class="headerlink" href="#1.2.1-Predefined-prompt-templates" title="Permalink to this heading">#</a></h4>
-<p>Promptmeteo has predefined prompt templates for each of the availables languages, models and tasks. This allows the user not to wonder about defining the prefect prompt but rather, to parametrize the prompt with the parameters of the use case. For the document classification task in english with OpenAI, the prompt template is:</p>
+<section id="1.2.1-Prompt-templates">
+<h4>1.2.1 Prompt templates<a class="headerlink" href="#1.2.1-Prompt-templates" title="Permalink to this heading">#</a></h4>
+<p>Promptmeteo has predefined <strong>prompt templates</strong> for each of the available languages, models and tasks. This allows the user not to wonder about defining the perfect prompt, but rather to parametrize the prompt template with the parameters of the use case, without neglecting the prompts.</p>
+<p>Let’s have a look into the prompt template for the document classification task in English with FlanTL:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt_print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">PROMPT_EXAMPLE</span><span class="p">)</span>
@@ -266,12 +273,21 @@
 <div class="highlight"><pre>
 TEMPLATE
  I need you to help me with a text classification task. {__PROMPT_DOMAIN__} {__PROMPT_LABELS__}
-{__CHAIN_THOUGHT__} {__ANSWER_FORMAT__}
+{__CHAIN_THOUGHT__} {__ANSWER_FORMAT__} {__SHOT_EXAMPLES__} {__PROMPT_SAMPLE__}
 PROMPT_DOMAIN
  The texts you will be processing are from the {__DOMAIN__} domain.
 PROMPT_LABELS
  I want you to classify the texts into one of the following categories: {__LABELS__}.
 PROMPT_DETAIL
+
+SHOT_EXAMPLES
+ Examples:
+
+{__EXAMPLES__}
+PROMPT_SAMPLE
+
+
+{__SAMPLE__}
 
 CHAIN_THOUGHT
 
@@ -280,14 +296,14 @@ ANSWER_FORMAT
 </pre></div></div>
 </div>
 </section>
-<section id="1.2.2-Prompt-text---Prompt-injection">
-<h4>1.2.2 Prompt text - Prompt injection<a class="headerlink" href="#1.2.2-Prompt-text---Prompt-injection" title="Permalink to this heading">#</a></h4>
-<p>This template is used to build a prompt text by adding the stament bellow into the template. This technique is called <strong>prompt injection</strong></p>
+<section id="1.2.2-Prompt-texts">
+<h4>1.2.2 Prompt texts<a class="headerlink" href="#1.2.2-Prompt-texts" title="Permalink to this heading">#</a></h4>
+<p>The prompt template is used to build a <strong>prompt text</strong>, which is the final text to pass to the LLM. We haven’t provided any example yet, only the labels, so it looks like this:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt_print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">template</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">template</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -296,27 +312,27 @@ ANSWER_FORMAT
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-I need you to help me with a text classification task.  I want you to classify the texts into one of the following categories
- positive, negative. In your response, include only the name of the class predicted.
+I need you to help me with a text classification task. The texts you will be processing are from the  domain. I want you to classify the texts into one of the following categories: positive, negative.
+ In your response, include only the name of the class predicted. Examples:
+
+{__EXAMPLES__}
+
+{__SAMPLE__}
+
 </pre></div></div>
 </div>
-</section>
-<section id="1.2.3-Injecting-labels---Zero-shot-Prompting">
-<h4>1.2.3 Injecting labels - Zero-shot Prompting<a class="headerlink" href="#1.2.3-Injecting-labels---Zero-shot-Prompting" title="Permalink to this heading">#</a></h4>
-<p>We can see tha not only the prompt has beenn build correctly, but also the labels <code class="docutils literal notranslate"><span class="pre">['positive',</span> <span class="pre">'negative']</span></code> from the class inicialitations has been injected. Given the labels without more examples is called <strong>Zero-shot prompting</strong></p>
-<p>I need you to help me with a text classification task. I want you to classify the texts into one of the following categories: <strong>positive, negative.</strong> Please provide a step-by-step argument for your answer, explain why you believe your final choice is justified, and make sure to conclude your explanation with the name of the class you have selected as the correct one, in lowercase and without punctuation. In your response, include only the name of the class as a single word, in lowercase, without
-punctuation, and without adding any other statements or words.</p>
+<p>We could use the above text as the prompt as is, it’s a valid approach called <strong>zero-shot prompting</strong>. But usually we will need to show the LLM some examples of what we want it to do; and that means we need to train it.</p>
 <hr class="docutils" />
 </section>
 </section>
 </section>
 <section id="2.-Train-a-model">
 <h2>2. Train a model<a class="headerlink" href="#2.-Train-a-model" title="Permalink to this heading">#</a></h2>
-<section id="2.1-Train-function">
-<h3>2.1 Train function<a class="headerlink" href="#2.1-Train-function" title="Permalink to this heading">#</a></h3>
-<p>The model can be trained by giving examples to the function <code class="docutils literal notranslate"><span class="pre">train()</span></code></p>
+<section id="2.1-train()-function">
+<h3>2.1 <code class="docutils literal notranslate"><span class="pre">train()</span></code> function<a class="headerlink" href="#2.1-train()-function" title="Permalink to this heading">#</a></h3>
+<p>As in any data science pipeline, you can train models in Promptmeteo. You simply have to give examples to it using the <code class="docutils literal notranslate"><span class="pre">train()</span></code> function, providing the texts (<code class="docutils literal notranslate"><span class="pre">examples</span></code>) and their expected classification (<code class="docutils literal notranslate"><span class="pre">annotations</span></code>):</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
@@ -327,14 +343,16 @@ punctuation, and without adding any other statements or words.</p>
 </div>
 </div>
 </section>
-<section id="2.2-Examples-Injection---Few-shot-prompting">
-<h3>2.2 Examples Injection - Few-shot prompting<a class="headerlink" href="#2.2-Examples-Injection---Few-shot-prompting" title="Permalink to this heading">#</a></h3>
-<p>When a new sample cames, the examples are added to the prompt to help the model to improve the answers. This technique is called <strong>Few-show prompting</strong>. This examples are choosed rom those that are more related to the new sample passes for makein inference. We can see that now, the prompt with the examples has the following aspect</p>
+<section id="2.2-Examples-injection">
+<h3>2.2 Examples injection<a class="headerlink" href="#2.2-Examples-injection" title="Permalink to this heading">#</a></h3>
+<p>Each example is added to the prompt to help the model improve the answers. When the number of examples is low, this technique is called <strong>few-shot prompting</strong>.</p>
+<p>These examples should be chosen from those that are more related to the new sample passed for making inference. We can see that now the prompt with the examples has the following aspect:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">_get_prompt</span><span class="p">(</span><span class="s1">&#39;NEW EXAMPLE&#39;</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example_for_inference</span> <span class="o">=</span> <span class="s1">&#39;I love it&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">_get_prompt</span><span class="p">(</span><span class="n">example_for_inference</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -343,28 +361,28 @@ punctuation, and without adding any other statements or words.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
- I need you to help me with a text classification task.  I want you to classify the texts into one of the following categories: positive, negative.
- In your response, include only the name of the class predicted.
+I need you to help me with a text classification task. The texts you will be processing are from the  domain. I want you to classify the texts into one of the following categories: positive, negative.
+ In your response, include only the name of the class predicted. Examples:
 
-INPUT: I like it
-OUTPUT: positive
+I like it
+positive
 
-INPUT: I hate it
-OUTPUT: negative
+I hate it
+negative
 
-INPUT: i am happy
-OUTPUT: positive
+i am happy
+positive
 
-INPUT: NEW EXAMPLE
-OUTPUT:
+I love it
+
 </pre></div></div>
 </div>
 </section>
-<section id="2.3-Save-Model---FAISS">
-<h3>2.3 Save Model - FAISS<a class="headerlink" href="#2.3-Save-Model---FAISS" title="Permalink to this heading">#</a></h3>
-<p>The examples given to the function train are saved in a vectorstore in local (with FAISS) and this vectorstore can be serialized to disk. Saving this examples in disk allow us to easily reuse it from new use cases without having to recover the original data again</p>
+<section id="2.3-Save-model">
+<h3>2.3 Save model<a class="headerlink" href="#2.3-Save-model" title="Permalink to this heading">#</a></h3>
+<p>The examples passed to the <code class="docutils literal notranslate"><span class="pre">train()</span></code> function are saved in a vectorstore in local (with FAISS) and this vectorstore can be serialized to disk. Saving these examples in disk allows us to easily reuse them for new use cases, without having to retrieve the original data again.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s1">&#39;my_classifier.meteo&#39;</span><span class="p">)</span>
@@ -372,12 +390,12 @@ OUTPUT:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;promptmeteo.document_classifier.DocumentClassifier at 0x7f32142f4d50&gt;
+&lt;promptmeteo.document_classifier.DocumentClassifier at 0x7ff4221a8ee0&gt;
 </pre></div></div>
 </div>
 <hr class="docutils" />
@@ -387,9 +405,9 @@ OUTPUT:
 <h2>3. Load a model<a class="headerlink" href="#3.-Load-a-model" title="Permalink to this heading">#</a></h2>
 <section id="3.1-Model-creation">
 <h3>3.1 Model creation<a class="headerlink" href="#3.1-Model-creation" title="Permalink to this heading">#</a></h3>
-<p>For reloading a model we have to intanciate a <code class="docutils literal notranslate"><span class="pre">DocumentClassifier</span></code> and use the function <code class="docutils literal notranslate"><span class="pre">load_model()</span></code></p>
+<p>Now that we have saved a model, we can load it. To load a model we have to intantiate a <code class="docutils literal notranslate"><span class="pre">DocumentClassifier</span></code> as we did before and use the function <code class="docutils literal notranslate"><span class="pre">load_model()</span></code>:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
@@ -406,9 +424,9 @@ OUTPUT:
 </section>
 <section id="3.2-Predict-new-data">
 <h3>3.2 Predict new data<a class="headerlink" href="#3.2-Predict-new-data" title="Permalink to this heading">#</a></h3>
-<p>By calling the function <code class="docutils literal notranslate"><span class="pre">predict()</span></code> we can use the prompt created with the examples loaded again to predict the classification over new data</p>
+<p>And now we are ready to predict labels for new data! By calling the function <code class="docutils literal notranslate"><span class="pre">predict()</span></code> we can use the prompt created with the examples to predict the classification over new data:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;so cool!!&#39;</span><span class="p">])</span>
@@ -416,7 +434,7 @@ OUTPUT:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -430,8 +448,8 @@ OUTPUT:
 <section id="4-Conclusions">
 <h2>4 Conclusions<a class="headerlink" href="#4-Conclusions" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>In this example we have shown how Promptmeteo can be used as a machine learning frameworks such as Scikit-Learn o Pytorch. It has a similar interface with allows to save the results from the training in a binary file and reuse it. This eases the integration of LLM solution in ML pipeline tools such as Sagemaker or Vertex.</p></li>
-<li><p>Promptmeteo does not only include code data to simplify the integration to LLM model and services. It also include predefined Prompt Engineer logic for different models and tasks. It allows to focus on developing a solution rather than writting prompts, and ensures that the prompt has been tested correctly by Promptmeteo, which make this kind os solution less error-prone.</p></li>
+<li><p>In this example we have shown how Promptmeteo can be used as a machine learning framework such as Scikit-Learn or Pytorch. It has a similar interface which allows to save the results from the training in a binary file and reuse it. This eases the integration of the LLM solution in ML pipeline tools such as Sagemaker or Vertex.</p></li>
+<li><p>Promptmeteo does not only include code data to simplify the integration of LLM model and services. It also includes predefined prompt engineering logic for different models and tasks. It allows to focus on developing a solution rather than writting prompts, and ensures that the prompt has been tested correctly by Promptmeteo, which makes this kind of solution less error-prone.</p></li>
 </ul>
 </section>
 </section>
@@ -494,18 +512,17 @@ OUTPUT:
 <li><a class="reference internal" href="#">Promptmeteo Usage - Save and Load Model</a><ul>
 <li><a class="reference internal" href="#1.-Create-a-model">1. Create a model</a><ul>
 <li><a class="reference internal" href="#1.1-Instance-a-DocumentClassifier">1.1 Instance a DocumentClassifier</a></li>
-<li><a class="reference internal" href="#1.2-Prompt-Templates">1.2 Prompt Templates</a><ul>
-<li><a class="reference internal" href="#1.2.1-Predefined-prompt-templates">1.2.1 Predefined prompt templates</a></li>
-<li><a class="reference internal" href="#1.2.2-Prompt-text---Prompt-injection">1.2.2 Prompt text - Prompt injection</a></li>
-<li><a class="reference internal" href="#1.2.3-Injecting-labels---Zero-shot-Prompting">1.2.3 Injecting labels - Zero-shot Prompting</a></li>
+<li><a class="reference internal" href="#1.2-Prompts">1.2 Prompts</a><ul>
+<li><a class="reference internal" href="#1.2.1-Prompt-templates">1.2.1 Prompt templates</a></li>
+<li><a class="reference internal" href="#1.2.2-Prompt-texts">1.2.2 Prompt texts</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a class="reference internal" href="#2.-Train-a-model">2. Train a model</a><ul>
-<li><a class="reference internal" href="#2.1-Train-function">2.1 Train function</a></li>
-<li><a class="reference internal" href="#2.2-Examples-Injection---Few-shot-prompting">2.2 Examples Injection - Few-shot prompting</a></li>
-<li><a class="reference internal" href="#2.3-Save-Model---FAISS">2.3 Save Model - FAISS</a></li>
+<li><a class="reference internal" href="#2.1-train()-function">2.1 <code class="docutils literal notranslate"><span class="pre">train()</span></code> function</a></li>
+<li><a class="reference internal" href="#2.2-Examples-injection">2.2 Examples injection</a></li>
+<li><a class="reference internal" href="#2.3-Save-model">2.3 Save model</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#3.-Load-a-model">3. Load a model</a><ul>

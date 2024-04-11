@@ -9,7 +9,7 @@
         <title>OpenAI - Test Classification Prompts - 🔥🧔</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
     
     
@@ -217,13 +217,16 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
-<span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">&#39;../data/amazon_reviews_en/amazon_reviews_multi-test.parquet&#39;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;../data/amazon_reviews_en/amazon_reviews_multi-test.parquet&quot;</span><span class="p">)</span>
 <span class="n">sql</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">SQLContext</span><span class="p">()</span>
-<span class="n">sql</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">sql</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 
-<span class="n">sentiment_data</span> <span class="o">=</span> <span class="n">sql</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">sentiment_data</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">sql</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    SELECT</span>
 <span class="s2">        review_body as REVIEW,</span>
 <span class="s2">        CASE</span>
@@ -234,13 +237,16 @@
 <span class="s2">        END AS TARGET,</span>
 <span class="s2">    FROM data</span>
 <span class="s2">    WHERE stars!=2 AND stars!=4;</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
 
-<span class="n">train_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;REVIEW&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-<span class="n">train_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;TARGET&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">train_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;REVIEW&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">train_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;TARGET&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 
-<span class="n">test_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;REVIEW&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-<span class="n">test_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;TARGET&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">test_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;REVIEW&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">test_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;TARGET&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 
 <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -263,7 +269,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">token</span> <span class="o">=</span> <span class="s1">&#39;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">token</span> <span class="o">=</span> <span class="s2">&quot;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -276,41 +282,41 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">TEMPLATE:</span>
-<span class="s1">    &quot;I need you to help me with a text classification task.</span>
-<span class="s1">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
-<span class="s1">    </span><span class="si">{__PROMPT_LABELS__}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">TEMPLATE:</span>
+<span class="s2">    &quot;I need you to help me with a text classification task.</span>
+<span class="s2">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
+<span class="s2">    </span><span class="si">{__PROMPT_LABELS__}</span>
 
-<span class="s1">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
-<span class="s1">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s1">&quot;</span>
-
-
-<span class="s1">PROMPT_DOMAIN:</span>
-<span class="s1">    &quot;The texts you will be processing are from the </span><span class="si">{__DOMAIN__}</span><span class="s1"> domain.&quot;</span>
+<span class="s2">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
+<span class="s2">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s2">&quot;</span>
 
 
-<span class="s1">PROMPT_LABELS:</span>
-<span class="s1">    &quot;I want you to classify the texts into one of the following categories:</span>
-<span class="s1">    </span><span class="si">{__LABELS__}</span><span class="s1">.&quot;</span>
+<span class="s2">PROMPT_DOMAIN:</span>
+<span class="s2">    &quot;The texts you will be processing are from the </span><span class="si">{__DOMAIN__}</span><span class="s2"> domain.&quot;</span>
 
 
-<span class="s1">PROMPT_DETAIL:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_LABELS:</span>
+<span class="s2">    &quot;I want you to classify the texts into one of the following categories:</span>
+<span class="s2">    </span><span class="si">{__LABELS__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">CHAIN_THOUGHT:</span>
-<span class="s1">    &quot;Please provide a step-by-step argument for your answer, explain why you</span>
-<span class="s1">    believe your final choice is justified, and make sure to conclude your</span>
-<span class="s1">    explanation with the name of the class you have selected as the correct</span>
-<span class="s1">    one, in lowercase and without punctuation.&quot;</span>
+<span class="s2">PROMPT_DETAIL:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">ANSWER_FORMAT:</span>
-<span class="s1">    &quot;In your response, include only the name of the class as a single word, in</span>
-<span class="s1">    lowercase, without punctuation, and without adding any other statements or</span>
-<span class="s1">    words.&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">CHAIN_THOUGHT:</span>
+<span class="s2">    &quot;Please provide a step-by-step argument for your answer, explain why you</span>
+<span class="s2">    believe your final choice is justified, and make sure to conclude your</span>
+<span class="s2">    explanation with the name of the class you have selected as the correct</span>
+<span class="s2">    one, in lowercase and without punctuation.&quot;</span>
+
+
+<span class="s2">ANSWER_FORMAT:</span>
+<span class="s2">    &quot;In your response, include only the name of the class as a single word, in</span>
+<span class="s2">    lowercase, without punctuation, and without adding any other statements or</span>
+<span class="s2">    words.&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -323,24 +329,21 @@
 <span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">,</span>
-    <span class="n">prompt_domain</span>        <span class="o">=</span> <span class="s1">&#39;product reviews&#39;</span><span class="p">,</span>
-    <span class="n">prompt_labels</span>        <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span><span class="s1">&#39;negative&#39;</span><span class="p">,</span><span class="s1">&#39;neutral&#39;</span><span class="p">],</span>
-    <span class="n">selector_k</span>           <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+    <span class="n">prompt_domain</span><span class="o">=</span><span class="s2">&quot;product reviews&quot;</span><span class="p">,</span>
+    <span class="n">prompt_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positive&quot;</span><span class="p">,</span> <span class="s2">&quot;negative&quot;</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">],</span>
+    <span class="n">selector_k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">read_prompt</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
-<span class="n">pred_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]</span>
+<span class="n">pred_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span>
-    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -367,36 +370,36 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">TEMPLATE:</span>
-<span class="s1">    &quot;I need you to help me with a text classification task.</span>
-<span class="s1">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
-<span class="s1">    </span><span class="si">{__PROMPT_LABELS__}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">TEMPLATE:</span>
+<span class="s2">    &quot;I need you to help me with a text classification task.</span>
+<span class="s2">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
+<span class="s2">    </span><span class="si">{__PROMPT_LABELS__}</span>
 
-<span class="s1">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
-<span class="s1">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s1">&quot;</span>
-
-
-<span class="s1">PROMPT_DOMAIN:</span>
-<span class="s1">    &quot;The texts you will be processing are from the </span><span class="si">{__DOMAIN__}</span><span class="s1"> domain.&quot;</span>
+<span class="s2">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
+<span class="s2">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s2">&quot;</span>
 
 
-<span class="s1">PROMPT_LABELS:</span>
-<span class="s1">    &quot;I want you to classify the texts into one of the following categories:</span>
-<span class="s1">    </span><span class="si">{__LABELS__}</span><span class="s1">.&quot;</span>
+<span class="s2">PROMPT_DOMAIN:</span>
+<span class="s2">    &quot;The texts you will be processing are from the </span><span class="si">{__DOMAIN__}</span><span class="s2"> domain.&quot;</span>
 
 
-<span class="s1">PROMPT_DETAIL:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_LABELS:</span>
+<span class="s2">    &quot;I want you to classify the texts into one of the following categories:</span>
+<span class="s2">    </span><span class="si">{__LABELS__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">CHAIN_THOUGHT:</span>
-<span class="s1">    &quot;Think step by step you answer.&quot;</span>
+<span class="s2">PROMPT_DETAIL:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">ANSWER_FORMAT:</span>
-<span class="s1">    &quot;In your response, include only the name of the class predicted.&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">CHAIN_THOUGHT:</span>
+<span class="s2">    &quot;Think step by step you answer.&quot;</span>
+
+
+<span class="s2">ANSWER_FORMAT:</span>
+<span class="s2">    &quot;In your response, include only the name of the class predicted.&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -409,23 +412,20 @@
 <span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">,</span>
-    <span class="n">prompt_domain</span>        <span class="o">=</span> <span class="s1">&#39;product reviews&#39;</span><span class="p">,</span>
-    <span class="n">prompt_labels</span>        <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span><span class="s1">&#39;negative&#39;</span><span class="p">,</span><span class="s1">&#39;neutral&#39;</span><span class="p">],</span>
-    <span class="n">selector_k</span>           <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+    <span class="n">prompt_domain</span><span class="o">=</span><span class="s2">&quot;product reviews&quot;</span><span class="p">,</span>
+    <span class="n">prompt_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positive&quot;</span><span class="p">,</span> <span class="s2">&quot;negative&quot;</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">],</span>
+    <span class="n">selector_k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">read_prompt</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span>
-    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -455,41 +455,41 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">TEMPLATE:</span>
-<span class="s1">    &quot;I need you to help me with a text classification task.</span>
-<span class="s1">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
-<span class="s1">    </span><span class="si">{__PROMPT_LABELS__}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">TEMPLATE:</span>
+<span class="s2">    &quot;I need you to help me with a text classification task.</span>
+<span class="s2">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
+<span class="s2">    </span><span class="si">{__PROMPT_LABELS__}</span>
 
-<span class="s1">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
-<span class="s1">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s1">&quot;</span>
-
-
-<span class="s1">PROMPT_DOMAIN:</span>
-<span class="s1">    &quot;The texts you will be processing are from the </span><span class="si">{__DOMAIN__}</span><span class="s1"> domain.&quot;</span>
+<span class="s2">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
+<span class="s2">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s2">&quot;</span>
 
 
-<span class="s1">PROMPT_LABELS:</span>
-<span class="s1">    &quot;I want you to classify the texts into one of the following categories:</span>
-<span class="s1">    </span><span class="si">{__LABELS__}</span><span class="s1">.&quot;</span>
+<span class="s2">PROMPT_DOMAIN:</span>
+<span class="s2">    &quot;The texts you will be processing are from the </span><span class="si">{__DOMAIN__}</span><span class="s2"> domain.&quot;</span>
 
 
-<span class="s1">PROMPT_DETAIL:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_LABELS:</span>
+<span class="s2">    &quot;I want you to classify the texts into one of the following categories:</span>
+<span class="s2">    </span><span class="si">{__LABELS__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">CHAIN_THOUGHT:</span>
-<span class="s1">    &quot;Please provide a step-by-step argument for your answer, explain why you</span>
-<span class="s1">    believe your final choice is justified, and make sure to conclude your</span>
-<span class="s1">    explanation with the name of the class you have selected as the correct</span>
-<span class="s1">    one, in lowercase and without punctuation.&quot;</span>
+<span class="s2">PROMPT_DETAIL:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">ANSWER_FORMAT:</span>
-<span class="s1">    &quot;In your response, include only the name of the class as a single word, in</span>
-<span class="s1">    lowercase, without punctuation, and without adding any other statements or</span>
-<span class="s1">    words.&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">CHAIN_THOUGHT:</span>
+<span class="s2">    &quot;Please provide a step-by-step argument for your answer, explain why you</span>
+<span class="s2">    believe your final choice is justified, and make sure to conclude your</span>
+<span class="s2">    explanation with the name of the class you have selected as the correct</span>
+<span class="s2">    one, in lowercase and without punctuation.&quot;</span>
+
+
+<span class="s2">ANSWER_FORMAT:</span>
+<span class="s2">    &quot;In your response, include only the name of the class as a single word, in</span>
+<span class="s2">    lowercase, without punctuation, and without adding any other statements or</span>
+<span class="s2">    words.&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -502,26 +502,20 @@
 <span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">,</span>
-    <span class="n">selector_k</span>           <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+    <span class="n">selector_k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">read_prompt</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
-<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">examples</span> <span class="o">=</span> <span class="n">train_reviews</span><span class="p">,</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">train_targets</span>
-<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">examples</span><span class="o">=</span><span class="n">train_reviews</span><span class="p">,</span> <span class="n">annotations</span><span class="o">=</span><span class="n">train_targets</span><span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span>
-    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -548,36 +542,36 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">TEMPLATE:</span>
-<span class="s1">    &quot;I need you to help me with a text classification task.</span>
-<span class="s1">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
-<span class="s1">    </span><span class="si">{__PROMPT_LABELS__}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">TEMPLATE:</span>
+<span class="s2">    &quot;I need you to help me with a text classification task.</span>
+<span class="s2">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
+<span class="s2">    </span><span class="si">{__PROMPT_LABELS__}</span>
 
-<span class="s1">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
-<span class="s1">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s1">&quot;</span>
-
-
-<span class="s1">PROMPT_DOMAIN:</span>
-<span class="s1">    &quot;The texts you will be processing are from the </span><span class="si">{__DOMAIN__}</span><span class="s1"> domain.&quot;</span>
+<span class="s2">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
+<span class="s2">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s2">&quot;</span>
 
 
-<span class="s1">PROMPT_LABELS:</span>
-<span class="s1">    &quot;I want you to classify the texts into one of the following categories:</span>
-<span class="s1">    </span><span class="si">{__LABELS__}</span><span class="s1">.&quot;</span>
+<span class="s2">PROMPT_DOMAIN:</span>
+<span class="s2">    &quot;The texts you will be processing are from the </span><span class="si">{__DOMAIN__}</span><span class="s2"> domain.&quot;</span>
 
 
-<span class="s1">PROMPT_DETAIL:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_LABELS:</span>
+<span class="s2">    &quot;I want you to classify the texts into one of the following categories:</span>
+<span class="s2">    </span><span class="si">{__LABELS__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">CHAIN_THOUGHT:</span>
-<span class="s1">    &quot;Think step by step you answer.&quot;</span>
+<span class="s2">PROMPT_DETAIL:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">ANSWER_FORMAT:</span>
-<span class="s1">    &quot;In your response, include only the name of the class predicted.&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">CHAIN_THOUGHT:</span>
+<span class="s2">    &quot;Think step by step you answer.&quot;</span>
+
+
+<span class="s2">ANSWER_FORMAT:</span>
+<span class="s2">    &quot;In your response, include only the name of the class predicted.&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -590,28 +584,25 @@
 <span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">,</span>
-    <span class="n">prompt_domain</span>        <span class="o">=</span> <span class="s1">&#39;product reviews&#39;</span><span class="p">,</span>
-    <span class="n">prompt_labels</span>        <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span><span class="s1">&#39;negative&#39;</span><span class="p">,</span><span class="s1">&#39;neutral&#39;</span><span class="p">],</span>
-    <span class="n">selector_k</span>           <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+    <span class="n">prompt_domain</span><span class="o">=</span><span class="s2">&quot;product reviews&quot;</span><span class="p">,</span>
+    <span class="n">prompt_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positive&quot;</span><span class="p">,</span> <span class="s2">&quot;negative&quot;</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">],</span>
+    <span class="n">selector_k</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">read_prompt</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">examples</span> <span class="o">=</span> <span class="n">train_reviews</span><span class="p">,</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">train_targets</span><span class="p">,</span>
+    <span class="n">examples</span><span class="o">=</span><span class="n">train_reviews</span><span class="p">,</span>
+    <span class="n">annotations</span><span class="o">=</span><span class="n">train_targets</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span>
-    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -646,30 +637,30 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">TEMPLATE:</span>
-<span class="s1">    &quot;I need you to help me with a text classification task.</span>
-<span class="s1">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
-<span class="s1">    </span><span class="si">{__PROMPT_LABELS__}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">TEMPLATE:</span>
+<span class="s2">    &quot;I need you to help me with a text classification task.</span>
+<span class="s2">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
+<span class="s2">    </span><span class="si">{__PROMPT_LABELS__}</span>
 
-<span class="s1">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
-<span class="s1">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s1">&quot;</span>
+<span class="s2">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
+<span class="s2">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s2">&quot;</span>
 
-<span class="s1">PROMPT_DOMAIN:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_DOMAIN:</span>
+<span class="s2">    &quot;&quot;</span>
 
-<span class="s1">PROMPT_LABELS:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_LABELS:</span>
+<span class="s2">    &quot;&quot;</span>
 
-<span class="s1">PROMPT_DETAIL:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_DETAIL:</span>
+<span class="s2">    &quot;&quot;</span>
 
-<span class="s1">CHAIN_THOUGHT:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">CHAIN_THOUGHT:</span>
+<span class="s2">    &quot;&quot;</span>
 
-<span class="s1">ANSWER_FORMAT:</span>
-<span class="s1">    &quot;&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">ANSWER_FORMAT:</span>
+<span class="s2">    &quot;&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -682,26 +673,23 @@
 <span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">,</span>
-    <span class="n">selector_k</span>           <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+    <span class="n">selector_k</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">read_prompt</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">examples</span> <span class="o">=</span> <span class="n">train_reviews</span><span class="p">,</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">train_targets</span><span class="p">,</span>
+    <span class="n">examples</span><span class="o">=</span><span class="n">train_reviews</span><span class="p">,</span>
+    <span class="n">annotations</span><span class="o">=</span><span class="n">train_targets</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span>
-    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -731,13 +719,14 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">&#39;../data/amazon_reviews_sp/amazon_reviews_multi-test.parquet&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;../data/amazon_reviews_sp/amazon_reviews_multi-test.parquet&quot;</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 
 <span class="n">sql</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">SQLContext</span><span class="p">()</span>
-<span class="n">sql</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">sql</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 
-<span class="n">sentiment_data</span> <span class="o">=</span> <span class="n">sql</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">sentiment_data</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">sql</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    SELECT</span>
 <span class="s2">        review_body as REVIEW,</span>
 <span class="s2">        CASE</span>
@@ -748,13 +737,16 @@
 <span class="s2">        END AS TARGET,</span>
 <span class="s2">    FROM data</span>
 <span class="s2">    WHERE stars!=2 AND stars!=4;</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
 <span class="o">/</span>
-<span class="n">train_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;REVIEW&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-<span class="n">train_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;TARGET&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">train_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;REVIEW&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">train_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;TARGET&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 
-<span class="n">test_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;REVIEW&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-<span class="n">test_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;TARGET&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">test_reviews</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;REVIEW&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">test_targets</span> <span class="o">=</span> <span class="n">sentiment_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;TARGET&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 
 <span class="n">sentiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -782,41 +774,41 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">TEMPLATE:</span>
-<span class="s1">    &quot;Necesito que me ayudes en una tarea de clasificación de texto.</span>
-<span class="s1">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
-<span class="s1">    </span><span class="si">{__PROMPT_LABELS__}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">TEMPLATE:</span>
+<span class="s2">    &quot;Necesito que me ayudes en una tarea de clasificación de texto.</span>
+<span class="s2">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
+<span class="s2">    </span><span class="si">{__PROMPT_LABELS__}</span>
 
-<span class="s1">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
-<span class="s1">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s1">&quot;</span>
-
-
-<span class="s1">PROMPT_DOMAIN:</span>
-<span class="s1">    &quot;Los textos que vas procesar del ambito de </span><span class="si">{__DOMAIN__}</span><span class="s1">.&quot;</span>
+<span class="s2">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
+<span class="s2">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s2">&quot;</span>
 
 
-<span class="s1">PROMPT_LABELS:</span>
-<span class="s1">    &quot;Quiero que me clasifiques los textos una de las siguientes categorías:</span>
-<span class="s1">    </span><span class="si">{__LABELS__}</span><span class="s1">.&quot;</span>
+<span class="s2">PROMPT_DOMAIN:</span>
+<span class="s2">    &quot;Los textos que vas procesar del ambito de </span><span class="si">{__DOMAIN__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">PROMPT_DETAIL:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_LABELS:</span>
+<span class="s2">    &quot;Quiero que me clasifiques los textos una de las siguientes categorías:</span>
+<span class="s2">    </span><span class="si">{__LABELS__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">CHAIN_THOUGHT:</span>
-<span class="s1">    &quot;Por favor argumenta tu respuesta paso a paso, explica por qué crees que</span>
-<span class="s1">    está justificada tu elección final, y asegúrate de que acabas tu</span>
-<span class="s1">    explicación con el nombre de la clase que has escogido como la</span>
-<span class="s1">    correcta, en minúscula y sin puntuación.&quot;</span>
+<span class="s2">PROMPT_DETAIL:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">ANSWER_FORMAT:</span>
-<span class="s1">    &quot;En tu respuesta incluye sólo el nombre de la clase, como una única</span>
-<span class="s1">    palabra, en minúscula, sin puntuación, y sin añadir ninguna otra</span>
-<span class="s1">    afirmación o palabra.&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">CHAIN_THOUGHT:</span>
+<span class="s2">    &quot;Por favor argumenta tu respuesta paso a paso, explica por qué crees que</span>
+<span class="s2">    está justificada tu elección final, y asegúrate de que acabas tu</span>
+<span class="s2">    explicación con el nombre de la clase que has escogido como la</span>
+<span class="s2">    correcta, en minúscula y sin puntuación.&quot;</span>
+
+
+<span class="s2">ANSWER_FORMAT:</span>
+<span class="s2">    &quot;En tu respuesta incluye sólo el nombre de la clase, como una única</span>
+<span class="s2">    palabra, en minúscula, sin puntuación, y sin añadir ninguna otra</span>
+<span class="s2">    afirmación o palabra.&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -829,24 +821,21 @@
 <span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;es&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">,</span>
-    <span class="n">prompt_domain</span>        <span class="o">=</span> <span class="s1">&#39;opiniones de productos&#39;</span><span class="p">,</span>
-    <span class="n">prompt_labels</span>        <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positiva&#39;</span><span class="p">,</span><span class="s1">&#39;negativa&#39;</span><span class="p">,</span><span class="s1">&#39;neutral&#39;</span><span class="p">],</span>
-    <span class="n">selector_k</span>           <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;es&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+    <span class="n">prompt_domain</span><span class="o">=</span><span class="s2">&quot;opiniones de productos&quot;</span><span class="p">,</span>
+    <span class="n">prompt_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positiva&quot;</span><span class="p">,</span> <span class="s2">&quot;negativa&quot;</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">],</span>
+    <span class="n">selector_k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">read_prompt</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
-<span class="n">pred_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]</span>
+<span class="n">pred_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span>
-    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -873,37 +862,37 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">TEMPLATE:</span>
-<span class="s1">    &quot;Necesito que me ayudes en una tarea de clasificación de texto.</span>
-<span class="s1">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
-<span class="s1">    </span><span class="si">{__PROMPT_LABELS__}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">TEMPLATE:</span>
+<span class="s2">    &quot;Necesito que me ayudes en una tarea de clasificación de texto.</span>
+<span class="s2">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
+<span class="s2">    </span><span class="si">{__PROMPT_LABELS__}</span>
 
-<span class="s1">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
-<span class="s1">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s1">&quot;</span>
-
-
-<span class="s1">PROMPT_DOMAIN:</span>
-<span class="s1">    &quot;Los textos que vas procesar del ambito de </span><span class="si">{__DOMAIN__}</span><span class="s1">.&quot;</span>
+<span class="s2">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
+<span class="s2">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s2">&quot;</span>
 
 
-<span class="s1">PROMPT_LABELS:</span>
-<span class="s1">    &quot;Quiero que me clasifiques los textos una de las siguientes categorías:</span>
-<span class="s1">    </span><span class="si">{__LABELS__}</span><span class="s1">.&quot;</span>
+<span class="s2">PROMPT_DOMAIN:</span>
+<span class="s2">    &quot;Los textos que vas procesar del ambito de </span><span class="si">{__DOMAIN__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">PROMPT_DETAIL:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_LABELS:</span>
+<span class="s2">    &quot;Quiero que me clasifiques los textos una de las siguientes categorías:</span>
+<span class="s2">    </span><span class="si">{__LABELS__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">CHAIN_THOUGHT:</span>
-<span class="s1">    &quot;Argumenta tu respuesta paso a paso.&quot;</span>
+<span class="s2">PROMPT_DETAIL:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">ANSWER_FORMAT:</span>
-<span class="s1">    &quot;En tu respuesta incluye sólo el nombre de la clase, como una única</span>
-<span class="s1">    respuesta&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">CHAIN_THOUGHT:</span>
+<span class="s2">    &quot;Argumenta tu respuesta paso a paso.&quot;</span>
+
+
+<span class="s2">ANSWER_FORMAT:</span>
+<span class="s2">    &quot;En tu respuesta incluye sólo el nombre de la clase, como una única</span>
+<span class="s2">    respuesta&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -916,23 +905,20 @@
 <span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;es&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">,</span>
-    <span class="n">prompt_domain</span>        <span class="o">=</span> <span class="s1">&#39;opiniones de productos&#39;</span><span class="p">,</span>
-    <span class="n">prompt_labels</span>        <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positiva&#39;</span><span class="p">,</span><span class="s1">&#39;negativa&#39;</span><span class="p">,</span><span class="s1">&#39;neutra&#39;</span><span class="p">],</span>
-    <span class="n">selector_k</span>           <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;es&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+    <span class="n">prompt_domain</span><span class="o">=</span><span class="s2">&quot;opiniones de productos&quot;</span><span class="p">,</span>
+    <span class="n">prompt_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positiva&quot;</span><span class="p">,</span> <span class="s2">&quot;negativa&quot;</span><span class="p">,</span> <span class="s2">&quot;neutra&quot;</span><span class="p">],</span>
+    <span class="n">selector_k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">read_prompt</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span>
-    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -959,36 +945,36 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">TEMPLATE:</span>
-<span class="s1">    &quot;Necesito que me ayudes en una tarea de clasificación de texto.</span>
-<span class="s1">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
-<span class="s1">    </span><span class="si">{__PROMPT_LABELS__}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">TEMPLATE:</span>
+<span class="s2">    &quot;Necesito que me ayudes en una tarea de clasificación de texto.</span>
+<span class="s2">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
+<span class="s2">    </span><span class="si">{__PROMPT_LABELS__}</span>
 
-<span class="s1">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
-<span class="s1">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s1">&quot;</span>
-
-
-<span class="s1">PROMPT_DOMAIN:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
+<span class="s2">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s2">&quot;</span>
 
 
-<span class="s1">PROMPT_LABELS:</span>
-<span class="s1">    &quot;Quiero que me clasifiques los textos una de las siguientes categorías:</span>
-<span class="s1">    </span><span class="si">{__LABELS__}</span><span class="s1">.&quot;</span>
+<span class="s2">PROMPT_DOMAIN:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">PROMPT_DETAIL:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_LABELS:</span>
+<span class="s2">    &quot;Quiero que me clasifiques los textos una de las siguientes categorías:</span>
+<span class="s2">    </span><span class="si">{__LABELS__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">CHAIN_THOUGHT:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_DETAIL:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">ANSWER_FORMAT:</span>
-<span class="s1">    &quot;&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">CHAIN_THOUGHT:</span>
+<span class="s2">    &quot;&quot;</span>
+
+
+<span class="s2">ANSWER_FORMAT:</span>
+<span class="s2">    &quot;&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1001,24 +987,21 @@
 <span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;es&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">,</span>
-    <span class="n">prompt_domain</span>        <span class="o">=</span> <span class="s1">&#39;opiniones de productos&#39;</span><span class="p">,</span>
-    <span class="n">prompt_labels</span>        <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positiva&#39;</span><span class="p">,</span><span class="s1">&#39;negativa&#39;</span><span class="p">,</span><span class="s1">&#39;neutra&#39;</span><span class="p">],</span>
-    <span class="n">selector_k</span>           <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;es&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+    <span class="n">prompt_domain</span><span class="o">=</span><span class="s2">&quot;opiniones de productos&quot;</span><span class="p">,</span>
+    <span class="n">prompt_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positiva&quot;</span><span class="p">,</span> <span class="s2">&quot;negativa&quot;</span><span class="p">,</span> <span class="s2">&quot;neutra&quot;</span><span class="p">],</span>
+    <span class="n">selector_k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">read_prompt</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
-<span class="n">pred_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]</span>
+<span class="n">pred_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span>
-    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1048,41 +1031,41 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">TEMPLATE:</span>
-<span class="s1">    &quot;Necesito que me ayudes en una tarea de clasificación de texto.</span>
-<span class="s1">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
-<span class="s1">    </span><span class="si">{__PROMPT_LABELS__}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">TEMPLATE:</span>
+<span class="s2">    &quot;Necesito que me ayudes en una tarea de clasificación de texto.</span>
+<span class="s2">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
+<span class="s2">    </span><span class="si">{__PROMPT_LABELS__}</span>
 
-<span class="s1">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
-<span class="s1">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s1">&quot;</span>
-
-
-<span class="s1">PROMPT_DOMAIN:</span>
-<span class="s1">    &quot;Los textos que vas procesar del ambito de </span><span class="si">{__DOMAIN__}</span><span class="s1">.&quot;</span>
+<span class="s2">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
+<span class="s2">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s2">&quot;</span>
 
 
-<span class="s1">PROMPT_LABELS:</span>
-<span class="s1">    &quot;Quiero que me clasifiques los textos una de las siguientes categorías:</span>
-<span class="s1">    </span><span class="si">{__LABELS__}</span><span class="s1">.&quot;</span>
+<span class="s2">PROMPT_DOMAIN:</span>
+<span class="s2">    &quot;Los textos que vas procesar del ambito de </span><span class="si">{__DOMAIN__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">PROMPT_DETAIL:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_LABELS:</span>
+<span class="s2">    &quot;Quiero que me clasifiques los textos una de las siguientes categorías:</span>
+<span class="s2">    </span><span class="si">{__LABELS__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">CHAIN_THOUGHT:</span>
-<span class="s1">    &quot;Por favor argumenta tu respuesta paso a paso, explica por qué crees que</span>
-<span class="s1">    está justificada tu elección final, y asegúrate de que acabas tu</span>
-<span class="s1">    explicación con el nombre de la clase que has escogido como la</span>
-<span class="s1">    correcta, en minúscula y sin puntuación.&quot;</span>
+<span class="s2">PROMPT_DETAIL:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">ANSWER_FORMAT:</span>
-<span class="s1">    &quot;En tu respuesta incluye sólo el nombre de la clase, como una única</span>
-<span class="s1">    palabra, en minúscula, sin puntuación, y sin añadir ninguna otra</span>
-<span class="s1">    afirmación o palabra.&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">CHAIN_THOUGHT:</span>
+<span class="s2">    &quot;Por favor argumenta tu respuesta paso a paso, explica por qué crees que</span>
+<span class="s2">    está justificada tu elección final, y asegúrate de que acabas tu</span>
+<span class="s2">    explicación con el nombre de la clase que has escogido como la</span>
+<span class="s2">    correcta, en minúscula y sin puntuación.&quot;</span>
+
+
+<span class="s2">ANSWER_FORMAT:</span>
+<span class="s2">    &quot;En tu respuesta incluye sólo el nombre de la clase, como una única</span>
+<span class="s2">    palabra, en minúscula, sin puntuación, y sin añadir ninguna otra</span>
+<span class="s2">    afirmación o palabra.&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1095,29 +1078,26 @@
 <span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;es&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">,</span>
-    <span class="n">prompt_domain</span>        <span class="o">=</span> <span class="s1">&#39;opiniones de productos&#39;</span><span class="p">,</span>
-    <span class="n">prompt_labels</span>        <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positiva&#39;</span><span class="p">,</span><span class="s1">&#39;negativa&#39;</span><span class="p">,</span><span class="s1">&#39;neutra&#39;</span><span class="p">],</span>
-    <span class="n">selector_k</span>           <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;es&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+    <span class="n">prompt_domain</span><span class="o">=</span><span class="s2">&quot;opiniones de productos&quot;</span><span class="p">,</span>
+    <span class="n">prompt_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positiva&quot;</span><span class="p">,</span> <span class="s2">&quot;negativa&quot;</span><span class="p">,</span> <span class="s2">&quot;neutra&quot;</span><span class="p">],</span>
+    <span class="n">selector_k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">read_prompt</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">examples</span> <span class="o">=</span> <span class="n">train_reviews</span><span class="p">,</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">train_targets</span><span class="p">,</span>
+    <span class="n">examples</span><span class="o">=</span><span class="n">train_reviews</span><span class="p">,</span>
+    <span class="n">annotations</span><span class="o">=</span><span class="n">train_targets</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
-<span class="n">pred_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]</span>
+<span class="n">pred_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span>
-    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1144,37 +1124,37 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">TEMPLATE:</span>
-<span class="s1">    &quot;Necesito que me ayudes en una tarea de clasificación de texto.</span>
-<span class="s1">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
-<span class="s1">    </span><span class="si">{__PROMPT_LABELS__}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">TEMPLATE:</span>
+<span class="s2">    &quot;Necesito que me ayudes en una tarea de clasificación de texto.</span>
+<span class="s2">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
+<span class="s2">    </span><span class="si">{__PROMPT_LABELS__}</span>
 
-<span class="s1">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
-<span class="s1">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s1">&quot;</span>
-
-
-<span class="s1">PROMPT_DOMAIN:</span>
-<span class="s1">    &quot;Los textos que vas procesar del ambito de </span><span class="si">{__DOMAIN__}</span><span class="s1">.&quot;</span>
+<span class="s2">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
+<span class="s2">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s2">&quot;</span>
 
 
-<span class="s1">PROMPT_LABELS:</span>
-<span class="s1">    &quot;Quiero que me clasifiques los textos una de las siguientes categorías:</span>
-<span class="s1">    </span><span class="si">{__LABELS__}</span><span class="s1">.&quot;</span>
+<span class="s2">PROMPT_DOMAIN:</span>
+<span class="s2">    &quot;Los textos que vas procesar del ambito de </span><span class="si">{__DOMAIN__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">PROMPT_DETAIL:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_LABELS:</span>
+<span class="s2">    &quot;Quiero que me clasifiques los textos una de las siguientes categorías:</span>
+<span class="s2">    </span><span class="si">{__LABELS__}</span><span class="s2">.&quot;</span>
 
 
-<span class="s1">CHAIN_THOUGHT:</span>
-<span class="s1">    &quot;Argumenta tu respuesta paso a paso.&quot;</span>
+<span class="s2">PROMPT_DETAIL:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">ANSWER_FORMAT:</span>
-<span class="s1">    &quot;En tu respuesta incluye sólo el nombre de la clase, como una única</span>
-<span class="s1">    respuesta&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">CHAIN_THOUGHT:</span>
+<span class="s2">    &quot;Argumenta tu respuesta paso a paso.&quot;</span>
+
+
+<span class="s2">ANSWER_FORMAT:</span>
+<span class="s2">    &quot;En tu respuesta incluye sólo el nombre de la clase, como una única</span>
+<span class="s2">    respuesta&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1187,29 +1167,26 @@
 <span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;es&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">,</span>
-    <span class="n">prompt_domain</span>        <span class="o">=</span> <span class="s1">&#39;opiniones de productos&#39;</span><span class="p">,</span>
-    <span class="n">prompt_labels</span>        <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positiva&#39;</span><span class="p">,</span><span class="s1">&#39;negativa&#39;</span><span class="p">,</span><span class="s1">&#39;neutra&#39;</span><span class="p">],</span>
-    <span class="n">selector_k</span>           <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;es&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+    <span class="n">prompt_domain</span><span class="o">=</span><span class="s2">&quot;opiniones de productos&quot;</span><span class="p">,</span>
+    <span class="n">prompt_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positiva&quot;</span><span class="p">,</span> <span class="s2">&quot;negativa&quot;</span><span class="p">,</span> <span class="s2">&quot;neutra&quot;</span><span class="p">],</span>
+    <span class="n">selector_k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">read_prompt</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">examples</span> <span class="o">=</span> <span class="n">train_reviews</span><span class="p">,</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">train_targets</span><span class="p">,</span>
+    <span class="n">examples</span><span class="o">=</span><span class="n">train_reviews</span><span class="p">,</span>
+    <span class="n">annotations</span><span class="o">=</span><span class="n">train_targets</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
-<span class="n">pred_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]</span>
+<span class="n">pred_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span>
-    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1352,35 +1329,35 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">TEMPLATE:</span>
-<span class="s1">    &quot;Necesito que me ayudes en una tarea de clasificación de texto.</span>
-<span class="s1">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
-<span class="s1">    </span><span class="si">{__PROMPT_LABELS__}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">TEMPLATE:</span>
+<span class="s2">    &quot;Necesito que me ayudes en una tarea de clasificación de texto.</span>
+<span class="s2">    </span><span class="si">{__PROMPT_DOMAIN__}</span>
+<span class="s2">    </span><span class="si">{__PROMPT_LABELS__}</span>
 
-<span class="s1">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
-<span class="s1">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s1">&quot;</span>
-
-
-<span class="s1">PROMPT_DOMAIN:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">    </span><span class="si">{__CHAIN_THOUGHT__}</span>
+<span class="s2">    </span><span class="si">{__ANSWER_FORMAT__}</span><span class="s2">&quot;</span>
 
 
-<span class="s1">PROMPT_LABELS:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_DOMAIN:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">PROMPT_DETAIL:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_LABELS:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">CHAIN_THOUGHT:</span>
-<span class="s1">    &quot;&quot;</span>
+<span class="s2">PROMPT_DETAIL:</span>
+<span class="s2">    &quot;&quot;</span>
 
 
-<span class="s1">ANSWER_FORMAT:</span>
-<span class="s1">    &quot;&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">CHAIN_THOUGHT:</span>
+<span class="s2">    &quot;&quot;</span>
+
+
+<span class="s2">ANSWER_FORMAT:</span>
+<span class="s2">    &quot;&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1393,29 +1370,26 @@
 <span class="kn">from</span> <span class="nn">promptmeteo</span> <span class="kn">import</span> <span class="n">DocumentClassifier</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DocumentClassifier</span><span class="p">(</span>
-    <span class="n">language</span>             <span class="o">=</span> <span class="s1">&#39;es&#39;</span><span class="p">,</span>
-    <span class="n">model_name</span>           <span class="o">=</span> <span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_name</span>  <span class="o">=</span> <span class="s1">&#39;openai&#39;</span><span class="p">,</span>
-    <span class="n">model_provider_token</span> <span class="o">=</span> <span class="n">token</span><span class="p">,</span>
-    <span class="n">prompt_domain</span>        <span class="o">=</span> <span class="s1">&#39;opiniones de productos&#39;</span><span class="p">,</span>
-    <span class="n">prompt_labels</span>        <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;positiva&#39;</span><span class="p">,</span><span class="s1">&#39;negativa&#39;</span><span class="p">,</span><span class="s1">&#39;neutra&#39;</span><span class="p">],</span>
-    <span class="n">selector_k</span>           <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;es&quot;</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_name</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_provider_token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+    <span class="n">prompt_domain</span><span class="o">=</span><span class="s2">&quot;opiniones de productos&quot;</span><span class="p">,</span>
+    <span class="n">prompt_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positiva&quot;</span><span class="p">,</span> <span class="s2">&quot;negativa&quot;</span><span class="p">,</span> <span class="s2">&quot;neutra&quot;</span><span class="p">],</span>
+    <span class="n">selector_k</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">read_prompt</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">examples</span> <span class="o">=</span> <span class="n">train_reviews</span><span class="p">,</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">train_targets</span><span class="p">,</span>
+    <span class="n">examples</span><span class="o">=</span><span class="n">train_reviews</span><span class="p">,</span>
+    <span class="n">annotations</span><span class="o">=</span><span class="n">train_targets</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">pred_targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">)</span>
-<span class="n">pred_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]</span>
+<span class="n">pred_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">pred_targets</span><span class="p">]</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span>
-    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">pred_targets</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

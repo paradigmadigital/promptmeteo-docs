@@ -72,6 +72,14 @@ promptmeteo.document\_qa module
    :undoc-members:
    :show-inheritance:
 
+promptmeteo.exceptions module
+-----------------------------
+
+.. automodule:: promptmeteo.exceptions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 promptmeteo.summarizer module
 -----------------------------
 

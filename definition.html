@@ -234,6 +234,34 @@
 <section id="prompt-templating">
 <h3>📄 Prompt Templating<a class="headerlink" href="#prompt-templating" title="Permalink to this heading">#</a></h3>
 <p>Establishing a concrete format for creating prompts in Promptmeteo (<cite>.prompt</cite>) not only facilitates programmatic use but also enables versioning of prompts. This approach aids in understanding changes when they occur and allows for the definition of code tests oriented toward prompt testing. This testing encompasses aspects such as validating language use and ensuring the prompt size is appropriate for the model.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">TEMPLATE</span><span class="p">:</span>
+<span class="w">    </span><span class="s">&quot;I</span><span class="nv"> </span><span class="s">need</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">help</span><span class="nv"> </span><span class="s">me</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">text</span><span class="nv"> </span><span class="s">classification</span><span class="nv"> </span><span class="s">task.</span>
+<span class="w">    </span><span class="s">{__PROMPT_DOMAIN__}</span>
+<span class="w">    </span><span class="s">{__PROMPT_LABELS__}</span>
+
+<span class="w">    </span><span class="s">{__CHAIN_THOUGHT__}</span>
+<span class="w">    </span><span class="s">{__ANSWER_FORMAT__}&quot;</span>
+
+<span class="nt">PROMPT_DOMAIN</span><span class="p">:</span>
+<span class="w">    </span><span class="s">&quot;The</span><span class="nv"> </span><span class="s">texts</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">will</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">processing</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">{__DOMAIN__}</span><span class="nv"> </span><span class="s">domain.&quot;</span>
+
+<span class="nt">PROMPT_LABELS</span><span class="p">:</span>
+<span class="w">    </span><span class="s">&quot;I</span><span class="nv"> </span><span class="s">want</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">classify</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">texts</span><span class="nv"> </span><span class="s">into</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">following</span><span class="nv"> </span><span class="s">categories:</span>
+<span class="w">    </span><span class="s">{__LABELS__}.&quot;</span>
+
+<span class="nt">PROMPT_DETAIL</span><span class="p">:</span>
+<span class="w">    </span><span class="s">&quot;&quot;</span>
+
+<span class="nt">CHAIN_THOUGHT</span><span class="p">:</span>
+<span class="w">    </span><span class="s">&quot;Please</span><span class="nv"> </span><span class="s">provide</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">step-by-step</span><span class="nv"> </span><span class="s">argument</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">your</span><span class="nv"> </span><span class="s">answer,</span><span class="nv"> </span><span class="s">explain</span><span class="nv"> </span><span class="s">why</span><span class="nv"> </span><span class="s">you</span>
+<span class="w">    </span><span class="s">believe</span><span class="nv"> </span><span class="s">your</span><span class="nv"> </span><span class="s">final</span><span class="nv"> </span><span class="s">choice</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">justified.&quot;</span>
+
+<span class="nt">ANSWER_FORMAT</span><span class="p">:</span>
+<span class="w">    </span><span class="s">&quot;In</span><span class="nv"> </span><span class="s">your</span><span class="nv"> </span><span class="s">response,</span><span class="nv"> </span><span class="s">include</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">class</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">word,</span><span class="nv"> </span><span class="s">in</span>
+<span class="w">    </span><span class="s">lowercase,</span><span class="nv"> </span><span class="s">without</span><span class="nv"> </span><span class="s">punctuation,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">without</span><span class="nv"> </span><span class="s">adding</span><span class="nv"> </span><span class="s">any</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">statements</span><span class="nv"> </span><span class="s">or</span>
+<span class="w">    </span><span class="s">words.&quot;</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="current-capacilities">
